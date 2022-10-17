@@ -8,6 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+/**
+ * Cette classe permet au client d'entrer toute ses informations d'autentification.
+ * Si jamais les champs informations ne sont pas remplis on renvoit le message que le
+ * champ est obligatoire. Sinon on va enregistrer les informations dans la base de donnée
+ * firebase de plus on donne l'option au client de revenir au menu de connexion.
+ * @author Chloé Al-Frenn
+ */
 
 public class ClientRegistrationActivity extends AppCompatActivity {
 
@@ -50,8 +57,14 @@ public class ClientRegistrationActivity extends AppCompatActivity {
         registerButton = (Button) findViewById(R.id.button_RegisterClient);
         goBack = (TextView) findViewById(R.id.textView_returnClient);
     }
+    /**
+     * Cette methode verifie que l'utilisateur a entré des donnees dans tout
+     * les edit text present. Sinon on renvoie le message que le champ est obligatoire.
+     * Return true seulement si tout les champs sont remplis.
+     *
+     */
 
-    private boolean valide(){ //verifier que l'utilisateur a entree des donnes dans tout les editText sinon on va lui dire que le champ est obligatoire
+    private boolean valide(){
         Boolean result = true;
 
         String prenom = clientFirstName.getText().toString();
