@@ -9,6 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * Cette classe contient la page d'ouverture de l'application.
+ * Elle permet a l'utilisateur de se connecter a l'application
+ * via son adresse Email et un mot de passe.
+ * Elle donne aussi l'option a l'utilisateur de s'inscrire en
+ * tant que client et cuisinier(pas encore implementé).
+ *
+ * @author Chloé Al-Frenn
+ */
 public class MainActivity extends AppCompatActivity {
 
     private EditText email;
@@ -43,7 +52,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+/**
+ * Cette methode permet a l'application de verifier les informations
+ * de connexion des utilisateurs. Si les informations sont mauvaise on
+ * retourne le message "mauvais email ou mot de passe"  Si les informations
+ * sont bonnes alors l'application va ouvrir la prochaine page pour
+ * l'utilisateur.
+* */
     private void checkLoginInfo(String userEmail, String userPassword){
         if((userEmail.equals("test@gmail.com")) && (userPassword.equals("1234"))){ //checks if the login info is valid
             Intent intent = new Intent(MainActivity.this, SecondActivity.class); // lets the user move into the next activity
