@@ -19,30 +19,22 @@ import android.widget.TextView;
 public class ClientRegistrationActivity extends AppCompatActivity {
 
     private EditText clientFirstName, clientLastName, clientEmail, clientPassword, clientAdress, clientCreditNumber, clientCreditExp, clientCreditCVV;
-    private Button registerButton;
-    private TextView goBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clientregistration);
         assignVariables();
+    }
+    //a implementer
+    public void onRegister(View view){
+        if(valide()){
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(valide()){
-                    //upload to the database
-                }
-            }
-        });
+        }
+    }
 
-        goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ClientRegistrationActivity.this, MainActivity.class)); //redirect the user to the main activity
-            }
-        });
+    public void onGoBack(View view){
+        startActivity(new Intent(ClientRegistrationActivity.this, MainActivity.class));
     }
 
     private void assignVariables() {
@@ -54,8 +46,6 @@ public class ClientRegistrationActivity extends AppCompatActivity {
         clientCreditNumber = (EditText) findViewById(R.id.editText_NumCarteClient);
         clientCreditExp = (EditText) findViewById(R.id.editText_CarteExpClient);
         clientCreditCVV = (EditText) findViewById(R.id.editText_CVVClient);
-        registerButton = (Button) findViewById(R.id.button_RegisterClient);
-        goBack = (TextView) findViewById(R.id.textView_returnClient);
     }
     /**
      * Cette methode verifie que l'utilisateur a entré des donnees dans tout

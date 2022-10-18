@@ -32,25 +32,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        email = (EditText)findViewById(R.id.editText_Email);
-        password = (EditText)findViewById(R.id.editText_MDP);
         login = (Button)findViewById(R.id.button_Connexion);
         info = (TextView)findViewById(R.id.textView_Info);
         clientSignUp = (TextView)findViewById(R.id.textView_ClientSignUp);
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkLoginInfo(email.getText().toString(), password.getText().toString());
-            }
-        });
+    }
 
-        clientSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ClientRegistrationActivity.class));
-            }
-        });
+    /**
+     * cette methode va appeler la methode qui verifie si les informations de connexions sont bonnes
+     * lorsque le client clique sur le bouton connexion.
+     * @param view
+     */
+    public void onCheckLoginInfo(View view){
+        email = (EditText)findViewById(R.id.editText_Email);
+        password = (EditText)findViewById(R.id.editText_MDP);
+        checkLoginInfo(email.getText().toString(), password.getText().toString());
+    }
+
+    /**
+     * cette methode permet au client d'ouvrir la page qui lui permet de s'inscrire lorsqu'il clique sur le texte
+     * qui lui dit "s'inscrire en tant que client"
+     * @param view
+     */
+    public void onClientSignUp(View view){
+        startActivity(new Intent(MainActivity.this, ClientRegistrationActivity.class));
     }
 /**
  * Cette methode permet a l'application de verifier les informations
