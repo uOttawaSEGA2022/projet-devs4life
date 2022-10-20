@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 =======
         myRef.setValue("Hello, World!");
 
+<<<<<<< Updated upstream
         clientRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
 >>>>>>> parent of 5e61e34 (Debugging these noobs)
+=======
+        
+>>>>>>> Stashed changes
     }
 
     /**
