@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText password;
     private Button login;
     private TextView info;
-    private TextView clientSignUp;
+    private Button clientSignUp;
 
     DatabaseReference databaseReference;
     Button clientRegister;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         login = (Button)findViewById(R.id.button_Connexion);
         info = (TextView)findViewById(R.id.textView_Info);
-        clientSignUp = (TextView)findViewById(R.id.textView_ClientSignUp);
+        clientSignUp = (Button)findViewById(R.id.Button_ClientSignUp);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void onClientSignUp(View view){
-        startActivity(new Intent(MainActivity.this, ClientRegistrationActivity.class));
+        Intent intent = new Intent(this, ClientRegistrationActivity.class);
+        startActivity(intent);
     }
 /**
  * Cette methode permet a l'application de verifier les informations

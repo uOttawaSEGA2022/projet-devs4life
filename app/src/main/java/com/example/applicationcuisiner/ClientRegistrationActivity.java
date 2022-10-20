@@ -34,16 +34,17 @@ import java.util.Map;
 
 public class ClientRegistrationActivity extends AppCompatActivity {
 
-    private EditText clientFirstName, clientLastName, clientEmail, clientPassword, clientAdress, clientCreditNumber, clientCreditExp, clientCreditCVV;
-    boolean valide=true;
+    private EditText clientFirstName, clientLastName, clientEmail, clientPassword, clientAddress, clientCreditNumber, clientCreditExp, clientCreditCVV;
+
     FirebaseAuth authentication;
     FirebaseFirestore store;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clientregistration);
 
-        //..........................
+
         authentication=FirebaseAuth.getInstance();
         store=FirebaseFirestore.getInstance();
 
@@ -51,12 +52,13 @@ public class ClientRegistrationActivity extends AppCompatActivity {
         clientLastName = (EditText) findViewById(R.id.editText_NomClient);
         clientEmail = (EditText) findViewById(R.id.editText_EmailClient);
         clientPassword = (EditText) findViewById(R.id.editText_MdpClient);
-        clientAdress = (EditText) findViewById(R.id.editText_AdresseClient);
+        clientAddress = (EditText) findViewById(R.id.editText_AdresseClient);
         clientCreditNumber = (EditText) findViewById(R.id.editText_NumCarteClient);
         clientCreditExp = (EditText) findViewById(R.id.editText_CarteExpClient);
         clientCreditCVV = (EditText) findViewById(R.id.editText_CVVClient);
-//------------------------------------------------
-        if(valide){
+
+
+        if(valide()){
         authentication.createUserWithEmailAndPassword(clientEmail.getText().toString(),clientPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             FirebaseUser user=authentication.getCurrentUser();
             DocumentReference collect=store.collection("Users").document(user.getUid());
@@ -71,7 +73,7 @@ public class ClientRegistrationActivity extends AppCompatActivity {
                 userInfo.put("LastName",clientLastName.getText().toString());
                 userInfo.put("Email",clientEmail.getText().toString());
                 userInfo.put("Password",clientPassword.getText().toString());
-                userInfo.put("Address",clientAdress.getText().toString());
+                userInfo.put("Address",clientAddress.getText().toString());
                 userInfo.put("Card",clientCreditNumber.getText().toString());
                 userInfo.put("Exp",clientCreditExp.getText().toString());
                 userInfo.put("CCV",clientCreditCVV.getText().toString());
@@ -86,7 +88,7 @@ public class ClientRegistrationActivity extends AppCompatActivity {
         });
         }
     }
-    //------------------------------------------------
+
 
 
     public void onGoBack(View view){
@@ -123,10 +125,10 @@ public class ClientRegistrationActivity extends AppCompatActivity {
             result = false;
             clientPassword.setHint("Ce champ est obligatoire: mot de passe");
         }
-        String adresse = clientAdress.getText().toString();
+        String adresse = clientAddress.getText().toString();
         if(adresse.isEmpty()){
             result = false;
-            clientAdress.setHint("Ce champ est obligatoire: adresse");
+            clientAddress.setHint("Ce champ est obligatoire: adresse");
         }
         String numCarte = clientCreditNumber.getText().toString();
         if(numCarte.isEmpty()){

@@ -56,17 +56,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_MDP" />
 
-    <TextView
-        android:id="@+id/textView_ClientSignUp"
+    <Button
+        android:id="@+id/Button_ClientSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClientSignUp"
         android:text="S'inscrire en tant que client"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_Connexion"
-        app:layout_constraintVertical_bias="0.133" />
+        app:layout_constraintVertical_bias="0.73"
+        android:onClick="onClientSignUp"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
