@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
  * retourne le message "mauvais email ou mot de passe"  Si les informations
  * sont bonnes alors l'application va ouvrir la prochaine page pour
  * l'utilisateur.
+ *
+ * Faire fonctionner avec firebase et enlever les cas test
 * */
     private void checkLoginInfo(String userEmail, String userPassword){
         if((userEmail.equals("test@gmail.com")) && (userPassword.equals("1234"))){ //checks if the login info is valid
