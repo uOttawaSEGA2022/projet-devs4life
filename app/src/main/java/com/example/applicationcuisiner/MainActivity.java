@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Cette classe contient la page d'ouverture de l'application.
  * Elle permet a l'utilisateur de se connecter a l'application
@@ -17,6 +20,7 @@ import android.widget.TextView;
  * tant que client et cuisinier(pas encore implementé).
  *
  * @author Chloé Al-Frenn
+ * @author Carolina González
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView info;
     private TextView clientSignUp;
 
-
+    DatabaseReference databaseReference;
+    Button clientRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +40,19 @@ public class MainActivity extends AppCompatActivity {
         login = (Button)findViewById(R.id.button_Connexion);
         info = (TextView)findViewById(R.id.textView_Info);
         clientSignUp = (TextView)findViewById(R.id.textView_ClientSignUp);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
 
+        myRef.setValue("Hello, World!");
 
-        
+        clientRegister.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+            startActivity(new Intent(getApplicationContext(),ClientRegistrationActivity.class));
+
+            }
+
+        }
     }
 
     /**
@@ -75,4 +90,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+
 }
