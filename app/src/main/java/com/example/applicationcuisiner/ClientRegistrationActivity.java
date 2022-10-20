@@ -8,36 +8,37 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 /**
  * Cette classe permet au client d'entrer toute ses informations d'autentification.
  * Si jamais les champs informations ne sont pas remplis on renvoit le message que le
  * champ est obligatoire. Sinon on va enregistrer les informations dans la base de donnée
  * firebase de plus on donne l'option au client de revenir au menu de connexion.
  * @author Chloé Al-Frenn
+ * @author Carolina González
  */
 
 public class ClientRegistrationActivity extends AppCompatActivity {
 
     private EditText clientFirstName, clientLastName, clientEmail, clientPassword, clientAdress, clientCreditNumber, clientCreditExp, clientCreditCVV;
-
+    boolean valide=true;
+    FirebaseAuth authentication;
+    FirebaseFirestore store;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clientregistration);
-        assignVariables();
-    }
-    //a implementer
-    public void onRegister(View view){
-        if(valide()){
+     
+        //..........................
+        authentication=FirebaseAuth.getInstance();
+        store=FirebaseFirestore.getInstance();
 
-        }
-    }
-
-    public void onGoBack(View view){
-        startActivity(new Intent(ClientRegistrationActivity.this, MainActivity.class));
-    }
-
-    private void assignVariables() {
         clientFirstName = (EditText) findViewById(R.id.editText_PrenomClient);
         clientLastName = (EditText) findViewById(R.id.editText_NomClient);
         clientEmail = (EditText) findViewById(R.id.editText_EmailClient);
@@ -46,7 +47,23 @@ public class ClientRegistrationActivity extends AppCompatActivity {
         clientCreditNumber = (EditText) findViewById(R.id.editText_NumCarteClient);
         clientCreditExp = (EditText) findViewById(R.id.editText_CarteExpClient);
         clientCreditCVV = (EditText) findViewById(R.id.editText_CVVClient);
+
+        if(valide){
+        authentication.createUserWithEmailAndPassword(clientEmail.getText().toString(),clientPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                Toast.makeText(ClientRegistrationActivity.this,"Votre compte a ete crée",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();//user cannot go back to registration
+            }
+        });
+        }
     }
+
+    public void onGoBack(View view){
+        startActivity(new Intent(ClientRegistrationActivity.this, MainActivity.class));
+    }
+
     /**
      * Cette methode verifie que l'utilisateur a entré des donnees dans tout
      * les edit text present. Sinon on renvoie le message que le champ est obligatoire.

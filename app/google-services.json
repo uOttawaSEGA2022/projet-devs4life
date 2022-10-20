@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "467177061667",
+    "project_id": "applicationcuisiner",
+    "storage_bucket": "applicationcuisiner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467177061667:android:a7b239f3403a072583a096",
+        "android_client_info": {
+          "package_name": "com.example.applicationcuisiner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "467177061667-gb5a480fglflpu35b0t9fla6bilfjfos.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAskVs_O1lwmUJV9mHzhW0oykcMU0x0RHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "467177061667-gb5a480fglflpu35b0t9fla6bilfjfos.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
