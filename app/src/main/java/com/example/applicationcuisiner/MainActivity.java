@@ -36,6 +36,19 @@ public class MainActivity extends AppCompatActivity {
         info = (TextView)findViewById(R.id.textView_Info);
         clientSignUp = (TextView)findViewById(R.id.textView_ClientSignUp);
 
+<<<<<<< HEAD
+=======
+        myRef.setValue("Hello, World!");
+
+        clientRegister.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+            startActivity(new Intent(getApplicationContext(),ClientRegistrationActivity.class));
+
+            }
+
+        }
+>>>>>>> parent of 5e61e34 (Debugging these noobs)
     }
 
     /**
