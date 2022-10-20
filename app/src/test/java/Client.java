@@ -21,6 +21,7 @@ public class Client extends User{
     public String getCardNumber(){
         return cardNumber;
     }
+
     public String getCardExpiration(){
         return cardExpiration;
     }
