@@ -1,5 +1,6 @@
 package com.example.applicationcuisiner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,10 +11,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Cette classe permet au client d'entrer toute ses informations d'autentification.
@@ -34,7 +42,7 @@ public class ClientRegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clientregistration);
-     
+
         //..........................
         authentication=FirebaseAuth.getInstance();
         store=FirebaseFirestore.getInstance();
@@ -47,18 +55,39 @@ public class ClientRegistrationActivity extends AppCompatActivity {
         clientCreditNumber = (EditText) findViewById(R.id.editText_NumCarteClient);
         clientCreditExp = (EditText) findViewById(R.id.editText_CarteExpClient);
         clientCreditCVV = (EditText) findViewById(R.id.editText_CVVClient);
-
+//------------------------------------------------
         if(valide){
         authentication.createUserWithEmailAndPassword(clientEmail.getText().toString(),clientPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            FirebaseUser user=authentication.getCurrentUser();
+            DocumentReference collect=store.collection("Users").document(user.getUid());
+            //Store data
+
             @Override
             public void onSuccess(AuthResult authResult) {
                 Toast.makeText(ClientRegistrationActivity.this,"Votre compte a ete crée",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                Map<String,Object> userInfo=new HashMap<>();
+                userInfo.put("Name",clientFirstName.getText().toString());
+                userInfo.put("LastName",clientLastName.getText().toString());
+                userInfo.put("Email",clientEmail.getText().toString());
+                userInfo.put("Password",clientPassword.getText().toString());
+                userInfo.put("Address",clientAdress.getText().toString());
+                userInfo.put("Card",clientCreditNumber.getText().toString());
+                userInfo.put("Exp",clientCreditExp.getText().toString());
+                userInfo.put("CCV",clientCreditCVV.getText().toString());
+
                 finish();//user cannot go back to registration
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ClientRegistrationActivity.this,"Erreur de registre",Toast.LENGTH_SHORT).show();
             }
         });
         }
     }
+    //------------------------------------------------
+
 
     public void onGoBack(View view){
         startActivity(new Intent(ClientRegistrationActivity.this, MainActivity.class));

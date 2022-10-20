@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView clientSignUp;
 
     DatabaseReference databaseReference;
-
+    Button clientRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("message");
 
         myRef.setValue("Hello, World!");
+
+        clientRegister.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+            startActivity(new Intent(getApplicationContext(),ClientRegistrationActivity.class));
+
+            }
+
+        }
     }
 
     /**
@@ -81,4 +90,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+
 }
