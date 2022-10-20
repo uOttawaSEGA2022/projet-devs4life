@@ -8,6 +8,10 @@ import android.view.View;
 
 public class SecondActivity extends AppCompatActivity {
 
+    public SecondActivity(Object object) {
+        System.out.println("Welcome "+object.getClass().getSimpleName());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

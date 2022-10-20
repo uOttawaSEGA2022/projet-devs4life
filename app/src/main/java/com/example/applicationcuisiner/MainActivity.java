@@ -84,13 +84,8 @@ public class MainActivity extends AppCompatActivity {
         if((userEmail.equals("test@gmail.com")) && (userPassword.equals("1234"))){ //checks if the login info is valid
             Intent intent = new Intent(MainActivity.this, SecondActivity.class); // lets the user move into the next activity
             startActivity(intent);
-        } else{
+        }else{
             info.setText("Mauvais email ou mot de passe"); //tell the user that the login info is wrong
         }
-
     }
-
-
-
-
 }
