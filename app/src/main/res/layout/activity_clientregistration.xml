@@ -8,10 +8,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="308dp"
-        android:layout_height="342dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="55dp"
+        android:layout_width="346dp"
+        android:layout_height="520dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginBottom="60dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,8 +81,8 @@
 
             <EditText
                 android:id="@+id/editText_CarteExpClient"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Date d'expiration"
@@ -89,8 +90,8 @@
 
             <EditText
                 android:id="@+id/editText_CVVClient"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="CVV"
@@ -103,26 +104,27 @@
         android:id="@+id/button_RegisterClient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="147dp"
+        android:layout_marginStart="144dp"
         android:layout_weight="1"
+        android:onClick="onRegister"
         android:text="S'inscrire"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.269"
-        android:onClick="onRegister"/>
+        app:layout_constraintVertical_bias="0.08" />
 
     <TextView
         android:id="@+id/textView_returnClient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="275dp"
+        android:layout_height="56dp"
         android:layout_marginStart="69dp"
         android:layout_marginEnd="69dp"
+        android:onClick="onGoBack"
         android:text="Revenir au menu de connexion"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_RegisterClient"
-        android:onClick="onGoBack"/>
+        app:layout_constraintVertical_bias="0.791" />
 </androidx.constraintlayout.widget.ConstraintLayout>

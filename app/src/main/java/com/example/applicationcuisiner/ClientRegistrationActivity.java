@@ -35,9 +35,9 @@ import java.util.Map;
 public class ClientRegistrationActivity extends AppCompatActivity {
 
     private EditText clientFirstName, clientLastName, clientEmail, clientPassword, clientAddress, clientCreditNumber, clientCreditExp, clientCreditCVV;
-
-    FirebaseAuth authentication;
-    FirebaseFirestore store;
+    private Button registerClient;
+    private FirebaseAuth authentication;
+    private FirebaseFirestore store;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,35 +57,37 @@ public class ClientRegistrationActivity extends AppCompatActivity {
         clientCreditExp = (EditText) findViewById(R.id.editText_CarteExpClient);
         clientCreditCVV = (EditText) findViewById(R.id.editText_CVVClient);
 
+    }
 
+    public void onRegister(View view){
         if(valide()){
-        authentication.createUserWithEmailAndPassword(clientEmail.getText().toString(),clientPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            FirebaseUser user=authentication.getCurrentUser();
-            DocumentReference collect=store.collection("Users").document(user.getUid());
-            //Store data
+            authentication.createUserWithEmailAndPassword(clientEmail.getText().toString(),clientPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                FirebaseUser user=authentication.getCurrentUser();
+                DocumentReference collect=store.collection("Users").document(user.getUid());
+                //Store data
 
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                Toast.makeText(ClientRegistrationActivity.this,"Votre compte a ete crée",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                Map<String,Object> userInfo=new HashMap<>();
-                userInfo.put("Name",clientFirstName.getText().toString());
-                userInfo.put("LastName",clientLastName.getText().toString());
-                userInfo.put("Email",clientEmail.getText().toString());
-                userInfo.put("Password",clientPassword.getText().toString());
-                userInfo.put("Address",clientAddress.getText().toString());
-                userInfo.put("Card",clientCreditNumber.getText().toString());
-                userInfo.put("Exp",clientCreditExp.getText().toString());
-                userInfo.put("CCV",clientCreditCVV.getText().toString());
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    Toast.makeText(ClientRegistrationActivity.this,"Votre compte a ete crée",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    Map<String,Object> userInfo=new HashMap<>();
+                    userInfo.put("Name",clientFirstName.getText().toString());
+                    userInfo.put("LastName",clientLastName.getText().toString());
+                    userInfo.put("Email",clientEmail.getText().toString());
+                    userInfo.put("Password",clientPassword.getText().toString());
+                    userInfo.put("Address",clientAddress.getText().toString());
+                    userInfo.put("Card",clientCreditNumber.getText().toString());
+                    userInfo.put("Exp",clientCreditExp.getText().toString());
+                    userInfo.put("CCV",clientCreditCVV.getText().toString());
 
-                finish();//user cannot go back to registration
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ClientRegistrationActivity.this,"Erreur de registre",Toast.LENGTH_SHORT).show();
-            }
-        });
+                    finish();//user cannot go back to registration
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(ClientRegistrationActivity.this,"Erreur de registre",Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

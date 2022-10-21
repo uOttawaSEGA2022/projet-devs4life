@@ -13,13 +13,6 @@
         android:theme="@style/Theme.ApplicationCuisiner"
         tools:targetApi="31">
         <activity
-            android:name=".Administrator"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ClientRegistrationActivity"
             android:exported="false">
             <meta-data
