@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,10 +36,13 @@ import java.util.Map;
 
 public class ClientRegistrationActivity extends AppCompatActivity {
 
+    private Client client;
     private EditText clientFirstName, clientLastName, clientEmail, clientPassword, clientAddress, clientCreditNumber, clientCreditExp, clientCreditCVV;
     private Button registerClient;
     private FirebaseAuth authentication;
     private FirebaseFirestore store;
+    private String type;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,8 @@ public class ClientRegistrationActivity extends AppCompatActivity {
         clientCreditNumber = (EditText) findViewById(R.id.editText_NumCarteClient);
         clientCreditExp = (EditText) findViewById(R.id.editText_CarteExpClient);
         clientCreditCVV = (EditText) findViewById(R.id.editText_CVVClient);
+        type = "Client";
+
 
     }
 
@@ -79,6 +86,9 @@ public class ClientRegistrationActivity extends AppCompatActivity {
                     userInfo.put("Card",clientCreditNumber.getText().toString());
                     userInfo.put("Exp",clientCreditExp.getText().toString());
                     userInfo.put("CCV",clientCreditCVV.getText().toString());
+                    userInfo.put("Type", type);
+
+                    client = new Client(clientFirstName.getText().toString(),clientLastName.getText().toString(),clientEmail.getText().toString(),clientPassword.getText().toString(),clientAddress.getText().toString(),clientCreditNumber.getText().toString(),clientCreditExp.getText().toString(),clientCreditCVV.getText().toString() );
 
                     finish();//user cannot go back to registration
                 }

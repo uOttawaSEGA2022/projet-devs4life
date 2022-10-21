@@ -1,5 +1,10 @@
+package com.example.applicationcuisiner;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
- * Classe abstraite User qui permet d'enregistrer les informations qui
+ * Classe abstraite com.example.applicationcuisiner.User qui permet d'enregistrer les informations qui
  * sont communes a tout les utilisateurs de l'application.
  *
  * @author Chloé Al-Frenn
@@ -11,6 +16,7 @@ public abstract class User {
     protected String password;
     protected String firstName;
     protected String lastName;
+
 
     //getters
     public String getEmail() {
@@ -46,6 +52,7 @@ public abstract class User {
     public void setLastName(String lastName){
         this.lastName = lastName;
     }
+
 
 
 }

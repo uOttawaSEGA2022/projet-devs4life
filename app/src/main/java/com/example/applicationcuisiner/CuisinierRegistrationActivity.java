@@ -39,17 +39,19 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     private Button registerCuisinier;
     private FirebaseAuth authentication;
     private FirebaseFirestore store;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuisinier_registration);
 
-        cuisinierFirstName = (EditText) findViewById(R.id.editText_PrenomCuisinier);
-        cuisinierLastName = (EditText) findViewById(R.id.editText_NomCuisinier);
+        authentication=FirebaseAuth.getInstance();
+        store=FirebaseFirestore.getInstance();
 
+        cuisinierFirstName = (EditText) findViewById(R.id.editTextText_PrenomCuisinier);
+        cuisinierLastName = (EditText) findViewById(R.id.editText_NomCuisinier);
         cuisinierEmail = (EditText) findViewById(R.id.editText_AdressCourrielCuisinier);
         cuisinierPassword = (EditText) findViewById(R.id.editText_Mode_de_passeCuisinier);
-
         cuisinierAdress = (EditText) findViewById(R.id.editText_AdresseRamassageCuisinier);
         cuisinierDescription = (EditText) findViewById(R.id.editText_DescriptionCuisinier);
     }
@@ -65,7 +67,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
                 public void onSuccess(AuthResult authResult) {
                     Toast.makeText(CuisinierRegistrationActivity.this,"Votre compte a ete crée",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                    Map<String,Object> userInfo = new HashMap<>();
+                    Map<String,Object> userInfo=new HashMap<>();
                     userInfo.put("Name",cuisinierFirstName.getText().toString());
                     userInfo.put("LastName",cuisinierLastName.getText().toString());
                     userInfo.put("Email",cuisinierEmail.getText().toString());
