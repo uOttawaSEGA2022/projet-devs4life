@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
  *
  * @author Chloé Al-Frenn
  * @author Carolina González
+ * @author Arina Burlac
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -29,9 +30,11 @@ public class MainActivity extends AppCompatActivity {
     private Button login;
     private TextView info;
     private Button clientSignUp;
+    private Button cuisinierSignUp;
 
     DatabaseReference databaseReference;
     Button clientRegister;
+    Button cuisinierRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         login = (Button)findViewById(R.id.button_Connexion);
         info = (TextView)findViewById(R.id.textView_Info);
         clientSignUp = (Button)findViewById(R.id.Button_ClientSignUp);
+        cuisinierSignUp = (Button)findViewById(R.id.Button_CuisinierSignUp);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
@@ -66,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onClientSignUp(View view){
         Intent intent = new Intent(this, ClientRegistrationActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * cette methode permet au client d'ouvrir la page qui lui permet de s'inscrire lorsqu'il clique sur le texte
+     * qui lui dit "s'inscrire en tant que cuisinier"
+     * @param view
+     */
+    public void onCuisinierSignUp(View view){
+        Intent intent = new Intent(this, CuisinierRegistrationActivity.class);
         startActivity(intent);
     }
 /**

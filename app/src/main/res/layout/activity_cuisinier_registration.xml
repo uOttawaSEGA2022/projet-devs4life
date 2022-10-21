@@ -5,5 +5,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CuisinierRegistrationActivity">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="342dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <EditText
+            android:id="@+id/editTextText_PrenomCuisinier"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Prénom"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editText_NomCuisinier"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Nom"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editText_AdressCourrielCuisinier"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Adresse courriel"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/editText_Mode_de_passeCuisinier"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Mot de passe"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/editText_AdresseRamassageCuisinier"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Adresse"
+            android:inputType="textPostalAddress" />
+
+        <EditText
+            android:id="@+id/editText_DescriptionCuisinier"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Description de soi-même"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_RegisterCuisinier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="onRegister"
+        android:text="S'inscrire"
+        android:layout_marginStart="147dp"
+        app:layout_constraintVertical_bias="0.269"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView_returnCuisinier"
+        android:layout_width="292dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginEnd="69dp"
+        android:onClick="onGoBack"
+        android:text="Revenir au menu de connexion"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_RegisterCuisinier"
+        app:layout_constraintVertical_bias="0.411" />
 </androidx.constraintlayout.widget.ConstraintLayout>

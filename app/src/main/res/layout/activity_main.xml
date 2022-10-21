@@ -60,14 +60,26 @@
         android:id="@+id/Button_ClientSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClientSignUp"
         android:text="S'inscrire en tant que client"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_Connexion"
-        app:layout_constraintVertical_bias="0.73"
-        android:onClick="onClientSignUp"/>
+        app:layout_constraintVertical_bias="0.391" />
+
+    <Button
+        android:id="@+id/Button_CuisinierSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCuisinierSignUp"
+        android:text="S'inscrire en tant que cuisinier"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_Connexion"
+        app:layout_constraintVertical_bias="0.627" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
