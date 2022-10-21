@@ -1,10 +1,13 @@
 package com.example.applicationcuisiner;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +47,7 @@ public class ClientRegistrationActivity extends AppCompatActivity {
     private String type;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +73,12 @@ public class ClientRegistrationActivity extends AppCompatActivity {
     public void onRegister(View view){
         if(valide()){
             authentication.createUserWithEmailAndPassword(clientEmail.getText().toString(),clientPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                FirebaseUser user=authentication.getCurrentUser();
-                DocumentReference collect=store.collection("Users").document(user.getUid());
                 //Store data
 
                 @Override
                 public void onSuccess(AuthResult authResult) {
+                    FirebaseUser clients=authentication.getCurrentUser();
+                    DocumentReference collect=store.collection("Clients").document(clients.getUid());
                     Toast.makeText(ClientRegistrationActivity.this,"Votre compte a ete crée",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     Map<String,Object> userInfo=new HashMap<>();
@@ -87,6 +91,21 @@ public class ClientRegistrationActivity extends AppCompatActivity {
                     userInfo.put("Exp",clientCreditExp.getText().toString());
                     userInfo.put("CCV",clientCreditCVV.getText().toString());
                     userInfo.put("Type", type);
+
+                    store.collection("Clients")
+                            .add(userInfo)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error adding document", e);
+                                }
+                            });
 
                     client = new Client(clientFirstName.getText().toString(),clientLastName.getText().toString(),clientEmail.getText().toString(),clientPassword.getText().toString(),clientAddress.getText().toString(),clientCreditNumber.getText().toString(),clientCreditExp.getText().toString(),clientCreditCVV.getText().toString() );
 
