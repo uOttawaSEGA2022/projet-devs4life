@@ -1,14 +1,22 @@
 package com.example.applicationcuisiner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView info;
     private Button clientSignUp;
     private Button cuisinierSignUp;
+    private FirebaseAuth firebaseAuth;
 
     DatabaseReference databaseReference;
     Button clientRegister;
@@ -49,8 +58,22 @@ public class MainActivity extends AppCompatActivity {
 
         myRef.setValue("Hello, World!");
 
+        firebaseAuth = FirebaseAuth.getInstance();
 
     }
+
+    public void updateUI(FirebaseUser account){
+
+        if(account != null){
+            Toast.makeText(this,"You Signed In successfully",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this,SecondActivity.class));
+
+        }else {
+            Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 
     /**
      * cette methode va appeler la methode qui verifie si les informations de connexions sont bonnes
@@ -90,12 +113,24 @@ public class MainActivity extends AppCompatActivity {
  * l'utilisateur.
 * */
     private void checkLoginInfo(String userEmail, String userPassword){
-        if((userEmail.equals("test@gmail.com")) && (userPassword.equals("1234"))){ //checks if the login info is valid
-            Intent intent = new Intent(MainActivity.this, SecondActivity.class); // lets the user move into the next activity
-            startActivity(intent);
-        } else{
-            info.setText("Mauvais email ou mot de passe"); //tell the user that the login info is wrong
-        }
+
+        firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                    startActivity(intent);
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    updateUI(user);
+                }
+                else {
+                    info.setText("Mauvais email ou mot de passe");
+                    updateUI(null);
+                    //tell the user that the login info is wrong
+                }
+            }
+        });
+
 
     }
 
