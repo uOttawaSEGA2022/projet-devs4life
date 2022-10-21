@@ -48,7 +48,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
         authentication=FirebaseAuth.getInstance();
         store=FirebaseFirestore.getInstance();
 
-        cuisinierFirstName = (EditText) findViewById(R.id.editTextText_PrenomCuisinier);
+        cuisinierFirstName = (EditText) findViewById(R.id.editText_PrenomCuisinier);
         cuisinierLastName = (EditText) findViewById(R.id.editText_NomCuisinier);
         cuisinierEmail = (EditText) findViewById(R.id.editText_AdressCourrielCuisinier);
         cuisinierPassword = (EditText) findViewById(R.id.editText_Mode_de_passeCuisinier);
