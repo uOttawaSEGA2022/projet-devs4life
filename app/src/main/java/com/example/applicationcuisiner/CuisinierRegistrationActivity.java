@@ -43,7 +43,15 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuisinier_registration);
-        assignVariables();
+
+        cuisinierFirstName = (EditText) findViewById(R.id.editText_PrenomCuisinier);
+        cuisinierLastName = (EditText) findViewById(R.id.editText_NomCuisinier);
+
+        cuisinierEmail = (EditText) findViewById(R.id.editText_AdressCourrielCuisinier);
+        cuisinierPassword = (EditText) findViewById(R.id.editText_Mode_de_passeCuisinier);
+
+        cuisinierAdress = (EditText) findViewById(R.id.editText_AdresseRamassageCuisinier);
+        cuisinierDescription = (EditText) findViewById(R.id.editText_DescriptionCuisinier);
     }
 
     public void onRegister(View view){
@@ -57,7 +65,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
                 public void onSuccess(AuthResult authResult) {
                     Toast.makeText(CuisinierRegistrationActivity.this,"Votre compte a ete crée",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                    Map<String,Object> userInfo=new HashMap<>();
+                    Map<String,Object> userInfo = new HashMap<>();
                     userInfo.put("Name",cuisinierFirstName.getText().toString());
                     userInfo.put("LastName",cuisinierLastName.getText().toString());
                     userInfo.put("Email",cuisinierEmail.getText().toString());
@@ -78,14 +86,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     public void onGoBack(View view){
         startActivity(new Intent(CuisinierRegistrationActivity.this, MainActivity.class));
     }
-    private void assignVariables() {
-        cuisinierFirstName = (EditText) findViewById(R.id.editTextText_PrenomCuisinier);
-        cuisinierLastName = (EditText) findViewById(R.id.editText_NomCuisinier);
-        cuisinierEmail = (EditText) findViewById(R.id.editText_AdressCourrielCuisinier);
-        cuisinierPassword = (EditText) findViewById(R.id.editText_Mode_de_passeCuisinier);
-        cuisinierAdress = (EditText) findViewById(R.id.editText_AdresseRamassageCuisinier);
-        cuisinierDescription = (EditText) findViewById(R.id.editText_DescriptionCuisinier);
-    }
+
     /**
      * Cette methode vérifie que l'utilisateur a saisi toutes les informations d'authentification dans tout
      * les edit text. Si l'utilisateur a saisi toutes les données, un message est renvoyé indiquant que le champ est obligatoire.
