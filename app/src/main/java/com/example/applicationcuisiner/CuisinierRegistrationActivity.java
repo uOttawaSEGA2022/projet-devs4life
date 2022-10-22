@@ -77,18 +77,19 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                boolean pick=true;
+                boolean pick=true; // set to true and check permissions
                 if (pick){
                    if(!checkCameraPermission()){
-                       requestCameraPermission();
+                       requestCameraPermission(); // first permission check: Camera?
                    }
 
                 }else {
                     if (!checkStoragePermission()){
-                        requestStoragePermission();
-                    } else pick=false;
+                        requestStoragePermission(); // second permission check: Storage?
+                    } else pick=false; // if both checks are okay...
 
                 }
+                // If both checks are okay, open the Gallery
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivity(intent);
             }
@@ -98,6 +99,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // Check if the client actually chose a picture
         if(resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             ImageView imageView = findViewById(R.id.image);
@@ -106,21 +108,22 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
+    // requestStoragePermission to the user
     private void requestStoragePermission() {
         requestPermissions(new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
     }
-
+    // requestCameraPermission to the user
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void requestCameraPermission() {
         requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
     }
-
+    // check user's StoragePermission
     private boolean checkStoragePermission() {
         boolean res2= ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED;
         return res2;
 
     }
-
+    // check user's Camera Permission
     private boolean checkCameraPermission() {
         boolean res1= ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED;
         boolean res2= ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED;
