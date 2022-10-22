@@ -14,9 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -24,15 +27,19 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class SecondActivity extends AppCompatActivity {
 
-    private TextView bienvenu;
-    private FirebaseFirestore db;
-    private String type;
+    private TextView bienvenue;
+    private FirebaseFirestore fireStore;
+    private String userID;
     private FirebaseAuth firebaseAuth;
 
 
@@ -41,27 +48,23 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        bienvenu = (TextView)findViewById(R.id.textView_Bienvenu);
-        db = FirebaseFirestore.getInstance();
+        bienvenue = (TextView)findViewById(R.id.textView_Bienvenu);
 
-        db.collection("user").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        fireStore = FirebaseFirestore.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        CollectionReference collection = fireStore.collection("client");
+        userID = collection.getId();
+
+
+        DocumentReference documentReference = fireStore.collection("user").document(userID);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
-
-                if(e != null){
-                    Toast.makeText(SecondActivity.this,"Error", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                for(DocumentChange documentChange: value.getDocumentChanges()){
-                    type = documentChange.getDocument().getData().get("Type").toString();
-                    bienvenu.setText("Bienvenue vous êtes un " + type);
-
-
-                }
-
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                bienvenue.setText("Bienvenue vous etes un " + userID);
             }
         });
+
 
 
 
