@@ -45,6 +45,8 @@ public class ClientRegistrationActivity extends AppCompatActivity {
     private FirebaseAuth authentication;
     private FirebaseFirestore store;
     private String type;
+    private String currentUserID;
+
 
 
 
@@ -82,6 +84,10 @@ public class ClientRegistrationActivity extends AppCompatActivity {
                     Toast.makeText(ClientRegistrationActivity.this,"Votre compte a ete crée",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     Map<String,Object> userInfo=new HashMap<>();
+                    currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+
                     userInfo.put("Name",clientFirstName.getText().toString());
                     userInfo.put("LastName",clientLastName.getText().toString());
                     userInfo.put("Email",clientEmail.getText().toString());
@@ -92,12 +98,14 @@ public class ClientRegistrationActivity extends AppCompatActivity {
                     userInfo.put("CCV",clientCreditCVV.getText().toString());
                     userInfo.put("Type", type);
 
-                    store.collection("user")
-                            .add(userInfo)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                   //store.collection("users").document(currentUserID).set(userInfo);
+
+                    store.collection("user").document(currentUserID)
+                            .set(userInfo)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                public void onSuccess(Void unused) {
+                                    Log.d(TAG, "DocumentSnapshot successfully written!");
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {

@@ -25,7 +25,7 @@
         android:layout_height="160dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:text="Bienvenu!"
+        android:text=""
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/button_disconnect"
         app:layout_constraintEnd_toEndOf="parent"
