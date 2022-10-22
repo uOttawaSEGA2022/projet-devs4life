@@ -2,4 +2,4 @@
 INFORMATIONS D'IDENTIFICATION
 ->Se connecter en tant qu'Administrateur:
 ID: admin@gmail.com
-Password: admin
+Password: admin1
