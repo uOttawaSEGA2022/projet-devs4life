@@ -1,10 +1,6 @@
 package com.example.applicationcuisiner;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.Manifest;
 import android.content.Intent;
@@ -13,12 +9,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,7 +49,11 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     private Button registerCuisinier;
     private FirebaseAuth authentication;
     private FirebaseFirestore store;
+
     private ImageView image;
+
+
+    private String type;
 
 
     @Override
@@ -65,6 +70,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
         cuisinierPassword = (EditText) findViewById(R.id.editText_Mode_de_passeCuisinier);
         cuisinierAdress = (EditText) findViewById(R.id.editText_AdresseRamassageCuisinier);
         cuisinierDescription = (EditText) findViewById(R.id.editText_DescriptionCuisinier);
+
         image = findViewById(R.id.image);
         image.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -119,6 +125,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
         boolean res1= ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED;
         boolean res2= ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED;
         return res1 && res2;
+
     }
 
     public void onRegister(View view){
@@ -139,7 +146,22 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
                     userInfo.put("Password",cuisinierPassword.getText().toString());
                     userInfo.put("Address",cuisinierAdress.getText().toString());
                     userInfo.put("Description",cuisinierDescription.getText().toString());
+                    userInfo.put("Type", type);
 
+                    store.collection("user")
+                            .add(userInfo)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error adding document", e);
+                                }
+                            });
                     finish();//user cannot go back to registration
                 }
             }).addOnFailureListener(new OnFailureListener() {

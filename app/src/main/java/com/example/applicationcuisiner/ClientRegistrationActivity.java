@@ -39,7 +39,7 @@ import java.util.Map;
 
 public class ClientRegistrationActivity extends AppCompatActivity {
 
-    private Client client;
+
     private EditText clientFirstName, clientLastName, clientEmail, clientPassword, clientAddress, clientCreditNumber, clientCreditExp, clientCreditCVV;
     private Button registerClient;
     private FirebaseAuth authentication;
@@ -106,8 +106,6 @@ public class ClientRegistrationActivity extends AppCompatActivity {
                                     Log.w(TAG, "Error adding document", e);
                                 }
                             });
-
-                    client = new Client(clientFirstName.getText().toString(),clientLastName.getText().toString(),clientEmail.getText().toString(),clientPassword.getText().toString(),clientAddress.getText().toString(),clientCreditNumber.getText().toString(),clientCreditExp.getText().toString(),clientCreditCVV.getText().toString() );
 
                     finish();//user cannot go back to registration
                 }

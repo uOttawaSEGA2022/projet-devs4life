@@ -21,12 +21,12 @@
 
     <TextView
         android:id="@+id/textView_Bienvenu"
-        android:layout_width="315dp"
-        android:layout_height="40dp"
+        android:layout_width="420dp"
+        android:layout_height="160dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="Bienvenu!"
-        android:textSize="32dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/button_disconnect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
