@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private Button cuisinierSignUp;
     private FirebaseAuth firebaseAuth;
 
-    DatabaseReference databaseReference;
-    Button clientRegister;
-    Button cuisinierRegister;
+    public DatabaseReference databaseReference;
+    public Button clientRegister;
+    public Button cuisinierRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
