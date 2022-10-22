@@ -78,7 +78,7 @@ public class ClientRegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(AuthResult authResult) {
                     FirebaseUser clients=authentication.getCurrentUser();
-                    DocumentReference collect=store.collection("Clients").document(clients.getUid());
+                    DocumentReference collect=store.collection("user").document(clients.getUid());
                     Toast.makeText(ClientRegistrationActivity.this,"Votre compte a ete crée",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     Map<String,Object> userInfo=new HashMap<>();
@@ -92,7 +92,7 @@ public class ClientRegistrationActivity extends AppCompatActivity {
                     userInfo.put("CCV",clientCreditCVV.getText().toString());
                     userInfo.put("Type", type);
 
-                    store.collection("Clients")
+                    store.collection("user")
                             .add(userInfo)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
@@ -114,7 +114,7 @@ public class ClientRegistrationActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(ClientRegistrationActivity.this,"Erreur de registre",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClientRegistrationActivity.this,"Erreur de connection",Toast.LENGTH_SHORT).show();
                 }
             });
         }

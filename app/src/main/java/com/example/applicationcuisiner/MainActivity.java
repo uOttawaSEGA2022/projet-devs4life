@@ -81,9 +81,15 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void onCheckLoginInfo(View view){
+
         email = (EditText)findViewById(R.id.editText_Email);
         password = (EditText)findViewById(R.id.editText_MDP);
-        checkLoginInfo(email.getText().toString(), password.getText().toString());
+        if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
+            Toast.makeText(this,"Can't leave empty",Toast.LENGTH_LONG).show();
+        } else {
+            checkLoginInfo(email.getText().toString(), password.getText().toString());
+        }
+
     }
 
     /**
