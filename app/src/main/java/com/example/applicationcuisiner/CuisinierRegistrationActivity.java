@@ -1,13 +1,22 @@
 package com.example.applicationcuisiner;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +48,8 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     private Button registerCuisinier;
     private FirebaseAuth authentication;
     private FirebaseFirestore store;
+    private ImageView image;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +65,60 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
         cuisinierPassword = (EditText) findViewById(R.id.editText_Mode_de_passeCuisinier);
         cuisinierAdress = (EditText) findViewById(R.id.editText_AdresseRamassageCuisinier);
         cuisinierDescription = (EditText) findViewById(R.id.editText_DescriptionCuisinier);
+        image = findViewById(R.id.image);
+        image.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+
+                boolean pick=true;
+                if (pick){
+                   if(!checkCameraPermission()){
+                       requestCameraPermission();
+                   }
+
+                }else {
+                    if (!checkStoragePermission()){
+                        requestStoragePermission();
+                    } else pick=false;
+
+                }
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && data != null) {
+            Uri selectedImage = data.getData();
+            ImageView imageView = findViewById(R.id.image);
+            imageView.setImageURI(selectedImage);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void requestStoragePermission() {
+        requestPermissions(new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void requestCameraPermission() {
+        requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+    }
+
+    private boolean checkStoragePermission() {
+        boolean res2= ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED;
+        return res2;
+
+    }
+
+    private boolean checkCameraPermission() {
+        boolean res1= ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED;
+        boolean res2= ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED;
+        return res1 && res2;
     }
 
     public void onRegister(View view){
