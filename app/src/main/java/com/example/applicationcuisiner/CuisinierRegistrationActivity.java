@@ -49,17 +49,17 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     private Button registerCuisinier;
     private FirebaseAuth authentication;
     private FirebaseFirestore store;
-
     private ImageView image;
-
-
     private String type;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        type = "Cuisinier";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuisinier_registration);
+
 
         authentication=FirebaseAuth.getInstance();
         store=FirebaseFirestore.getInstance();
