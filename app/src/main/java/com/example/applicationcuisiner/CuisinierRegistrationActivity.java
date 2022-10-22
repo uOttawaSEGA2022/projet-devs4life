@@ -1,10 +1,13 @@
 package com.example.applicationcuisiner;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +42,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     private Button registerCuisinier;
     private FirebaseAuth authentication;
     private FirebaseFirestore store;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
         cuisinierPassword = (EditText) findViewById(R.id.editText_Mode_de_passeCuisinier);
         cuisinierAdress = (EditText) findViewById(R.id.editText_AdresseRamassageCuisinier);
         cuisinierDescription = (EditText) findViewById(R.id.editText_DescriptionCuisinier);
+        type = "Cuisinier";
     }
 
     public void onRegister(View view){
@@ -74,7 +79,22 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
                     userInfo.put("Password",cuisinierPassword.getText().toString());
                     userInfo.put("Address",cuisinierAdress.getText().toString());
                     userInfo.put("Description",cuisinierDescription.getText().toString());
+                    userInfo.put("Type", type);
 
+                    store.collection("user")
+                            .add(userInfo)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error adding document", e);
+                                }
+                            });
                     finish();//user cannot go back to registration
                 }
             }).addOnFailureListener(new OnFailureListener() {
