@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Email"
+            android:hint="Adresse courriel"
             android:inputType="textEmailAddress" />
 
         <EditText

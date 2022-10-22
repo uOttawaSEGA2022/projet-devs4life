@@ -55,7 +55,7 @@ public class SecondActivity extends AppCompatActivity {
 
                 for(DocumentChange documentChange: value.getDocumentChanges()){
                     type = documentChange.getDocument().getData().get("Type").toString();
-                    bienvenu.setText("Bienvenue vous etes un " + type);
+                    bienvenu.setText("Bienvenue vous êtes un " + type);
 
 
                 }
