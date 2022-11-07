@@ -52,6 +52,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     private ImageView image;
     private String type;
     private String currentUserID;
+    private String status;
 
 
 
@@ -71,6 +72,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
         cuisinierPassword = (EditText) findViewById(R.id.editText_Mode_de_passeCuisinier);
         cuisinierAdress = (EditText) findViewById(R.id.editText_AdresseRamassageCuisinier);
         cuisinierDescription = (EditText) findViewById(R.id.editText_DescriptionCuisinier);
+        status = "Active"; //de base tout les cuisiniers sont actifs.
 
         image = findViewById(R.id.image);
         image.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +155,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
                     userInfo.put("Address",cuisinierAdress.getText().toString());
                     userInfo.put("Description",cuisinierDescription.getText().toString());
                     userInfo.put("Type", type);
+                    userInfo.put("Status", status);
 
                     store.collection("user").document(currentUserID)
                             .set(userInfo)

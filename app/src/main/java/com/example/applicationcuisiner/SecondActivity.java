@@ -24,6 +24,8 @@ public class SecondActivity extends AppCompatActivity {
 
     private FirebaseFirestore fireStore;
     private String currentUserID;
+    private String type;
+    private String status;
 
 
 
@@ -46,7 +48,25 @@ public class SecondActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
-                        bienvenue.setText("Bienvenue vous etes un "+document.getString("Type"));
+                        type = document.getString("Type");
+                        status = document.getString("Status");
+                        if(type != null && type.equals("Admin")){
+                            bienvenue.setText("Bienvenue vous etes un "+type);
+                            //start admin activity
+                        }
+                        else if(type != null && type.equals("Cuisinier")){
+                            if(status != null && status.equals("PermanentlyBanned")){
+                                bienvenue.setText("Malheureusement vous etes banni de maniere permanente, vous n'aurez plus acces au reste de l'application");
+                            } else if (status != null && status.equals("Banned")){
+                                bienvenue.setText("Malheureusement vous etes banni pour:");
+                            } else {
+                                bienvenue.setText("Bienvenue vous etes un "+type);
+                                //start cuisinier activity
+                            }
+                        } else{
+                            bienvenue.setText("Bienvenue vous etes un "+type);
+                            //start client activity
+                        }
                     } else {
                         Log.d("LOGGER", "No such document");
                     }

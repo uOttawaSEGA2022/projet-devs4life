@@ -21,15 +21,17 @@
 
     <TextView
         android:id="@+id/textView_Bienvenu"
-        android:layout_width="420dp"
-        android:layout_height="160dp"
+        android:layout_width="390dp"
+        android:layout_height="156dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text=""
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/button_disconnect"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.078"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
