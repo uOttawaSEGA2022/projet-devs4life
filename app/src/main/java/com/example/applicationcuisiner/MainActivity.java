@@ -84,9 +84,20 @@ public class MainActivity extends AppCompatActivity {
 
         email = (EditText)findViewById(R.id.editText_Email);
         password = (EditText)findViewById(R.id.editText_MDP);
+        if(email.getText().toString() == "admin@gmail.com") {
+            Intent intent = new Intent(this, Administrateur.class);
+            startActivity(intent);
+
+
+        }
         if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
             Toast.makeText(this,"Can't leave empty",Toast.LENGTH_LONG).show();
-        } else {
+        }
+        else if (email.getText().toString()=="admin@gmail.com" ){
+            Intent intent = new Intent(this, Administrateur.class);
+            startActivity(intent);
+        }
+        else {
             checkLoginInfo(email.getText().toString(), password.getText().toString());
         }
 
@@ -109,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onCuisinierSignUp(View view){
         Intent intent = new Intent(this, CuisinierRegistrationActivity.class);
+        startActivity(intent);
+    }
+    public void onAdminSignUp(View view){
+        Intent intent = new Intent(this, Administrateur.class);
         startActivity(intent);
     }
 /**
@@ -139,6 +154,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
 
 
