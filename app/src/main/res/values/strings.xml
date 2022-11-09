@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ApplicationCuisiner</string>
+    <string name="s_inscrire_en_tant_que_client">S\'inscrire en tant que client</string>
+    <string name="vous_n_avez_pas_encore_de_compte_inscrivez_vous_ici">Vous n\'avez pas encore de compte? Inscrivez-vous ici</string>
+    <string name="une_image_d_orange">Une image d\'orange</string>
+    <string name="s_inscrire_en_tant_que_cuisinier">S\'inscrire en tant que cuisinier</string>
+    <string name="connexion">Connexion</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="email">Email</string>
+    <string name="foodie">FOODIE</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="une_image_d_avocat">une image d\'avocat</string>
+    <string name="une_image_de_citron">une image de citron</string>
 </resources>

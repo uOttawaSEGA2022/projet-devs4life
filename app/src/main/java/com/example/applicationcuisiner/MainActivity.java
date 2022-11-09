@@ -25,7 +25,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
- * Cette classe contient la page d'ouverture de application.
+ * Cette classe est une Activité qui contient la page d'ouverture de application.
  * Elle permet a l'utilisateur de passer aux prochaines page de l'application
  * via son adresse Email et un mot de passe,
  * si ceux-ci sont enregistrés dans la base de données Firebase.
@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore fireStore;
     private String type;
     private String status;
+    TextView noEmail;
+    TextView noPassword;
 
 
 
@@ -52,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        info = findViewById(R.id.textView_Info);
+        noEmail = findViewById(R.id.textView_noEmail);
+        noPassword = findViewById(R.id.textView_noPassword);
+        info = findViewById(R.id.textView_inscrivezVous);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
@@ -69,11 +73,21 @@ public class MainActivity extends AppCompatActivity {
      * @param view view of the button
      */
     public void onCheckLoginInfo(View view){
-
         EditText email = findViewById(R.id.editText_Email);
         EditText password = findViewById(R.id.editText_MDP);
         if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
-            Toast.makeText(this,"Can't leave the fields empty",Toast.LENGTH_LONG).show();
+            if(email.getText().toString().isEmpty())  {
+                noEmail.setText("Email obligatoire");
+            }
+            if(password.getText().toString().isEmpty()){
+                noPassword.setText("Mot de passe obligatoire");
+            }
+            if(!email.getText().toString().isEmpty())  {
+                noEmail.setText("");
+            }
+            if(!password.getText().toString().isEmpty()){
+                noPassword.setText("");
+            }
         }
         else {
             checkLoginInfo(email.getText().toString(), password.getText().toString());
@@ -129,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else {
-                    info.setText("Mauvais email ou mot de passe");
+                    noEmail.setText("Mauvais email ou mot de passe");
+                    noPassword.setText("Mauvais email ou mot de passe");
                 }
             }
         });
