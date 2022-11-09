@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="LISTE DE PLAINTES"
-        android:textAlignment="center"
+    android:layout_height="match_parent"
+    tools:context=".AdminActivity">
 
-        />
-    <ListView
-        android:id="@+id/listViewPlaintes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView">
-    </ListView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
