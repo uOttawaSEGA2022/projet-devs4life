@@ -67,7 +67,7 @@ public class ClientRegistrationActivity extends AppCompatActivity {
         clientCreditNumber = (EditText) findViewById(R.id.editText_NumCarteClient);
         clientCreditExp = (EditText) findViewById(R.id.editText_CarteExpClient);
         clientCreditCVV = (EditText) findViewById(R.id.editText_CVVClient);
-        type = "Client";
+        type = "Client"; //initialize the type to client
 
 
     }

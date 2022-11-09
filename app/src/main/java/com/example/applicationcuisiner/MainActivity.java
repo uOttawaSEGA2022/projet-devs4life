@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore fireStore;
     private String type;
+    private String status;
 
 
 
@@ -102,18 +103,19 @@ public class MainActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
-                                    System.out.println("here3 " + document.getString("Type"));
                                     type = document.getString("Type");
-                                    System.out.println("here4" + type);
                                     if(type != null && type.equals("Admin")){
                                         AdminPage(user);
-                                        System.out.println("this is an admin");
-                                    } else if(type != null && type.equals("Cuisinier")){
-                                        CuisinierPage(user);
-                                        System.out.println("this is a cuisinier");
-                                    } else if (type != null && type.equals("Client")){
+                                        } else if(type != null && type.equals("Client")){
                                         ClientPage(user);
-                                        System.out.println("this is a client");
+                                    } else if (type != null && type.equals("Cuisinier")) {
+                                        status = document.getString("Status");
+                                        if(status != null && status.equals("PermanentlyBanned"))
+                                            CuisinierPermanentlyBannedPage(user);
+                                        else if(status!= null && status.equals("Banned"))
+                                            CuisinierTemporarilyBannedPage(user);
+                                        else if(status != null && status.equals("Active"))
+                                            CuisinierPage(user);
                                     }
                                     Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                 } else {
@@ -148,6 +150,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * cette methode permet au client d'aller vers sa page de bienvenue.
+     * @param account compte de l'utilisateur qui veut se connecter
+     */
+    public void ClientPage(FirebaseUser account){
+        if(account != null){
+            Toast.makeText(this,"You Signed In successfully",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, ClientActivity.class));
+        }else {
+            Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
      * cette methode permet au cuisinier d'aller vers sa page de bienvenue.
      * @param account compte de l'utilisateur qui veut se connecter
      */
@@ -161,13 +176,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * cette methode permet au client d'aller vers sa page de bienvenue.
+     * cette methode permet a un cuisinier banni de maniere permanente
+     * d'aller vers sa page de banissement.
      * @param account compte de l'utilisateur qui veut se connecter
      */
-    public void ClientPage(FirebaseUser account){
+    public void CuisinierPermanentlyBannedPage(FirebaseUser account){
         if(account != null){
             Toast.makeText(this,"You Signed In successfully",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, ClientActivity.class));
+            startActivity(new Intent(this, CuisinierPermanentlyBannedActivity.class));
+        }else {
+            Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * cette methode permet a un cuisinier banni de maniere permanente
+     * d'aller vers sa page de banissement.
+     * @param account compte de l'utilisateur qui veut se connecter
+     */
+    public void CuisinierTemporarilyBannedPage(FirebaseUser account){
+        if(account != null){
+            Toast.makeText(this,"You Signed In successfully",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, CuisinierTemporarilyBannedActivity.class));
         }else {
             Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();
         }
