@@ -39,7 +39,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private TextView info;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore fireStore;
     private String type;
@@ -57,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         noEmail = findViewById(R.id.textView_noEmail);
         noPassword = findViewById(R.id.textView_noPassword);
-        info = findViewById(R.id.textView_inscrivezVous);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
@@ -158,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void AdminPage(FirebaseUser account){
         if(account != null){
-            startActivity(new Intent(this, AdminActivity.class));
+            startActivity(new Intent(this, AdministratorActivity.class));
         }else {
             Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();
         }

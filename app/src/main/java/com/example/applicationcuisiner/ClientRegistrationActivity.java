@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+//we should add a go back method
 /**
  * Cette classe permet au client d'entrer toute ses informations d'autentification.
  * Si jamais les champs informations ne sont pas remplis on renvoit le message que le
@@ -85,8 +86,6 @@ public class ClientRegistrationActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     Map<String,Object> userInfo=new HashMap<>();
                     currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
 
                     userInfo.put("Name",clientFirstName.getText().toString());
                     userInfo.put("LastName",clientLastName.getText().toString());

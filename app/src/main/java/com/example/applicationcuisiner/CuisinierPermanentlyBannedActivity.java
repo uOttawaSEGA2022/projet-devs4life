@@ -25,6 +25,7 @@ public class CuisinierPermanentlyBannedActivity extends AppCompatActivity {
      * qui est la page de login.
      * @param view view du boutton
      */
+
     public void onDisconnect(View view){
         Intent intent = new Intent(CuisinierPermanentlyBannedActivity.this, MainActivity.class);
         startActivity(intent);

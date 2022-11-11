@@ -43,9 +43,10 @@ import java.util.Map;
  * @author Chloé Al-Frenn
  * @author Carolina González
  */
-
+//we should add a go back method
+    //remove the sethints and implement textview instead
 public class CuisinierRegistrationActivity extends AppCompatActivity {
-    private EditText cuisinierFirstName, cuisinierLastName, cuisinierEmail, cuisinierPassword, cuisinierAdress, cuisinierDescription;
+    private EditText cuisinierFirstName, cuisinierLastName, cuisinierEmail, cuisinierPassword, cuisinierAddress, cuisinierDescription;
     private Button registerCuisinier;
     private FirebaseAuth authentication;
     private FirebaseFirestore store;
@@ -70,7 +71,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
         cuisinierLastName = (EditText) findViewById(R.id.editText_NomCuisinier);
         cuisinierEmail = (EditText) findViewById(R.id.editText_AdressCourrielCuisinier);
         cuisinierPassword = (EditText) findViewById(R.id.editText_Mode_de_passeCuisinier);
-        cuisinierAdress = (EditText) findViewById(R.id.editText_AdresseRamassageCuisinier);
+        cuisinierAddress = (EditText) findViewById(R.id.editText_AdresseRamassageCuisinier);
         cuisinierDescription = (EditText) findViewById(R.id.editText_DescriptionCuisinier);
         status = "Active"; //de base tout les cuisiniers sont actifs.
 
@@ -152,7 +153,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
                     userInfo.put("LastName",cuisinierLastName.getText().toString());
                     userInfo.put("Email",cuisinierEmail.getText().toString());
                     userInfo.put("Password",cuisinierPassword.getText().toString());
-                    userInfo.put("Address",cuisinierAdress.getText().toString());
+                    userInfo.put("Address", cuisinierAddress.getText().toString());
                     userInfo.put("Description",cuisinierDescription.getText().toString());
                     userInfo.put("Type", type);
                     userInfo.put("Status", status);
@@ -214,10 +215,10 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
             result = false;
             cuisinierPassword.setHint("Ce champ est obligatoire : mot de passe");
         }
-        String adresse = cuisinierAdress.getText().toString();
-        if (adresse.isEmpty()) {
+        String address = cuisinierAddress.getText().toString();
+        if (address.isEmpty()) {
             result = false;
-            cuisinierAdress.setHint("Ce champ est obligatoire : adresse");
+            cuisinierAddress.setHint("Ce champ est obligatoire : address");
         }
         String description = cuisinierDescription.getText().toString();
         if (description.isEmpty()) {
