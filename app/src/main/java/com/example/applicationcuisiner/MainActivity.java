@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore fireStore;
     private String type;
     private String status;
+
     TextView noEmail;
     TextView noPassword;
 
@@ -157,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void AdminPage(FirebaseUser account){
         if(account != null){
-            Toast.makeText(this,"You Signed In successfully",Toast.LENGTH_LONG).show();
             startActivity(new Intent(this, AdminActivity.class));
         }else {
             Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();
@@ -170,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void ClientPage(FirebaseUser account){
         if(account != null){
-            Toast.makeText(this,"You Signed In successfully",Toast.LENGTH_LONG).show();
             startActivity(new Intent(this, ClientActivity.class));
         }else {
             Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();
@@ -183,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void CuisinierPage(FirebaseUser account){
         if(account != null){
-            Toast.makeText(this,"You Signed In successfully",Toast.LENGTH_LONG).show();
             startActivity(new Intent(this, CuisinierActivity.class));
         }else {
             Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();
@@ -197,7 +195,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void CuisinierPermanentlyBannedPage(FirebaseUser account){
         if(account != null){
-            Toast.makeText(this,"You Signed In successfully",Toast.LENGTH_LONG).show();
             startActivity(new Intent(this, CuisinierPermanentlyBannedActivity.class));
         }else {
             Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();
@@ -211,7 +208,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void CuisinierTemporarilyBannedPage(FirebaseUser account){
         if(account != null){
-            Toast.makeText(this,"You Signed In successfully",Toast.LENGTH_LONG).show();
             startActivity(new Intent(this, CuisinierTemporarilyBannedActivity.class));
         }else {
             Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();
