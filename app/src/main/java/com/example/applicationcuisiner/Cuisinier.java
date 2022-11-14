@@ -1,5 +1,19 @@
 package com.example.applicationcuisiner;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,13 +24,11 @@ import java.util.TimerTask;
 
 public class Cuisinier extends User{
 
-    String address;
-    String description;
-    String status; //Active, Banned or PermanentlyBanned
-    Date momentBanned; //use the method getTime() and compare it to timeBanned to see if the user is still banned.
-    long durationBanned;
-    Timer time;
-    //can i save an image? for the void check
+    private String address;
+    private String description;
+    private int index;
+    private String status; //Active, Banned or PermanentlyBanned
+    private long durationBanned;
 
     public Cuisinier(String userID,String firstname, String lastname, String email, String password, String address, String description){
         type = "Cuisinier";
@@ -28,14 +40,11 @@ public class Cuisinier extends User{
         this.password = password;
         this.address = address;
         this.description = description;
+
     }
 
     public String getAddress() {
         return address;
-    }
-
-    public Date getMomentBanned() {
-        return momentBanned;
     }
 
     public long getDurationBanned() {
@@ -50,6 +59,7 @@ public class Cuisinier extends User{
         return status;
     }
 
+
     public void setAddress(String address) {
         this.address = address;
     }
@@ -62,13 +72,10 @@ public class Cuisinier extends User{
         this.durationBanned = durationBanned;
     }
 
-    public void setMomentBanned(Date momentBanned) {
-        this.momentBanned = momentBanned;
-    }
-
     public void setStatus(String status) {
         this.status = status;
     }
+
 
 
 }

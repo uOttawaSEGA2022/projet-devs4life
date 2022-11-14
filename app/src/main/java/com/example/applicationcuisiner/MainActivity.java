@@ -193,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void CuisinierPermanentlyBannedPage(FirebaseUser account){
         if(account != null){
+            System.out.println("temporairement");
             startActivity(new Intent(this, CuisinierPermanentlyBannedActivity.class));
         }else {
             Toast.makeText(this,"You can't sign in",Toast.LENGTH_LONG).show();

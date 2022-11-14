@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +55,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     private String type;
     private String currentUserID;
     private String status;
-
+    private Cuisinier cuisinier;
 
 
     @Override
@@ -157,6 +158,11 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
                     userInfo.put("Description",cuisinierDescription.getText().toString());
                     userInfo.put("Type", type);
                     userInfo.put("Status", status);
+                    cuisinier = new Cuisinier(currentUserID, cuisinierFirstName.getText().toString(), cuisinierLastName.getText().toString(),cuisinierEmail.getText().toString(), cuisinierPassword.getText().toString(), cuisinierAddress.getText().toString(), cuisinierDescription.getText().toString());
+
+
+
+
 
                     store.collection("user").document(currentUserID)
                             .set(userInfo)
