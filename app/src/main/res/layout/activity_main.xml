@@ -6,80 +6,203 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editText_Email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
+    <ImageView
+        android:id="@+id/imageView_orange"
+        android:layout_width="182dp"
+        android:layout_height="232dp"
+        android:contentDescription="@string/une_image_d_orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/orange_cropped" />
+
+    <ImageView
+        android:id="@+id/imageView_citron"
+        android:layout_width="170dp"
+        android:layout_height="277dp"
+        android:contentDescription="@string/une_image_de_citron"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.579"
+        app:srcCompat="@drawable/citron_cropped" />
+
+    <ImageView
+        android:id="@+id/imageView_avocat"
+        android:layout_width="117dp"
+        android:layout_height="308dp"
+        android:layout_marginTop="516dp"
+        android:contentDescription="@string/une_image_d_avocat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/avocado_cropped" />
+
+    <TextView
+        android:id="@+id/textView_WelcomeTo"
+        android:layout_width="116dp"
+        android:layout_height="34dp"
+        android:text="@string/welcome_to"
+        android:fontFamily="@font/k2d_medium"
+        android:gravity="center"
+        android:textColor="@color/textBlue"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.183"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14" />
+
+    <TextView
+        android:id="@+id/textView_FOODIE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/k2d_thin"
+        android:gravity="center"
+        android:text="@string/foodie"
+        android:textColor="@color/textBlue"
+        android:textSize="96sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.794"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.171" />
+
+    <EditText
+        android:id="@+id/editText_Email"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
+        android:background="@drawable/et_border"
+        android:ems="10"
+        android:fontFamily="@font/k2d_medium"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/textBlue"
+        android:textColorHint="@color/textBlue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.364" />
 
     <EditText
         android:id="@+id/editText_MDP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
+        android:background="@drawable/et_border"
         android:ems="10"
-        android:hint="Mot de passe"
+        android:fontFamily="@font/k2d_medium"
+        android:hint="@string/mot_de_passe"
         android:inputType="textPassword"
+        android:textColor="@color/textBlue"
+        android:textColorHint="@color/textBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_Email"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
 
     <Button
         android:id="@+id/button_Connexion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connexion"
+        android:layout_width="119dp"
+        android:layout_height="48dp"
+        android:background="@drawable/rounded_corner_btn"
+        android:fontFamily="@font/k2d_medium"
+        android:onClick="onCheckLoginInfo"
+        android:text="@string/connexion"
+        android:textColor="@color/textBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_MDP"
-        app:layout_constraintVertical_bias="0.149"
-        android:onClick="onCheckLoginInfo"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.648" />
 
     <TextView
-        android:id="@+id/textView_Info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/button_Connexion"
+        android:id="@+id/textView_inscrivezVous"
+        android:layout_width="267dp"
+        android:layout_height="53dp"
+        android:fontFamily="@font/k2d_medium"
+        android:text="@string/vous_n_avez_pas_encore_de_compte_inscrivez_vous_ici"
+        android:textColor="@color/textBlue"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_MDP" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.796" />
 
     <Button
-        android:id="@+id/Button_ClientSignUp"
-        android:layout_width="302dp"
-        android:layout_height="50dp"
+        android:id="@+id/button_ClientSignUp"
+        android:layout_width="290dp"
+        android:layout_height="51dp"
+        android:background="@drawable/rounded_btn"
+        android:fontFamily="@font/k2d_medium"
         android:onClick="onClientSignUp"
-        android:text="S'inscrire en tant que client"
+        android:text="@string/s_inscrire_en_tant_que_client"
+        android:textColor="@color/textBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.876"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_Connexion"
-        app:layout_constraintVertical_bias="0.391" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.875" />
 
     <Button
-        android:id="@+id/Button_CuisinierSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/button_CuisinierSignUp"
+        android:layout_width="250dp"
+        android:layout_height="51dp"
+        android:background="@drawable/rounded_btn"
+        android:fontFamily="@font/k2d_medium"
         android:onClick="onCuisinierSignUp"
-        android:text="S'inscrire en tant que cuisinier"
+        android:text="@string/s_inscrire_en_tant_que_cuisinier"
+        android:textColor="@color/textBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_Connexion"
-        app:layout_constraintVertical_bias="0.627" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <TextView
+        android:id="@+id/textView_noEmail"
+        android:layout_width="232dp"
+        android:layout_height="47dp"
+        android:fontFamily="@font/k2d_medium"
+        android:textColor="@color/errorRed"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431" />
+
+    <TextView
+        android:id="@+id/textView_noPassword"
+        android:layout_width="232dp"
+        android:layout_height="47dp"
+        android:fontFamily="@font/k2d_medium"
+        android:textColor="@color/errorRed"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.568" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
