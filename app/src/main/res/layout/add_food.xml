@@ -64,8 +64,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="132dp"
-        android:layout_height="60dp"
+        android:layout_width="140dp"
+        android:layout_height="65dp"
         android:text="Add Repas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
