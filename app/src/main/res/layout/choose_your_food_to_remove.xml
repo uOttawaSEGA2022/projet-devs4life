@@ -29,7 +29,7 @@
     <ListView
         android:id="@+id/listViewProducts"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
         android:layout_below="@+id/textView"
         android:layout_marginTop="33dp"></ListView>
 
