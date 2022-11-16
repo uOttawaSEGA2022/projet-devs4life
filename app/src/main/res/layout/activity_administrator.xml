@@ -16,8 +16,16 @@
         android:id="@+id/editTextPlainte"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/editTextTemp"
+        android:hint="Date" />
+
+    <EditText
+        android:id="@+id/editTextTemp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/editTextName"
-        android:hint="Enter plainte" />
+        android:hint="TEMP"
+        />
 
     <Button
         android:id="@+id/addButton"

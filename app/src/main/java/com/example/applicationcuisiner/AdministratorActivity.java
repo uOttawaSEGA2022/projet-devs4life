@@ -32,8 +32,8 @@ public class AdministratorActivity extends AppCompatActivity {
     EditText editTextPlainte;
     Button buttonAddPlainte;
     ListView listViewPlaintes;
-
     List<Plainte> plaintes;
+    EditText editTextTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class AdministratorActivity extends AppCompatActivity {
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextPlainte = (EditText) findViewById(R.id.editTextPlainte);
+        editTextTemp= (EditText) findViewById(R.id.editTextTemp);
         listViewPlaintes = (ListView) findViewById(R.id.listViewPlaintes);
         buttonAddPlainte = (Button) findViewById(R.id.addButton);
 
@@ -114,9 +115,10 @@ public class AdministratorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = editTextName.getText().toString().trim();
+                String temp = editTextTemp.getText().toString().trim();
                 double plainte = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
                 if (!TextUtils.isEmpty(name)) {
-                    updatePlainte(plainteId, name, plainte);
+                    updatePlainte(plainteId, name, plainte,temp);
                     b.dismiss();
                 }
             }
@@ -131,9 +133,9 @@ public class AdministratorActivity extends AppCompatActivity {
         });
     }
 
-    private void updatePlainte(String id, String name, double complaint) {
+    private void updatePlainte(String id, String name, double complaint, String temp) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
-        Plainte plainte  = new Plainte(id,name,complaint);
+        Plainte plainte  = new Plainte(id,name,complaint,temp);
         dR.setValue(plainte);
         Toast.makeText(getApplicationContext(), "Plainte Updated", Toast.LENGTH_SHORT).show();
     }
@@ -151,13 +153,16 @@ public class AdministratorActivity extends AppCompatActivity {
 
         String name = editTextName.getText().toString().trim();
         double complaint = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
+        String temp = editTextTemp.getText().toString().trim();
+
         if (!TextUtils.isEmpty(name)){
 
             String id = databsePlaintes.push().getKey();
-            Plainte plainte = new Plainte(id,name,complaint);
+            Plainte plainte = new Plainte(id,name,complaint,temp);
             databsePlaintes.child(id).setValue(plainte);
             editTextName.setText("");
             editTextPlainte.setText("");
+            editTextTemp.setText("");
             Toast.makeText(this,"Plainte added",Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this,"Please enter a name",Toast.LENGTH_LONG).show();

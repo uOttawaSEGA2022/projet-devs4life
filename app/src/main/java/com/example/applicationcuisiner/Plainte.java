@@ -4,17 +4,15 @@ public class Plainte {
     private String _id;
     private String _cooksname;
     private double _plainte;
+    private String _temp;
 
     public Plainte() {
     }
-    public Plainte(String id, String cooksname, double plainte) {
+    public Plainte(String id, String cooksname, double plainte,String temp) {
         _id = id;
         _cooksname = cooksname;
         _plainte = plainte;
-    }
-    public Plainte(String cooksname, double plainte) {
-        _cooksname = cooksname;
-        _plainte = plainte;
+        _temp=temp;
     }
 
     public void setId(String id) {
@@ -34,5 +32,11 @@ public class Plainte {
     }
     public double getPlainte() {
         return _plainte;
+    }
+    public void setTemp(String temp) {
+        _temp=temp;
+    }
+    public String getTemp() {
+        return _temp;
     }
 }

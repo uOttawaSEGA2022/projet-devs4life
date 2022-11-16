@@ -26,10 +26,12 @@ public class PlainteList extends ArrayAdapter<Plainte> {
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
         TextView textViewPlainte = (TextView) listViewItem.findViewById(R.id.textViewPlainte);
+        TextView textViewTemp = (TextView) listViewItem.findViewById(R.id.textViewName);
 
         Plainte plainte = plaintes.get(position);
         textViewName.setText(plainte.getCooksname());
         textViewPlainte.setText(String.valueOf(plainte.getPlainte()));
+        textViewTemp.setText(plainte.getTemp());
         return listViewItem;
     }
 }
