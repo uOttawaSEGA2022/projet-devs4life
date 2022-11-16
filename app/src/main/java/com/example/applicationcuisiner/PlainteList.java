@@ -17,7 +17,7 @@ public class PlainteList extends ArrayAdapter<Plainte> {
     List<Plainte> plaintes;
 
     public PlainteList(Activity context, List<Plainte> plaintes) {
-        super(context, R.layout.product_list, plaintes);
+        super(context, R.layout.plainte_list, plaintes);
         this.context = context;
         this.plaintes = plaintes;
     }
@@ -25,7 +25,7 @@ public class PlainteList extends ArrayAdapter<Plainte> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.product_list, null, true);
+        View listViewItem = inflater.inflate(R.layout.plainte_list, null, true);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
         TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.textViewPrice);
