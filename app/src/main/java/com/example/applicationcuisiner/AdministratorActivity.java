@@ -2,11 +2,13 @@ package com.example.applicationcuisiner;
 
 import android.os.Bundle;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,7 +28,9 @@ import java.util.List;
 public class AdministratorActivity extends AppCompatActivity {
     DatabaseReference databaseProducts;
 
-
+    EditText editTextName;
+    EditText editTextPlainte;
+    Button buttonAddProduct;
     ListView listViewPlaintes;
 
     List<Plainte> plaintes;
@@ -35,19 +39,28 @@ public class AdministratorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrator);
-        databaseProducts = FirebaseDatabase.getInstance().getReference("plaintes");
+        databaseProducts = FirebaseDatabase.getInstance().getReference("products");
 
-        listViewPlaintes = (ListView) findViewById(R.id.listViewPlaintes);
-
+        editTextName = (EditText) findViewById(R.id.editTextName);
+        editTextPlainte = (EditText) findViewById(R.id.editTextPrice);
+        listViewPlaintes = (ListView) findViewById(R.id.listViewProducts);
+        buttonAddProduct = (Button) findViewById(R.id.addButton);
 
         plaintes = new ArrayList<>();
 
+        //adding an onclicklistener to button
+        buttonAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addProduct();
+            }
+        });
 
         listViewPlaintes.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Plainte plainte = plaintes.get(i);
-                showUpdateDeleteDialog(plainte.getId(), plainte.getCuisinierName());
+                Plainte product = plaintes.get(i);
+                showUpdateDeleteDialog(product.getId(), product.getProductName());
                 return true;
             }
         });
@@ -66,10 +79,10 @@ public class AdministratorActivity extends AppCompatActivity {
 
                 plaintes.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    Plainte plainte = postSnapshot.getValue(Plainte.class);
-                    plaintes.add(plainte);
+                    Plainte product = postSnapshot.getValue(Plainte.class);
+                    plaintes.add(product);
                 }
-                Plaintes_Liste productsAdapter = new Plaintes_Liste(AdministratorActivity.this,plaintes);
+                PlainteList productsAdapter = new PlainteList(AdministratorActivity.this, plaintes);
                 listViewPlaintes.setAdapter(productsAdapter);
             }
 
@@ -85,9 +98,11 @@ public class AdministratorActivity extends AppCompatActivity {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.actions, null);
+        final View dialogView = inflater.inflate(R.layout.update, null);
         dialogBuilder.setView(dialogView);
 
+        final EditText editTextName = (EditText) dialogView.findViewById(R.id.editTextName);
+        final EditText editTextPrice  = (EditText) dialogView.findViewById(R.id.editTextPrice);
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateProduct);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteProduct);
 
@@ -95,26 +110,58 @@ public class AdministratorActivity extends AppCompatActivity {
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = editTextName.getText().toString().trim();
+                double price = Double.parseDouble(String.valueOf(editTextPrice.getText().toString()));
+                if (!TextUtils.isEmpty(name)) {
+                    updateProduct(productId, name, price);
+                    b.dismiss();
+                }
+            }
+        });
 
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deletePlainte(productId);
+                deleteProduct(productId);
                 b.dismiss();
             }
         });
     }
 
-    private boolean deletePlainte(String id) {
+    private void updateProduct(String id, String name, double price) {
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("products").child(id);
+        Plainte product  = new Plainte(id,name,price);
+        dR.setValue(product);
+        Toast.makeText(getApplicationContext(), "Product Updated", Toast.LENGTH_SHORT).show();
+    }
 
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
+    private boolean deleteProduct(String id) {
+
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("products").child(id);
         dR.removeValue();
-        Toast.makeText(getApplicationContext(),"Plainte Deleted", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Product Deleted", Toast.LENGTH_LONG).show();
         return true;
-
 
     }
 
+    private void addProduct() {
 
+        String name = editTextName.getText().toString().trim();
+        double price = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
+        if (!TextUtils.isEmpty(name)){
+
+            String id = databaseProducts.push().getKey();
+            Plainte product = new Plainte(id,name,price);
+            databaseProducts.child(id).setValue(product);
+            editTextName.setText("");
+            editTextPlainte.setText("");
+            Toast.makeText(this,"Product added",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this,"Please enter a name",Toast.LENGTH_LONG).show();
+        }
+
+    }
 }
-
