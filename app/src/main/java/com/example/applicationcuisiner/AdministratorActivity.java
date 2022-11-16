@@ -42,7 +42,7 @@ public class AdministratorActivity extends AppCompatActivity {
         databsePlaintes = FirebaseDatabase.getInstance().getReference("plaintes");
 
         editTextName = (EditText) findViewById(R.id.editTextName);
-        editTextPlainte = (EditText) findViewById(R.id.editTextPlainte);
+
         editTextTemp= (EditText) findViewById(R.id.editTextTemp);
         listViewPlaintes = (ListView) findViewById(R.id.listViewPlaintes);
         buttonAddPlainte = (Button) findViewById(R.id.addButton);

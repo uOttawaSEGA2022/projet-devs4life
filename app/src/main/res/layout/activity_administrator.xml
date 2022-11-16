@@ -12,12 +12,7 @@
         android:layout_height="wrap_content"
         android:hint="Enter cook's name" />
 
-    <EditText
-        android:id="@+id/editTextPlainte"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextTemp"
-        android:hint="Date" />
+
 
     <EditText
         android:id="@+id/editTextTemp"
@@ -31,7 +26,7 @@
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextPlainte"
+        android:layout_below="@id/editTextTemp"
         android:layout_centerInParent="true"
         android:layout_weight="1"
         android:text="Add" />
