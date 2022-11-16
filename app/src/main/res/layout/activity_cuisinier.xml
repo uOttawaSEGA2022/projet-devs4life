@@ -25,7 +25,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="368dp" />
+            android:layout_height="280dp" />
 
         <Button
             android:id="@+id/btn_addRepas"
@@ -38,7 +38,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="35dp" />
+            android:layout_height="30dp" />
 
         <Button
             android:id="@+id/btn_removeRepas"
@@ -50,8 +50,8 @@
             android:textColor="@color/textBlue" />
 
         <Space
-            android:layout_width="match_parent"
-            android:layout_height="28dp" />
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
 
         <Button
             android:id="@+id/btn_seeMenu"
@@ -61,6 +61,20 @@
             android:fontFamily="@font/k2d_medium"
             android:text="See Menu"
             android:onClick="onGoToMenu"
+            android:textColor="@color/textBlue" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <Button
+            android:id="@+id/btn_disconnectFromCuisinier"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/k2d_medium"
+            android:text="Disconnect"
+            android:onClick="onDisconnectCuisinier"
             android:textColor="@color/textBlue" />
     </LinearLayout>
 

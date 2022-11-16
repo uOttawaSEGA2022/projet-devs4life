@@ -29,4 +29,10 @@ public class CuisinierActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SeeMenuActivity.class);
         startActivity(intent);
     }
+
+    public void onDisconnectCuisinier(View view){
+        Intent intent = new Intent(CuisinierActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
