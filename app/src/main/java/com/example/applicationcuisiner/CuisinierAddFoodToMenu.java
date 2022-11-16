@@ -14,10 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,18 +35,20 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
     Button addBtn;
     FirebaseFirestore db;
     String currentUserID;
-    String name;
+    String cname;
     String lastname;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_food);
+        setContentView(R.layout.activity_cuisinier_add_food);
          db = FirebaseFirestore.getInstance();
 
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        // below line is use to initialize our variables
 
         DocumentReference docRef = db.collection("user").document(currentUserID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -57,32 +57,35 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
-                        name = document.getString("Name");
+                        cname = document.getString("Name");
                         lastname = document.getString("LastName");
                     }
                 }
             }
         });
 
-         EditText foodName = findViewById(R.id.foodName);
-         EditText foodDescription = findViewById(R.id.foodDescription);
-         EditText foodPrice = findViewById(R.id.foodPrice);
-         EditText typeOfFood = findViewById(R.id.typeOfFood);
-         addBtn = findViewById(R.id.addFoodToDatabase);
+         EditText foodName = findViewById(R.id.et_foodName);
+         EditText foodDescription = findViewById(R.id.et_foodDescription);
+         EditText foodPrice = findViewById(R.id.et_foodPrice);
+         EditText typeOfFood = findViewById(R.id.et_typeOfCuisine);
+         EditText typeOfRepas = findViewById(R.id.et_typeOfRepas);
+         addBtn = findViewById(R.id.btn_addFoodToDatabase);
          addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String FoodName = foodName.getText().toString();
-                String FoodDescription = foodDescription.getText().toString();
-                String FoodPrice = foodPrice.getText().toString();
-                String TypeOfFood = typeOfFood.getText().toString();
+                String name = foodName.getText().toString();
+                String description = foodDescription.getText().toString();
+                String price = foodPrice.getText().toString();
+                String typeFood = typeOfFood.getText().toString();
+                String typeRepas = typeOfRepas.getText().toString();
                 Map<String, Object> menu = new HashMap<>();
-                menu.put("Food Name", FoodName);
-                menu.put("Food Description", FoodDescription);
-                menu.put("Food Price", FoodPrice);
-                menu.put("Type Of Food", TypeOfFood);
-                menu.put("Name of cook", name + " " + lastname);
+                menu.put("name", name);
+                menu.put("description", description);
+                menu.put("price", price);
+                menu.put("typeDeCuisine", typeFood);
+                menu.put("typeDeRepas", typeRepas);
+                menu.put("cook", cname + " " + lastname);
 
                 db.collection("menu")
                         .add(menu)
@@ -102,11 +105,15 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    public void onGoBack01(View view){
+        Intent intent = new Intent(this, CuisinierActivity.class);
+        startActivity(intent);
     }
 }

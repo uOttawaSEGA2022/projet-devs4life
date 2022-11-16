@@ -7,39 +7,61 @@
     android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome Cook!"
-        android:textSize="96sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/addFoodBtn"
-        android:layout_width="170dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="412dp"
-        android:text="Add Repas"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_welcomeCook"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:fontFamily="@font/k2d_medium"
+            android:gravity="center"
+            android:shadowColor="@color/textBlue"
+            android:text="Bienvenue vous etes un cuisinier!"
+            android:textColor="@color/textBlue"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="174dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="117dp"
-        android:layout_marginBottom="174dp"
-        android:text="Remove Repas"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addFoodBtn" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="368dp" />
+
+        <Button
+            android:id="@+id/btn_addRepas"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/k2d_medium"
+            android:text="Add Repas"
+            android:textColor="@color/textBlue" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <Button
+            android:id="@+id/btn_removeRepas"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/k2d_medium"
+            android:text="Remove Repas"
+            android:textColor="@color/textBlue" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="28dp" />
+
+        <Button
+            android:id="@+id/btn_seeMenu"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/k2d_medium"
+            android:text="See Menu"
+            android:onClick="onGoToMenu"
+            android:textColor="@color/textBlue" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

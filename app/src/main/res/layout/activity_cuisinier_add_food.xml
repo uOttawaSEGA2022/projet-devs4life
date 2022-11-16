@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_addToMenu"
+            android:layout_width="match_parent"
+            android:layout_height="126dp"
+            android:fontFamily="@font/k2d_medium"
+            android:gravity="center"
+            android:text="Ajoutez un repas a votre menu"
+            android:textColor="@color/textBlue"
+            android:textSize="34sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_foodName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/et_border"
+                android:ems="10"
+                android:fontFamily="@font/k2d_medium"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/textBlue"
+                android:textColorHint="@color/textBlue" />
+
+            <EditText
+                android:id="@+id/et_foodPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/et_border"
+                android:ems="10"
+                android:fontFamily="@font/k2d_medium"
+                android:hint="Price"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                android:textColor="@color/textBlue"
+                android:textColorHint="@color/textBlue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_typeOfCuisine"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/et_border"
+                android:ems="10"
+                android:fontFamily="@font/k2d_medium"
+                android:hint="Type de cuisine"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/textBlue"
+                android:textColorHint="@color/textBlue" />
+
+            <EditText
+                android:id="@+id/et_typeOfRepas"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/et_border"
+                android:ems="10"
+                android:fontFamily="@font/k2d_medium"
+                android:hint="Type de repas"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/textBlue"
+                android:textColorHint="@color/textBlue" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_foodDescription"
+            android:layout_width="match_parent"
+            android:layout_height="124dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="13dp"
+            android:background="@drawable/et_border"
+            android:ems="10"
+            android:fontFamily="@font/k2d_medium"
+            android:hint="Description"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColor="@color/textBlue"
+            android:textColorHint="@color/textBlue" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="101dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn_addFoodToDatabase"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:background="@drawable/rounded_btn"
+                android:fontFamily="@font/k2d_medium"
+                android:onClick="onClientSignUp"
+                android:text="Add Repas to Menu"
+                android:textColor="@color/textBlue" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn_goBack01"
+                android:layout_width="413dp"
+                android:layout_height="66dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_btn"
+                android:fontFamily="@font/k2d_medium"
+                android:onClick="onGoBack01"
+                android:text="Go Back"
+                android:textColor="@color/textBlue" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

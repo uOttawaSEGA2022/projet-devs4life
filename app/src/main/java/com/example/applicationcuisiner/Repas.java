@@ -3,16 +3,22 @@ package com.example.applicationcuisiner;
 public class Repas {
     private String name;
     private String description;
-    private double price;
+    private String price;
     private String typeDeCuisine;
-    private String typedeRepas;
+    private String typeDeRepas;
+    private String cook;
 
-    public Repas(String name, String description, double price, String typeDeCuisine, String typedeRepas) {
+    public Repas(){
+
+    }
+
+    public Repas(String name, String description, String price, String cook, String typeDeCuisine, String typeDeRepas) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.cook = cook;
         this.typeDeCuisine = typeDeCuisine;
-        this.typedeRepas = typedeRepas;
+        this.typeDeRepas = typeDeRepas;
     }
 
     public void setName(String name){ this.name = name;}
@@ -21,7 +27,7 @@ public class Repas {
         this.description = description;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -29,8 +35,12 @@ public class Repas {
         this.typeDeCuisine = typeDeCuisine;
     }
 
-    public void setTypedeRepas(String typedeRepas) {
-        this.typedeRepas = typedeRepas;
+    public void setTypDdeRepas(String typeDeRepas) {
+        this.typeDeRepas = typeDeRepas;
+    }
+
+    public void setCook(String cook) {
+        this.cook = cook;
     }
 
     public String getName() {
@@ -41,7 +51,7 @@ public class Repas {
         return description;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -49,8 +59,12 @@ public class Repas {
         return typeDeCuisine;
     }
 
-    public String getTypedeRepas() {
-        return typedeRepas;
+    public String getTypeDeRepas() {
+        return typeDeRepas;
+    }
+
+    public String getCook() {
+        return cook;
     }
 }
 

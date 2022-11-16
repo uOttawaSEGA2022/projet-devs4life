@@ -16,9 +16,17 @@ public class CuisinierActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuisinier);
 
-        Button btnAdd = (Button)findViewById(R.id.addFoodBtn);
+        Button btnAdd = (Button)findViewById(R.id.btn_addRepas);
+        Button btnSeeMenu = (Button) findViewById(R.id.btn_seeMenu);
 
         View.OnClickListener btnListener = view -> startActivity(new Intent(CuisinierActivity.this, CuisinierAddFoodToMenu.class));
         btnAdd.setOnClickListener(btnListener);
+
+
+    }
+
+    public void onGoToMenu(View view){
+        Intent intent = new Intent(this, SeeMenuActivity.class);
+        startActivity(intent);
     }
 }
