@@ -29,7 +29,7 @@ public class PlainteList extends ArrayAdapter<Plainte> {
 
         Plainte plainte = plaintes.get(position);
         textViewName.setText(plainte.getCooksname());
-        textViewTemp.setText(plainte.getTemp());
+        textViewTemp.setText(plainte.getPlainte());
         return listViewItem;
     }
 }
