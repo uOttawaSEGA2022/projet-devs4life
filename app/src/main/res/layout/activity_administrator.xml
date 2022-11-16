@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextName"
         android:layout_marginTop="-2dp"
-        android:hint="Enter Plainte" />
+        android:hint="Enter Plainte"
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/addButton"
@@ -30,6 +31,20 @@
         android:layout_weight="1"
         android:text="Add" />
 
+
+    <Button
+        android:id="@+id/disconnectButtonAdministrator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextTemp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="147dp"
+        android:layout_weight="1"
+        android:text="Disconnect "
+        android:onClick="onDisconnectAdministrator" />
 
     <TextView
         android:id="@+id/textView"
@@ -43,8 +58,9 @@
     <ListView
         android:id="@+id/listViewPlaintes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView">
-    </ListView>
+        android:layout_height="461dp"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="51dp"></ListView>
+
 
 </RelativeLayout>

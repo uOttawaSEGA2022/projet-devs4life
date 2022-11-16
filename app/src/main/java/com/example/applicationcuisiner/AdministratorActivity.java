@@ -1,5 +1,6 @@
 package com.example.applicationcuisiner;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.text.TextUtils;
@@ -157,4 +158,17 @@ public class AdministratorActivity extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * Lorsque l'administrateur clique sur le bouton il va etre redirectionner vers MainActivity
+     * qui est la page de login.
+     * @param view view du boutton
+     */
+
+    public void onDisconnectAdministrator(View view){
+        Intent intent = new Intent(AdministratorActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }
