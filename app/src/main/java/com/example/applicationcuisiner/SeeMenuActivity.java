@@ -9,9 +9,12 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -25,6 +28,9 @@ public class SeeMenuActivity extends AppCompatActivity {
     String currentUserID;
     ListView menuLV;
     ArrayList<Repas> menuArrayList;
+    private String cookName;
+    private String cookLastName;
+    private String fullcookName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +40,34 @@ public class SeeMenuActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        System.out.println("id is" + currentUserID);
+        DocumentReference docRef = db.collection("user").document(currentUserID);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        System.out.println("were inside the document");
+                        cookName = document.getString("Name");
+                        cookLastName = document.getString("LastName");
+                        fullcookName = cookName + " " + cookLastName;
+                        System.out.println("name is " + fullcookName);
 
-        // below line is use to initialize our variables
-        menuLV = findViewById(R.id.lv_seeMenu);
-        menuArrayList = new ArrayList<>();
 
-        // here we are calling a method
-        // to load data in our list view.
-        loadDatainListview();
+                        // below line is use to initialize our variables
+                        menuLV = findViewById(R.id.lv_seeMenu);
+                        menuArrayList = new ArrayList<>();
+
+                        // here we are calling a method
+                        // to load data in our list view.
+                        loadDatainListview();
+                    }
+                }
+            }
+        });
+
+
     }
 
     private void loadDatainListview() {
@@ -65,6 +91,7 @@ public class SeeMenuActivity extends AppCompatActivity {
 
                                 // after getting data from Firebase we are
                                 // storing that data in our array list
+                                if(repas.getCook().equals(fullcookName))
                                 menuArrayList.add(repas);
                             }
                             // after that we are passing our array list to our adapter class.
