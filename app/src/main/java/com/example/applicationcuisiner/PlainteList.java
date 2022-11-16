@@ -1,8 +1,5 @@
 package com.example.applicationcuisiner;
 
-/**
- * Created by Miguel Garzón on 2017-05-09.
- */
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,11 +25,11 @@ public class PlainteList extends ArrayAdapter<Plainte> {
         View listViewItem = inflater.inflate(R.layout.plainte_list, null, true);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
-        TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.textViewPrice);
+        TextView textViewPlainte = (TextView) listViewItem.findViewById(R.id.textViewPlainte);
 
-        Plainte product = plaintes.get(position);
-        textViewName.setText(product.getCooksname());
-        textViewPrice.setText(String.valueOf(product.getPlainte()));
+        Plainte plainte = plaintes.get(position);
+        textViewName.setText(plainte.getCooksname());
+        textViewPlainte.setText(String.valueOf(plainte.getPlainte()));
         return listViewItem;
     }
 }
