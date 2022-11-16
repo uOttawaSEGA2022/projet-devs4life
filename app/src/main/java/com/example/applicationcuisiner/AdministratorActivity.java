@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdministratorActivity extends AppCompatActivity {
-    DatabaseReference databaseProducts;
+    DatabaseReference databsePlaintes;
 
     EditText editTextName;
     EditText editTextPlainte;
@@ -39,7 +39,7 @@ public class AdministratorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrator);
-        databaseProducts = FirebaseDatabase.getInstance().getReference("plaintes");
+        databsePlaintes = FirebaseDatabase.getInstance().getReference("plaintes");
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextPlainte = (EditText) findViewById(R.id.editTextPrice);
@@ -59,8 +59,8 @@ public class AdministratorActivity extends AppCompatActivity {
         listViewPlaintes.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Plainte product = plaintes.get(i);
-                showUpdateDeleteDialog(product.getId(), product.getCooksname());
+                Plainte plainte = plaintes.get(i);
+                showUpdateDeleteDialog(plainte.getId(), plainte.getCooksname());
                 return true;
             }
         });
@@ -71,7 +71,7 @@ public class AdministratorActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        databaseProducts.addValueEventListener(new ValueEventListener() {
+        databsePlaintes.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 System.out.println(dataSnapshot.getChildrenCount());
@@ -94,7 +94,7 @@ public class AdministratorActivity extends AppCompatActivity {
     }
 
 
-    private void showUpdateDeleteDialog(final String productId, String productName) {
+    private void showUpdateDeleteDialog(final String plainteId, String cooksname) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -106,7 +106,7 @@ public class AdministratorActivity extends AppCompatActivity {
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdatePlainte);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeletePlainte);
 
-        dialogBuilder.setTitle(productName);
+        dialogBuilder.setTitle(cooksname);
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
@@ -116,7 +116,7 @@ public class AdministratorActivity extends AppCompatActivity {
                 String name = editTextName.getText().toString().trim();
                 double price = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
                 if (!TextUtils.isEmpty(name)) {
-                    updatePlainte(productId, name, price);
+                    updatePlainte(plainteId, name, price);
                     b.dismiss();
                 }
             }
@@ -125,7 +125,7 @@ public class AdministratorActivity extends AppCompatActivity {
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deletePlainte(productId);
+                deletePlainte(plainteId);
                 b.dismiss();
             }
         });
@@ -133,8 +133,8 @@ public class AdministratorActivity extends AppCompatActivity {
 
     private void updatePlainte(String id, String name, double price) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
-        Plainte product  = new Plainte(id,name,price);
-        dR.setValue(product);
+        Plainte plainte  = new Plainte(id,name,price);
+        dR.setValue(plainte);
         Toast.makeText(getApplicationContext(), "Plainte Updated", Toast.LENGTH_SHORT).show();
     }
 
@@ -153,9 +153,9 @@ public class AdministratorActivity extends AppCompatActivity {
         double price = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
         if (!TextUtils.isEmpty(name)){
 
-            String id = databaseProducts.push().getKey();
-            Plainte product = new Plainte(id,name,price);
-            databaseProducts.child(id).setValue(product);
+            String id = databsePlaintes.push().getKey();
+            Plainte plainte = new Plainte(id,name,price);
+            databsePlaintes.child(id).setValue(plainte);
             editTextName.setText("");
             editTextPlainte.setText("");
             Toast.makeText(this,"Plainte added",Toast.LENGTH_LONG).show();
