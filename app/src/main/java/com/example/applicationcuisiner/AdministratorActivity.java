@@ -39,7 +39,7 @@ public class AdministratorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrator);
-        databaseProducts = FirebaseDatabase.getInstance().getReference("products");
+        databaseProducts = FirebaseDatabase.getInstance().getReference("plaintes");
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextPlainte = (EditText) findViewById(R.id.editTextPrice);
@@ -132,17 +132,17 @@ public class AdministratorActivity extends AppCompatActivity {
     }
 
     private void updateProduct(String id, String name, double price) {
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("products").child(id);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
         Plainte product  = new Plainte(id,name,price);
         dR.setValue(product);
-        Toast.makeText(getApplicationContext(), "Product Updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Plainte Updated", Toast.LENGTH_SHORT).show();
     }
 
     private boolean deleteProduct(String id) {
 
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("products").child(id);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
         dR.removeValue();
-        Toast.makeText(getApplicationContext(),"Product Deleted", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Plainte Deleted", Toast.LENGTH_LONG).show();
         return true;
 
     }
@@ -158,7 +158,7 @@ public class AdministratorActivity extends AppCompatActivity {
             databaseProducts.child(id).setValue(product);
             editTextName.setText("");
             editTextPlainte.setText("");
-            Toast.makeText(this,"Product added",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Plainte added",Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this,"Please enter a name",Toast.LENGTH_LONG).show();
         }
