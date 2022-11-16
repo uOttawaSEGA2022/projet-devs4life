@@ -12,12 +12,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class Plaintes_Liste extends ArrayAdapter<Plainte> {
+public class PlainteList extends ArrayAdapter<Plainte> {
     private Activity context;
     List<Plainte> plaintes;
 
-    public Plaintes_Liste(Activity context, List<Plainte> products) {
-        super(context, R.layout.plaintes_liste, products);
+    public PlainteList(Activity context, List<Plainte> plaintes) {
+        super(context, R.layout.product_list, plaintes);
         this.context = context;
         this.plaintes = plaintes;
     }
@@ -25,14 +25,14 @@ public class Plaintes_Liste extends ArrayAdapter<Plainte> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.plaintes_liste, null, true);
+        View listViewItem = inflater.inflate(R.layout.product_list, null, true);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
         TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.textViewPrice);
 
         Plainte product = plaintes.get(position);
-        textViewName.setText(product.getCuisinierName());
-        textViewPrice.setText(String.valueOf(product.getPlainte()));
+        textViewName.setText(product.getProductName());
+        textViewPrice.setText(String.valueOf(product.getPrice()));
         return listViewItem;
     }
 }

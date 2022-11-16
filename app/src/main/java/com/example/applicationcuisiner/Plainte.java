@@ -2,19 +2,19 @@ package com.example.applicationcuisiner;
 
 public class Plainte {
     private String _id;
-    private String _cuisinier;
-    private String _plainte;
+    private String _productname;
+    private double _price;
 
     public Plainte() {
     }
-    public Plainte(String id, String cuisinier, String plainte) {
+    public Plainte(String id, String productname, double price) {
         _id = id;
-        _cuisinier = cuisinier;
-        _plainte=plainte;
+        _productname = productname;
+        _price = price;
     }
-    public Plainte(String cuisinier, String plainte) {
-        _cuisinier = cuisinier;
-        _plainte=plainte;
+    public Plainte(String productname, double price) {
+        _productname = productname;
+        _price = price;
     }
 
     public void setId(String id) {
@@ -23,15 +23,16 @@ public class Plainte {
     public String getId() {
         return _id;
     }
-    public void setProductName(String cuisinier) {_cuisinier = cuisinier;
+    public void setProductName(String productname) {
+        _productname = productname;
     }
-    public String getCuisinierName() {
-        return _cuisinier;
+    public String getProductName() {
+        return _productname;
     }
-    public void setPlainte(String plainte) {
-        _plainte = plainte;
+    public void setPrice(double price) {
+        _price = price;
     }
-    public String getPlainte() {
-        return _plainte;
+    public double getPrice() {
+        return _price;
     }
 }
