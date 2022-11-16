@@ -39,7 +39,7 @@ public class AdministratorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrator);
-        databaseProducts = FirebaseDatabase.getInstance().getReference("plaintes");
+        databaseProducts = FirebaseDatabase.getInstance().getReference("products");
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextPlainte = (EditText) findViewById(R.id.editTextPrice);
@@ -60,7 +60,7 @@ public class AdministratorActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Plainte product = plaintes.get(i);
-                showUpdateDeleteDialog(product.getId(), product.getCooksname());
+                showUpdateDeleteDialog(product.getId(), product.getProductName());
                 return true;
             }
         });
@@ -132,7 +132,7 @@ public class AdministratorActivity extends AppCompatActivity {
     }
 
     private void updateProduct(String id, String name, double price) {
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("products").child(id);
         Plainte product  = new Plainte(id,name,price);
         dR.setValue(product);
         Toast.makeText(getApplicationContext(), "Product Updated", Toast.LENGTH_SHORT).show();
@@ -140,7 +140,7 @@ public class AdministratorActivity extends AppCompatActivity {
 
     private boolean deleteProduct(String id) {
 
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("products").child(id);
         dR.removeValue();
         Toast.makeText(getApplicationContext(),"Product Deleted", Toast.LENGTH_LONG).show();
         return true;

@@ -31,8 +31,8 @@ public class PlainteList extends ArrayAdapter<Plainte> {
         TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.textViewPrice);
 
         Plainte product = plaintes.get(position);
-        textViewName.setText(product.getCooksname());
-        textViewPrice.setText(String.valueOf(product.getPlainte()));
+        textViewName.setText(product.getProductName());
+        textViewPrice.setText(String.valueOf(product.getPrice()));
         return listViewItem;
     }
 }
