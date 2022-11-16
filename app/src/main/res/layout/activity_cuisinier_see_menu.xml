@@ -32,7 +32,7 @@
             android:background="@drawable/rounded_btn"
             android:fontFamily="@font/k2d_medium"
             android:text="Go Back"
-            android:onClick="onGoToBack"
+            android:onClick="onGoBackToCuisinierMainPage"
             android:textColor="@color/textBlue"/>
     </LinearLayout>
 

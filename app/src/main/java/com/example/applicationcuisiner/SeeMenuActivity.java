@@ -88,7 +88,7 @@ public class SeeMenuActivity extends AppCompatActivity {
                 });
     }
 
-    public void onGoBack(View view){
+    public void onGoBackToCuisinierMainPage(View view){
         Intent intent = new Intent(this, CuisinierActivity.class);
         startActivity(intent);
     }
