@@ -114,13 +114,7 @@ public class AdministratorActivity extends AppCompatActivity {
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = editTextName.getText().toString().trim();
-                String temp = editTextTemp.getText().toString().trim();
-                double plainte = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
-                if (!TextUtils.isEmpty(name)) {
-                    updatePlainte(plainteId, name, plainte,temp);
-                    b.dismiss();
-                }
+
             }
         });
 
@@ -133,12 +127,8 @@ public class AdministratorActivity extends AppCompatActivity {
         });
     }
 
-    private void updatePlainte(String id, String name, double complaint, String temp) {
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
-        Plainte plainte  = new Plainte(id,name,complaint,temp);
-        dR.setValue(plainte);
-        Toast.makeText(getApplicationContext(), "Plainte Updated", Toast.LENGTH_SHORT).show();
-    }
+
+
 
     private boolean deletePlainte(String id) {
 
@@ -158,7 +148,7 @@ public class AdministratorActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(name)){
 
             String id = databsePlaintes.push().getKey();
-            Plainte plainte = new Plainte(id,name,complaint,temp);
+            Plainte plainte = new Plainte(id,name,temp);
             databsePlaintes.child(id).setValue(plainte);
             editTextName.setText("");
             editTextPlainte.setText("");
