@@ -43,7 +43,7 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cuisinier_add_food);
+        setContentView(R.layout.activity_cuisinier_add_to_menu);
          db = FirebaseFirestore.getInstance();
 
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();

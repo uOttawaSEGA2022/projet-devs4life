@@ -22,7 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeeMenuActivity extends AppCompatActivity {
+public class Cuisinier_SeeMenuActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     String currentUserID;
@@ -88,21 +88,20 @@ public class SeeMenuActivity extends AppCompatActivity {
                                 // after getting this list we are passing
                                 // that list to our object class.
                                 Repas repas= d.toObject(Repas.class);
-
                                 // after getting data from Firebase we are
                                 // storing that data in our array list
                                 if(repas.getCook().equals(fullcookName))
                                 menuArrayList.add(repas);
                             }
                             // after that we are passing our array list to our adapter class.
-                            RepasListAdapter adapter = new RepasListAdapter(SeeMenuActivity.this, menuArrayList);
+                            RepasListAdapter adapter = new RepasListAdapter(Cuisinier_SeeMenuActivity.this, menuArrayList);
 
                             // after passing this array list to our adapter
                             // class we are setting our adapter to our list view.
                             menuLV.setAdapter(adapter);
                         } else {
                             // if the snapshot is empty we are displaying a toast message.
-                            Toast.makeText(SeeMenuActivity.this, "No data found in Database", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Cuisinier_SeeMenuActivity.this, "No data found in Database", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -110,7 +109,7 @@ public class SeeMenuActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         // we are displaying a toast message
                         // when we get any error from Firebase.
-                        Toast.makeText(SeeMenuActivity.this, "Fail to load data..", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Cuisinier_SeeMenuActivity.this, "Fail to load data..", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

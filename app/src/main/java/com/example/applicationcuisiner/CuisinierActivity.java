@@ -26,7 +26,7 @@ public class CuisinierActivity extends AppCompatActivity {
     }
 
     public void onGoToMenu(View view){
-        Intent intent = new Intent(this, SeeMenuActivity.class);
+        Intent intent = new Intent(this, Cuisinier_SeeMenuActivity.class);
         startActivity(intent);
     }
 

@@ -1,10 +1,12 @@
 package com.example.applicationcuisiner;
 import android.content.Context;
         import android.view.LayoutInflater;
-        import android.view.View;
+import android.view.MenuItem;
+import android.view.View;
         import android.view.ViewGroup;
         import android.widget.ArrayAdapter;
-        import android.widget.TextView;
+import android.widget.PopupMenu;
+import android.widget.TextView;
         import android.widget.Toast;
 
         import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 
 public class RepasListAdapter extends ArrayAdapter<Repas> {
 
+    private View listitemView;
     // constructor for our list view adapter.
     public RepasListAdapter(@NonNull Context context, ArrayList<Repas> dataModalArrayList) {
         super(context, 0, dataModalArrayList);
@@ -24,7 +27,7 @@ public class RepasListAdapter extends ArrayAdapter<Repas> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // below line is use to inflate the
         // layout for our item of list view.
-        View listitemView = convertView;
+        listitemView = convertView;
         if (listitemView == null) {
             listitemView = LayoutInflater.from(getContext()).inflate(R.layout.menulist, parent, false);
         }
@@ -63,6 +66,22 @@ public class RepasListAdapter extends ArrayAdapter<Repas> {
                 // on the item click on our list view.
                 // we are displaying a toast message.
                 Toast.makeText(getContext(), "Item clicked is : " + repas.getName(), Toast.LENGTH_SHORT).show();
+                // Initializing the popup menu and giving the reference as current context
+                PopupMenu popupMenu = new PopupMenu(getContext(), listitemView);
+
+                // Inflating popup menu from popup_menu.xml file
+                popupMenu.getMenuInflater().inflate(R.menu.popup_repas_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        // Toast message on menu item clicked
+                        Toast.makeText(getContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+                // Showing the popup menu
+                popupMenu.show();
+
             }
         });
         return listitemView;

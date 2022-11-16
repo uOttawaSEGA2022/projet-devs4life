@@ -80,7 +80,7 @@ public class CuisinierTemporarilyBannedActivity extends AppCompatActivity {
      * @param view view du boutton
      */
 
-    public void onDisconnect(View view){
+    public void onDisconnectTemp(View view){
         Intent intent = new Intent(CuisinierTemporarilyBannedActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
