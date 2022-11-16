@@ -13,7 +13,7 @@
         android:hint="Enter cook's name" />
 
     <EditText
-        android:id="@+id/editTextPrice"
+        android:id="@+id/editTextPlainte"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextName"
@@ -23,7 +23,7 @@
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextPrice"
+        android:layout_below="@id/editTextPlainte"
         android:layout_centerInParent="true"
         android:layout_weight="1"
         android:text="Add" />
@@ -39,7 +39,7 @@
         android:textSize="24sp" />
 
     <ListView
-        android:id="@+id/listViewProducts"
+        android:id="@+id/listViewPlaintes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView">

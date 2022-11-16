@@ -42,8 +42,8 @@ public class AdministratorActivity extends AppCompatActivity {
         databsePlaintes = FirebaseDatabase.getInstance().getReference("plaintes");
 
         editTextName = (EditText) findViewById(R.id.editTextName);
-        editTextPlainte = (EditText) findViewById(R.id.editTextPrice);
-        listViewPlaintes = (ListView) findViewById(R.id.listViewProducts);
+        editTextPlainte = (EditText) findViewById(R.id.editTextPlainte);
+        listViewPlaintes = (ListView) findViewById(R.id.listViewPlaintes);
         buttonAddPlainte = (Button) findViewById(R.id.addButton);
 
         plaintes = new ArrayList<>();
@@ -114,9 +114,9 @@ public class AdministratorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = editTextName.getText().toString().trim();
-                double price = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
+                double plainte = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
                 if (!TextUtils.isEmpty(name)) {
-                    updatePlainte(plainteId, name, price);
+                    updatePlainte(plainteId, name, plainte);
                     b.dismiss();
                 }
             }
@@ -131,9 +131,9 @@ public class AdministratorActivity extends AppCompatActivity {
         });
     }
 
-    private void updatePlainte(String id, String name, double price) {
+    private void updatePlainte(String id, String name, double complaint) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
-        Plainte plainte  = new Plainte(id,name,price);
+        Plainte plainte  = new Plainte(id,name,complaint);
         dR.setValue(plainte);
         Toast.makeText(getApplicationContext(), "Plainte Updated", Toast.LENGTH_SHORT).show();
     }
@@ -150,11 +150,11 @@ public class AdministratorActivity extends AppCompatActivity {
     private void addPlainte() {
 
         String name = editTextName.getText().toString().trim();
-        double price = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
+        double complaint = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
         if (!TextUtils.isEmpty(name)){
 
             String id = databsePlaintes.push().getKey();
-            Plainte plainte = new Plainte(id,name,price);
+            Plainte plainte = new Plainte(id,name,complaint);
             databsePlaintes.child(id).setValue(plainte);
             editTextName.setText("");
             editTextPlainte.setText("");
