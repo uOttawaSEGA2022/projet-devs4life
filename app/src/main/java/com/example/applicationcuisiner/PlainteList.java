@@ -25,7 +25,7 @@ public class PlainteList extends ArrayAdapter<Plainte> {
         View listViewItem = inflater.inflate(R.layout.plainte_list, null, true);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
-        TextView textViewTemp = (TextView) listViewItem.findViewById(R.id.textViewName);
+        TextView textViewTemp = (TextView) listViewItem.findViewById(R.id.textViewName);//could add as a line in plainte_list but would be too long
 
         Plainte plainte = plaintes.get(position);
         textViewName.setText(plainte.getCooksname());

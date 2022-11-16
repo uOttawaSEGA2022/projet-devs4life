@@ -102,8 +102,6 @@ public class AdministratorActivity extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.update, null);
         dialogBuilder.setView(dialogView);
 
-        final EditText editTextName = (EditText) dialogView.findViewById(R.id.editTextName);
-        final EditText editTextPlainte  = (EditText) dialogView.findViewById(R.id.editTextPlainte);
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdatePlainte);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeletePlainte);
 
@@ -142,7 +140,7 @@ public class AdministratorActivity extends AppCompatActivity {
     private void addPlainte() {
 
         String name = editTextName.getText().toString().trim();
-        double complaint = Double.parseDouble(String.valueOf(editTextPlainte.getText().toString()));
+
         String temp = editTextTemp.getText().toString().trim();
 
         if (!TextUtils.isEmpty(name)){
@@ -151,7 +149,7 @@ public class AdministratorActivity extends AppCompatActivity {
             Plainte plainte = new Plainte(id,name,temp);
             databsePlaintes.child(id).setValue(plainte);
             editTextName.setText("");
-            editTextPlainte.setText("");
+
             editTextTemp.setText("");
             Toast.makeText(this,"Plainte added",Toast.LENGTH_LONG).show();
         } else {
