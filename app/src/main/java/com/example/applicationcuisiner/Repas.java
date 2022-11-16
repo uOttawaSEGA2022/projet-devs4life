@@ -7,6 +7,14 @@ public class Repas {
     private String typeDeCuisine;
     private String typedeRepas;
 
+    public Repas(String name, String description, double price, String typeDeCuisine, String typedeRepas) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.typeDeCuisine = typeDeCuisine;
+        this.typedeRepas = typedeRepas;
+    }
+
     public void setName(String name){ this.name = name;}
 
     public void setDescription(String description) {

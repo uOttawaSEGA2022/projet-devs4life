@@ -11,18 +11,22 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome Cook Demian"
-        android:textSize="96sp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="196dp"
+        android:text="Welcome Cook"
+        android:textSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/addFoodBtn"
         android:layout_width="170dp"
         android:layout_height="68dp"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="412dp"
-        android:text="Add Repas"
+        android:layout_marginTop="408dp"
+        android:onClick="changeIntent"
+        android:text="Add Repas to menu"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +36,14 @@
         android:id="@+id/button3"
         android:layout_width="174dp"
         android:layout_height="66dp"
-        android:text="Remove Repas"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="501dp" />
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="117dp"
+        android:layout_marginBottom="177dp"
+        android:text="Remove Repas from menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addFoodBtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
