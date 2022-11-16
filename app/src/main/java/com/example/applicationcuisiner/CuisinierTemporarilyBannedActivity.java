@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Locale;
@@ -32,6 +33,8 @@ public class CuisinierTemporarilyBannedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuisinier_temporarily_banned);
 
+        fireStore = FirebaseFirestore.getInstance();
+        currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         countdownText = findViewById(R.id.tv_coutdown);
 
         duration = TimeUnit.MINUTES.toMillis(1);
@@ -49,6 +52,20 @@ public class CuisinierTemporarilyBannedActivity extends AppCompatActivity {
 
                 public void onFinish() {
                     countdownText.setText("done!");
+
+                    fireStore.collection("user").document(currentUserID).update("Status", "Active").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "DocumentSnapshot successfully updated!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error updating document", e);
+                                }
+                            });
+
                 }
             }.start();
 
