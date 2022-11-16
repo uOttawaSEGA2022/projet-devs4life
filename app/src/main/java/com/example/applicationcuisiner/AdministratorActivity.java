@@ -60,7 +60,7 @@ public class AdministratorActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Plainte product = plaintes.get(i);
-                showUpdateDeleteDialog(product.getId(), product.getProductName());
+                showUpdateDeleteDialog(product.getId(), product.getCooksname());
                 return true;
             }
         });
