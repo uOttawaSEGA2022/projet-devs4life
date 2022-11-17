@@ -17,8 +17,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -92,34 +96,55 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         // Toast message on menu item clicked
-
                         // menu item select listener
+
+                        db = FirebaseFirestore.getInstance();
 
                             if (menuItem.getTitle().equals("Delete")) {
                                 System.out.println("j'ai cliquer sur del");
-                                FirebaseFirestore db;
-                                db = FirebaseFirestore.getInstance();
+
                                 System.out.println(repas.getName());
-                                db.collection("menu").document(repas.getName())
-                                        .delete()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                               // notifyDataSetChanged();
-                                                RepasArrayList.remove(position);
-                                                listitemView.refreshDrawableState();
-                                                notifyDataSetChanged();
+                                DocumentReference docRef = db.collection("repasProp").document(repas.getName());
+                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+                                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                                System.out.println("ledocument est propose");
+                                                System.out.println("we cannot delete");
+                                                Toast.makeText(getContext(), "We cannot delete something that is in repas Proposes", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Log.d(TAG, "No such document");
+                                                db = FirebaseFirestore.getInstance();
+                                                db.collection("menu").document(repas.getName())
+                                                        .delete()
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                // notifyDataSetChanged();
+                                                                RepasArrayList.remove(position);
+                                                                listitemView.refreshDrawableState();
+                                                                notifyDataSetChanged();
 
-                                                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                                                Log.d(TAG, "DocumentSnapshot successfully deleted!");
 
+                                                            }
+                                                        })
+                                                        .addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Log.w(TAG, "Error deleting document", e);
+                                                            }
+                                                        });
                                             }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w(TAG, "Error deleting document", e);
-                                            }
-                                        });
+                                        } else {
+                                            Log.d(TAG, "get failed with ", task.getException());
+
+                                        }
+                                    }
+                                });
 
 
                             } else if (menuItem.getTitle().equals("Add to repas propose")) { //ajouter a firestore
@@ -174,7 +199,6 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
         });
         return listitemView;
     }
-
 
 
 }
