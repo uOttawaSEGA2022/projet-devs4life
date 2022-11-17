@@ -30,6 +30,7 @@ public class CuisinierActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void onDisconnectCuisinier(View view){
         Intent intent = new Intent(CuisinierActivity.this, MainActivity.class);
         startActivity(intent);

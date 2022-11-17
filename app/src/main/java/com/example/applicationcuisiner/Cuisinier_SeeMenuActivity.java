@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -100,7 +98,7 @@ public class Cuisinier_SeeMenuActivity extends AppCompatActivity {
                                 }
                             }
                             // after that we are passing our array list to our adapter class.
-                            RepasListAdapter adapter = new RepasListAdapter(Cuisinier_SeeMenuActivity.this, menuArrayList);
+                            RepasListAdapterforMenu adapter = new RepasListAdapterforMenu(Cuisinier_SeeMenuActivity.this, menuArrayList);
 
                             // after passing this array list to our adapter
                             // class we are setting our adapter to our list view.

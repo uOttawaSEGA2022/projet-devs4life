@@ -2,7 +2,6 @@ package com.example.applicationcuisiner;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 
@@ -23,16 +22,18 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
-public class RepasListAdapter extends ArrayAdapter<Repas> {
+public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
 
     private View listitemView;
     private ArrayList RepasArrayList;
+    private  FirebaseFirestore db;
 
 
     // constructor for our list view adapter.
-    public RepasListAdapter(@NonNull Context context, ArrayList<Repas> RepasArrayList) {
+    public RepasListAdapterforMenu(@NonNull Context context, ArrayList<Repas> RepasArrayList) {
         super(context, 0, RepasArrayList);
         this.RepasArrayList = RepasArrayList;
 
@@ -111,7 +112,6 @@ public class RepasListAdapter extends ArrayAdapter<Repas> {
 
                                                 Log.d(TAG, "DocumentSnapshot successfully deleted!");
 
-
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
@@ -122,8 +122,46 @@ public class RepasListAdapter extends ArrayAdapter<Repas> {
                                         });
 
 
-                            } else if (menuItem.getTitle().equals("Add to repas propose")) {
+                            } else if (menuItem.getTitle().equals("Add to repas propose")) { //ajouter a firestore
                                 System.out.println("j'ai cliquer sur add");
+
+                                System.out.println("le nom du repas cliquer est " + repas.getName());
+
+                                db = FirebaseFirestore.getInstance();
+
+                                String name = repas.getName();
+                                String description = repas.getDescription();
+                                String price = repas.getPrice();
+                                String typeFood = repas.getTypeDeCuisine();
+                                String typeRepas = repas.getTypeDeRepas();
+                                String cook = repas.getCook();
+                                Map<String, Object> repasProp = new HashMap<>();
+                                repasProp.put("name", name);
+                                repasProp.put("description", description);
+                                repasProp.put("price", price);
+                                repasProp.put("typeDeCuisine", typeFood);
+                                repasProp.put("typeDeRepas", typeRepas);
+                                repasProp.put("cook", cook);
+
+                                db.collection("repasProp").document(name)
+                                        .set(repasProp)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error adding document", e);
+                                            }
+                                        });
+
+
+
+
+
                             }
 
                         Toast.makeText(getContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();

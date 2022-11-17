@@ -41,12 +41,12 @@
             android:layout_height="30dp" />
 
         <Button
-            android:id="@+id/btn_removeRepas"
+            android:id="@+id/btn_repasProposes"
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:background="@drawable/rounded_btn"
             android:fontFamily="@font/k2d_medium"
-            android:text="Remove Repas"
+            android:text="See repas proposés"
             android:textColor="@color/textBlue" />
 
         <Space
