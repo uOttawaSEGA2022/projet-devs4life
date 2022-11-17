@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ public class Cuisinier_SeeMenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuisinier_see_menu);
 
@@ -70,7 +73,9 @@ public class Cuisinier_SeeMenuActivity extends AppCompatActivity {
 
     }
 
-    private void loadDatainListview() {
+
+
+    public void loadDatainListview() {
         // below line is use to get data from Firebase
         // firestore using collection in android.
         db.collection("menu").get()
@@ -90,8 +95,9 @@ public class Cuisinier_SeeMenuActivity extends AppCompatActivity {
                                 Repas repas= d.toObject(Repas.class);
                                 // after getting data from Firebase we are
                                 // storing that data in our array list
-                                if(repas.getCook().equals(fullcookName))
+                                if(repas.getCook().equals(fullcookName)){
                                 menuArrayList.add(repas);
+                                }
                             }
                             // after that we are passing our array list to our adapter class.
                             RepasListAdapter adapter = new RepasListAdapter(Cuisinier_SeeMenuActivity.this, menuArrayList);
@@ -99,6 +105,11 @@ public class Cuisinier_SeeMenuActivity extends AppCompatActivity {
                             // after passing this array list to our adapter
                             // class we are setting our adapter to our list view.
                             menuLV.setAdapter(adapter);
+
+
+
+
+
                         } else {
                             // if the snapshot is empty we are displaying a toast message.
                             Toast.makeText(Cuisinier_SeeMenuActivity.this, "No data found in Database", Toast.LENGTH_SHORT).show();
@@ -114,10 +125,13 @@ public class Cuisinier_SeeMenuActivity extends AppCompatActivity {
                 });
     }
 
+
+
     public void onGoBackToCuisinierMainPage(View view){
         Intent intent = new Intent(this, CuisinierActivity.class);
         startActivity(intent);
     }
+
 
 
 }

@@ -1,8 +1,8 @@
 package com.example.applicationcuisiner;
 
-public class Admin extends User{
+public class Administrateur extends User{
 
-    public Admin(String firstName, String lastName, String email, String Password, String UserID){
+    public Administrateur(String firstName, String lastName, String email, String Password, String UserID){
         type = "Admin";
         this.firstName = firstName;
         this.lastname = lastName;

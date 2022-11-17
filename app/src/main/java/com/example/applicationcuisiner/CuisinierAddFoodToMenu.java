@@ -1,7 +1,10 @@
 package com.example.applicationcuisiner;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,17 +90,18 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
                 menu.put("typeDeRepas", typeRepas);
                 menu.put("cook", cname + " " + lastname);
 
-                db.collection("menu")
-                        .add(menu)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("menu").document(name)
+                        .set(menu)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(CuisinierAddFoodToMenu.this, "Successfull", Toast.LENGTH_SHORT).show();
+                            public void onSuccess(Void unused) {
+                                Log.d(TAG, "DocumentSnapshot successfully written!");
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(CuisinierAddFoodToMenu.this, "Failed", Toast.LENGTH_SHORT).show();
+                                Log.w(TAG, "Error adding document", e);
                             }
                         });
 

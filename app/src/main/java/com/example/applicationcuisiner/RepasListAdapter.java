@@ -1,25 +1,41 @@
 package com.example.applicationcuisiner;
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Context;
-        import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.content.Intent;
+import android.util.Log;
+import android.view.LayoutInflater;
+
+        import android.view.MenuItem;
+
+        import android.view.View;
         import android.view.ViewGroup;
         import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-        import android.widget.Toast;
+import android.widget.Toast;
 
-        import androidx.annotation.NonNull;
-        import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RepasListAdapter extends ArrayAdapter<Repas> {
 
     private View listitemView;
+    private ArrayList RepasArrayList;
+
+
     // constructor for our list view adapter.
-    public RepasListAdapter(@NonNull Context context, ArrayList<Repas> dataModalArrayList) {
-        super(context, 0, dataModalArrayList);
+    public RepasListAdapter(@NonNull Context context, ArrayList<Repas> RepasArrayList) {
+        super(context, 0, RepasArrayList);
+        this.RepasArrayList = RepasArrayList;
+
     }
 
     @NonNull
@@ -75,15 +91,53 @@ public class RepasListAdapter extends ArrayAdapter<Repas> {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         // Toast message on menu item clicked
+
+                        // menu item select listener
+
+                            if (menuItem.getTitle().equals("Delete")) {
+                                System.out.println("j'ai cliquer sur del");
+                                FirebaseFirestore db;
+                                db = FirebaseFirestore.getInstance();
+                                System.out.println(repas.getName());
+                                db.collection("menu").document(repas.getName())
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                               // notifyDataSetChanged();
+                                                RepasArrayList.remove(position);
+                                                listitemView.refreshDrawableState();
+                                                notifyDataSetChanged();
+
+                                                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error deleting document", e);
+                                            }
+                                        });
+
+
+                            } else if (menuItem.getTitle().equals("Add to repas propose")) {
+                                System.out.println("j'ai cliquer sur add");
+                            }
+
                         Toast.makeText(getContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
                         return true;
                     }
                 });
                 // Showing the popup menu
                 popupMenu.show();
-
             }
         });
         return listitemView;
     }
+
+
+
 }
+
