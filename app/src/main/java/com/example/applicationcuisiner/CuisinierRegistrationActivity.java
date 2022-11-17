@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -57,12 +58,27 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     private String status;
     private Cuisinier cuisinier;
 
+    TextView noEmail;
+    TextView noPassword;
+    TextView noNom;
+    TextView noPrenom;
+    TextView noAddress;
+    TextView noDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         type = "Cuisinier";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuisinier_registration);
+
+        noEmail = findViewById(R.id.textView_noEmail);
+        noPassword = findViewById(R.id.textView_noPassword);
+        noNom=findViewById(R.id.textView_noNom);
+        noPrenom=findViewById(R.id.textView_noPrenom);
+        noAddress=findViewById(R.id.textView_noAddress);
+        noDescription=findViewById(R.id.textView_noDescription);
+
+
 
 
         authentication=FirebaseAuth.getInstance();
@@ -198,40 +214,42 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
      * La méthode va return true si et seulement si tous les champs ont été remplis.
      */
 
+
     private boolean valide() {
         Boolean result = true;
 
         String prenom = cuisinierFirstName.getText().toString();
         if (prenom.isEmpty()) {
             result = false;
-            cuisinierFirstName.setHint("Ce champ est obligatoire  Prenom");
+            noPrenom.setText("Prenom obligatoire");
         }
         String nom = cuisinierLastName.getText().toString();
         if (nom.isEmpty()) {
             result = false;
-            cuisinierLastName.setHint("Ce champ est obligatoire : nom");
+            noNom.setText("Nom obligatoire");
         }
         String email = cuisinierEmail.getText().toString();
         if (email.isEmpty()) {
             result = false;
-            cuisinierEmail.setHint("Ce champ est obligatoire : email");
+            noEmail.setText("Email obligatoire");
         }
         String password = cuisinierPassword.getText().toString();
         if (password.isEmpty()) {
             result = false;
-            cuisinierPassword.setHint("Ce champ est obligatoire : mot de passe");
+            noPassword.setText("Mot de passe obligatoire (6 caracteres)");
         }
         String address = cuisinierAddress.getText().toString();
         if (address.isEmpty()) {
             result = false;
-            cuisinierAddress.setHint("Ce champ est obligatoire : address");
+            noAddress.setText("Address obligatoire");
         }
         String description = cuisinierDescription.getText().toString();
         if (description.isEmpty()) {
             result = false;
-            cuisinierDescription.setHint("Ce champ est obligatoire : Description de soi-même");
+            noDescription.setText("Description obligatoire");
         }
 
         return result;
     }
+
 }

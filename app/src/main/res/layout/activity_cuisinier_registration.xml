@@ -21,8 +21,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="342dp"
+        android:layout_width="366dp"
+        android:layout_height="502dp"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="55dp"
         android:layout_marginBottom="250dp"
@@ -41,6 +41,14 @@
             android:hint="Prénom"
             android:inputType="textPersonName" />
 
+        <TextView
+            android:id="@+id/textView_noPrenom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/k2d_medium"
+            android:textColor="@color/errorRed"
+            android:textSize="16sp" />
+
         <EditText
             android:id="@+id/editText_NomCuisinier"
             android:layout_width="match_parent"
@@ -49,6 +57,14 @@
             android:ems="10"
             android:hint="Nom"
             android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView_noNom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/k2d_medium"
+            android:textColor="@color/errorRed"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/editText_AdressCourrielCuisinier"
@@ -59,6 +75,14 @@
             android:hint="Adresse courriel"
             android:inputType="textEmailAddress" />
 
+        <TextView
+            android:id="@+id/textView_noEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/k2d_medium"
+            android:textColor="@color/errorRed"
+            android:textSize="16sp" />
+
         <EditText
             android:id="@+id/editText_Mode_de_passeCuisinier"
             android:layout_width="match_parent"
@@ -67,6 +91,14 @@
             android:ems="10"
             android:hint="Mot de passe"
             android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/textView_noPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/k2d_medium"
+            android:textColor="@color/errorRed"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/editText_AdresseRamassageCuisinier"
@@ -77,6 +109,14 @@
             android:hint="Adresse"
             android:inputType="textPostalAddress" />
 
+        <TextView
+            android:id="@+id/textView_noAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/k2d_medium"
+            android:textColor="@color/errorRed"
+            android:textSize="16sp" />
+
         <EditText
             android:id="@+id/editText_DescriptionCuisinier"
             android:layout_width="match_parent"
@@ -85,6 +125,14 @@
             android:ems="10"
             android:hint="Description de soi-même"
             android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView_noDescription"
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/k2d_medium"
+            android:textColor="@color/errorRed"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -116,5 +164,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_RegisterCuisinier"
         app:layout_constraintVertical_bias="0.411" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
