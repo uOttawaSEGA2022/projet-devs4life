@@ -231,12 +231,15 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
         String email = cuisinierEmail.getText().toString();
         if (email.isEmpty()) {
             result = false;
-            noEmail.setText("Email obligatoire");
+            noEmail.setText("Email obligatoire: cuisinier@gmail.com");
         }
         String password = cuisinierPassword.getText().toString();
         if (password.isEmpty()) {
             result = false;
-            noPassword.setText("Mot de passe obligatoire (6 caracteres)");
+            noPassword.setText("Mot de passe obligatoire");
+        }
+        if (!password.isEmpty() && password.length()<6){
+            noPassword.setText("Mot de passe doit avoir aux moins 6 caracteres");
         }
         String address = cuisinierAddress.getText().toString();
         if (address.isEmpty()) {
