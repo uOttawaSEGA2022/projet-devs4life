@@ -2,129 +2,251 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ClientRegistrationActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="346dp"
-        android:layout_height="520dp"
-        android:layout_marginStart="49dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginBottom="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/tv_bienvenuInscriptionClient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/k2d_medium"
+            android:gravity="center"
+            android:text="Bienvenue!"
+            android:textColor="@color/textBlue"
+            android:textSize="34sp" />
+
         <EditText
             android:id="@+id/editText_PrenomClient"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
+            android:background="@drawable/et_border"
             android:ems="10"
+            android:fontFamily="@font/k2d_medium"
             android:hint="Prénom"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="@color/textBlue"
+            android:textColorHint="@color/textBlue" />
+
+        <TextView
+            android:id="@+id/tv_prenomErreur"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/k2d_medium"
+            android:text=""
+            android:textColor="@color/errorRed"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/editText_NomClient"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
+            android:background="@drawable/et_border"
             android:ems="10"
+            android:fontFamily="@font/k2d_medium"
             android:hint="Nom"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="@color/textBlue"
+            android:textColorHint="@color/textBlue" />
+
+        <TextView
+            android:id="@+id/tv_nomErreur"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/k2d_medium"
+            android:text=""
+            android:textColor="@color/errorRed"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/editText_EmailClient"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
+            android:background="@drawable/et_border"
             android:ems="10"
+            android:fontFamily="@font/k2d_medium"
             android:hint="Adresse courriel"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="@color/textBlue"
+            android:textColorHint="@color/textBlue" />
+
+        <TextView
+            android:id="@+id/tv_courrielErreur"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/k2d_medium"
+            android:text=""
+            android:textColor="@color/errorRed"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/editText_MdpClient"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
+            android:background="@drawable/et_border"
             android:ems="10"
+            android:fontFamily="@font/k2d_medium"
             android:hint="Mot de passe"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/textBlue"
+            android:textColorHint="@color/textBlue" />
+
+        <TextView
+            android:id="@+id/tv_mdpErreur"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/k2d_medium"
+            android:text=""
+            android:textColor="@color/errorRed"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/editText_AdresseClient"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
+            android:background="@drawable/et_border"
             android:ems="10"
+            android:fontFamily="@font/k2d_medium"
             android:hint="Adresse"
-            android:inputType="textPostalAddress" />
+            android:inputType="textPostalAddress"
+            android:textColor="@color/textBlue"
+            android:textColorHint="@color/textBlue" />
+
+        <TextView
+            android:id="@+id/tv_adresseErreur"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/k2d_medium"
+            android:text=""
+            android:textColor="@color/errorRed"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/editText_NumCarteClient"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
+            android:background="@drawable/et_border"
             android:ems="10"
+            android:fontFamily="@font/k2d_medium"
             android:hint="Numéro de carte de crédit"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@color/textBlue"
+            android:textColorHint="@color/textBlue" />
+
+        <TextView
+            android:id="@+id/tv_numErreur"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/k2d_medium"
+            android:text=""
+            android:textColor="@color/errorRed"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/editText_CarteExpClient"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/et_border"
                 android:ems="10"
+                android:fontFamily="@font/k2d_medium"
                 android:hint="Date d'expiration"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@color/textBlue"
+                android:textColorHint="@color/textBlue" />
 
             <EditText
                 android:id="@+id/editText_CVVClient"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/et_border"
                 android:ems="10"
+                android:fontFamily="@font/k2d_medium"
                 android:hint="CVV"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@color/textBlue"
+                android:textColorHint="@color/textBlue" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_expErreur"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/k2d_medium"
+                android:text=""
+                android:textColor="@color/errorRed"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_cvvErreur"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/k2d_medium"
+                android:text=""
+                android:textColor="@color/errorRed"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_RegisterClient"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/k2d_medium"
+            android:onClick="onRegister"
+            android:text="S'inscrire"
+            android:textColor="@color/textBlue" />
+
+        <TextView
+            android:id="@+id/textView_returnClient"
+            android:layout_width="412dp"
+            android:layout_height="59dp"
+            android:layout_marginEnd="69dp"
+            android:fontFamily="@font/k2d_medium"
+            android:gravity="center"
+            android:onClick="onGoBack"
+            android:text="Revenir au menu de connexion"
+            android:textColor="@color/textBlue"
+            android:textSize="20sp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_RegisterClient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_weight="1"
-        android:onClick="onRegister"
-        android:text="S'inscrire"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.08" />
-
-    <TextView
-        android:id="@+id/textView_returnClient"
-        android:layout_width="275dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="69dp"
-        android:layout_marginEnd="69dp"
-        android:onClick="onGoBack"
-        android:text="Revenir au menu de connexion"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_RegisterClient"
-        app:layout_constraintVertical_bias="0.791" />
 </androidx.constraintlayout.widget.ConstraintLayout>
