@@ -72,15 +72,13 @@ public class CuisinierTemporarilyBannedActivity extends AppCompatActivity {
     }
 
 
-
-
     /**
      * Lorsque le cuisinier clique sur le bouton il va etre redirectionner vers MainActivity
      * qui est la page de login.
      * @param view view du boutton
      */
 
-    public void onDisconnectTemp(View view){
+    public void OnDisconnectTemporaire(View view){
         Intent intent = new Intent(CuisinierTemporarilyBannedActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
