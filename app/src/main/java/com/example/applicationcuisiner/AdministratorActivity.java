@@ -167,14 +167,14 @@ public class AdministratorActivity extends AppCompatActivity {
         }
         if (TextUtils.isEmpty(name)){
             noCooksname.setText("Cooksname obligatoire");
-            Toast.makeText(this,"Please enter a name",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter a Cooksname",Toast.LENGTH_LONG).show();
         }
         if (!TextUtils.isEmpty(name)){
             noCooksname.setText("");
         }
         if (TextUtils.isEmpty(name)){
             noPlainte.setText("Plainte obligatoire");
-            Toast.makeText(this,"Please enter a name",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter a plainte",Toast.LENGTH_LONG).show();
         }
         if (!TextUtils.isEmpty(temp)){
             noPlainte.setText("");
