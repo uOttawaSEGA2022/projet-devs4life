@@ -223,6 +223,9 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
             result = false;
             noPrenom.setText("Prenom obligatoire");
         }
+        if(!prenom.isEmpty())  {
+            noPrenom.setText("");
+        }
         String nom = cuisinierLastName.getText().toString();
         if (nom.isEmpty()) {
             result = false;

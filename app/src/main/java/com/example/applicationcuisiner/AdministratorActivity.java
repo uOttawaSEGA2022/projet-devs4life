@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,11 @@ public class AdministratorActivity extends AppCompatActivity {
     List<Plainte> plaintes;
     EditText editTextTemp;
 
+    TextView noCooksname;
+    TextView noPlainte;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,9 @@ public class AdministratorActivity extends AppCompatActivity {
         editTextTemp= (EditText) findViewById(R.id.editTextTemp);
         listViewPlaintes = (ListView) findViewById(R.id.listViewPlaintes);
         buttonAddPlainte = (Button) findViewById(R.id.addButton);
+
+        noCooksname = findViewById(R.id.textView_noCooksname);
+        noPlainte = findViewById(R.id.textView_noPlainte);
 
         plaintes = new ArrayList<>();
 
@@ -144,7 +153,7 @@ public class AdministratorActivity extends AppCompatActivity {
 
         String temp = editTextTemp.getText().toString().trim();
 
-        if (!TextUtils.isEmpty(name)){
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(temp)){
 
             String id = databsePlaintes.push().getKey();
             Plainte plainte = new Plainte(id,name,temp);
@@ -153,9 +162,26 @@ public class AdministratorActivity extends AppCompatActivity {
 
             editTextTemp.setText("");
             Toast.makeText(this,"Plainte added",Toast.LENGTH_LONG).show();
-        } else {
+            ;
+
+        }
+        if (TextUtils.isEmpty(name)){
+            noCooksname.setText("Cooksname obligatoire");
             Toast.makeText(this,"Please enter a name",Toast.LENGTH_LONG).show();
         }
+        if (!TextUtils.isEmpty(name)){
+            noCooksname.setText("");
+        }
+        if (TextUtils.isEmpty(name)){
+            noPlainte.setText("Plainte obligatoire");
+            Toast.makeText(this,"Please enter a name",Toast.LENGTH_LONG).show();
+        }
+        if (!TextUtils.isEmpty(temp)){
+            noPlainte.setText("");
+        }
+
+
+
 
     }
 
