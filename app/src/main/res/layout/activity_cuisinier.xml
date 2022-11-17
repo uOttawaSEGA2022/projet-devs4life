@@ -47,6 +47,7 @@
             android:background="@drawable/rounded_btn"
             android:fontFamily="@font/k2d_medium"
             android:text="See repas proposés"
+            android:onClick="OnGoToRepasPropose"
             android:textColor="@color/textBlue" />
 
         <Space
