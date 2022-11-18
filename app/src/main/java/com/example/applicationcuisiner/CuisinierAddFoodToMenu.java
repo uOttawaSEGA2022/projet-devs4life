@@ -91,7 +91,7 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
                                 if (document.exists()) {
                                     Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                     System.out.println("un repas avec le mm nom existe deja ");
-                                    repasAjouteTV.setText("un repas avec le mm nom existe deja");
+                                    repasAjouteTV.setText("un repas avec le meme nom existe deja");
 
                                 } else {
                                     Log.d(TAG, "No such document");

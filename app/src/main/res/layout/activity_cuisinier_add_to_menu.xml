@@ -162,9 +162,9 @@
         <TextView
             android:id="@+id/tv_noFoodDescription"
             android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:text=""
+            android:layout_height="wrap_content"
             android:fontFamily="@font/k2d_medium"
+            android:text=""
             android:textColor="@color/errorRed" />
 
         <LinearLayout
@@ -180,7 +180,7 @@
             <Button
                 android:id="@+id/btn_addFoodToDatabase"
                 android:layout_width="match_parent"
-                android:layout_height="68dp"
+                android:layout_height="67dp"
                 android:background="@drawable/rounded_btn"
                 android:fontFamily="@font/k2d_medium"
                 android:onClick="onClientSignUp"
@@ -224,7 +224,7 @@
         <TextView
             android:id="@+id/tv_repasAdded"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fontFamily="@font/k2d_medium"
             android:gravity="center"
             android:textColor="@color/textBlue"

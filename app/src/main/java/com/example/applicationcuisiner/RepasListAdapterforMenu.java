@@ -116,7 +116,7 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
                                                 System.out.println("we cannot delete");
 
                                                 //would like to change a TextView here
-                                                tvError.setText("Can't delete if it's in repas proposés");
+                                                tvError.setText("Vous ne pouvez pas supprimer un repas contenu dans la \nliste des repas proposés.");
                                                 //Toast.makeText(getContext(), "We cannot delete something that is in repas Proposes", Toast.LENGTH_SHORT).show();
 
 

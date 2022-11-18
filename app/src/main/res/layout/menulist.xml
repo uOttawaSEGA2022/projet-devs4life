@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_width="410dp"
+        android:layout_height="178dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,11 +93,11 @@
         <TextView
             android:id="@+id/tv_errorDeleteFromMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:fontFamily="@font/k2d_medium"
             android:text=" "
             android:textColor="@color/errorRed"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
