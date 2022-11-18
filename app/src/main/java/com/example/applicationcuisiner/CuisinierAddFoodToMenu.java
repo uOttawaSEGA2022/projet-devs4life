@@ -81,35 +81,56 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (valide()) {
-                    repasAjouteTV.setText("Repas added!");
-                    String name = foodName.getText().toString();
-                    String description = foodDescription.getText().toString();
-                    String price = foodPrice.getText().toString();
-                    String typeFood = typeOfFood.getText().toString();
-                    String typeRepas = typeOfRepas.getText().toString();
-                    Map<String, Object> menu = new HashMap<>();
-                    menu.put("name", name);
-                    menu.put("description", description);
-                    menu.put("price", price);
-                    menu.put("typeDeCuisine", typeFood);
-                    menu.put("typeDeRepas", typeRepas);
-                    menu.put("cook", cname + " " + lastname);
 
-                    db.collection("menu").document(name + cname + " " + lastname)
-                            .set(menu)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error adding document", e);
-                                }
-                            });
+                    DocumentReference docRef = db.collection("menu").document(foodName.getText().toString()+ cname + " " + lastname);
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    System.out.println("un repas avec le mm nom existe deja ");
+                                    repasAjouteTV.setText("un repas avec le mm nom existe deja");
 
+                                } else {
+                                    Log.d(TAG, "No such document");
+                                    repasAjouteTV.setText("Repas added!");
+                                    String name = foodName.getText().toString();
+                                    String description = foodDescription.getText().toString();
+                                    String price = foodPrice.getText().toString();
+                                    String typeFood = typeOfFood.getText().toString();
+                                    String typeRepas = typeOfRepas.getText().toString();
+                                    Map<String, Object> menu = new HashMap<>();
+                                    menu.put("name", name);
+                                    menu.put("description", description);
+                                    menu.put("price", price);
+                                    menu.put("typeDeCuisine", typeFood);
+                                    menu.put("typeDeRepas", typeRepas);
+                                    menu.put("cook", cname + " " + lastname);
+
+                                    db.collection("menu").document(name + cname + " " + lastname)
+                                            .set(menu)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error adding document", e);
+                                                }
+                                            });
+                                }
+                            } else {
+                                Log.d(TAG, "get failed with ", task.getException());
+                                repasAjouteTV.setText("");
+
+                            }
+                        }
+                    });
 
                 } else {
                     repasAjouteTV.setText("");
