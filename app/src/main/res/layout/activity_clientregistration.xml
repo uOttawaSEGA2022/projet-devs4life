@@ -30,13 +30,14 @@
         <EditText
             android:id="@+id/editText_PrenomClient"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_weight="1"
-            android:background="@drawable/et_border"
+
             android:ems="10"
             android:fontFamily="@font/k2d_medium"
             android:hint="Prénom"
             android:inputType="textPersonName"
+            android:rotationX="0"
             android:textColor="@color/textBlue"
             android:textColorHint="@color/textBlue" />
 
@@ -55,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@drawable/et_border"
+
             android:ems="10"
             android:fontFamily="@font/k2d_medium"
             android:hint="Nom"
@@ -78,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@drawable/et_border"
+
             android:ems="10"
             android:fontFamily="@font/k2d_medium"
             android:hint="Adresse courriel"
@@ -101,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@drawable/et_border"
+
             android:ems="10"
             android:fontFamily="@font/k2d_medium"
             android:hint="Mot de passe"
@@ -124,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@drawable/et_border"
+
             android:ems="10"
             android:fontFamily="@font/k2d_medium"
             android:hint="Adresse"
@@ -147,7 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@drawable/et_border"
+
             android:ems="10"
             android:fontFamily="@font/k2d_medium"
             android:hint="Numéro de carte de crédit"
@@ -176,7 +177,6 @@
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/et_border"
                 android:ems="10"
                 android:fontFamily="@font/k2d_medium"
                 android:hint="Date d'expiration"
@@ -189,7 +189,7 @@
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/et_border"
+
                 android:ems="10"
                 android:fontFamily="@font/k2d_medium"
                 android:hint="CVV"

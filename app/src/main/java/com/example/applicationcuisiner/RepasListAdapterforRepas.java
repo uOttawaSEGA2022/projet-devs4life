@@ -83,7 +83,7 @@ public class RepasListAdapterforRepas  extends ArrayAdapter<Repas> {
             public void onClick(View v) {
                 // on the item click on our list view.
                 // we are displaying a toast message.
-                Toast.makeText(getContext(), "Item clicked is : " + repas.getName(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), "Item clicked is : " + repas.getName(), Toast.LENGTH_SHORT).show();
                 // Initializing the popup menu and giving the reference as current context
                 PopupMenu popupMenu = new PopupMenu(getContext(), listitemView);
 
@@ -101,7 +101,7 @@ public class RepasListAdapterforRepas  extends ArrayAdapter<Repas> {
                             FirebaseFirestore db;
                             db = FirebaseFirestore.getInstance();
                             System.out.println(repas.getName());
-                            db.collection("repasProp").document(repas.getName())
+                            db.collection("repasProp").document(repas.getName()+repas.getCook())
                                     .delete()
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
@@ -125,7 +125,7 @@ public class RepasListAdapterforRepas  extends ArrayAdapter<Repas> {
 
                         }
 
-                        Toast.makeText(getContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
                         return true;
                     }
                 });

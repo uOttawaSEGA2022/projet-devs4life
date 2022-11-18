@@ -87,9 +87,9 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
                 menu.put("price", price);
                 menu.put("typeDeCuisine", typeFood);
                 menu.put("typeDeRepas", typeRepas);
-                menu.put("cook", cname + " " + lastname);
+                menu.put("cook", cname + " "+ lastname);
 
-                db.collection("menu").document(name)
+                db.collection("menu").document(name+cname+ " "+lastname)
                         .set(menu)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
