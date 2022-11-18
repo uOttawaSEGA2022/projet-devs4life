@@ -68,12 +68,12 @@ public class RepasListAdapterforRepas  extends ArrayAdapter<Repas> {
         // after initializing our items we are
         // setting data to our view.
         // below line is use to set data to our text view.
-        name.setText(repas.getName());
-        description.setText(repas.getDescription());
-        price.setText(repas.getPrice());
-        cook.setText(repas.getCook());
-        typeDeRepas.setText(repas.getTypeDeRepas());
-        typeDeCuisine.setText(repas.getTypeDeCuisine());
+        name.setText("Nom: " + repas.getName());
+        description.setText("Description: " + repas.getDescription());
+        price.setText("Prix: " +repas.getPrice());
+        cook.setText("Cuisinier: " +repas.getCook());
+        typeDeRepas.setText("Repas: " +repas.getTypeDeRepas());
+        typeDeCuisine.setText("Cuisine: " +repas.getTypeDeCuisine());
 
 
         // below line is use to add item click listener
