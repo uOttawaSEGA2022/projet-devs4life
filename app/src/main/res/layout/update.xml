@@ -20,8 +20,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Suspend" />
+        android:text="Suspend permanently" />
 
+
+
+    <Button
+        android:id="@+id/buttonSuspendPlainte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Suspend for a period of time" />
     <Button
         android:id="@+id/buttonDeletePlainte"
         android:layout_width="wrap_content"

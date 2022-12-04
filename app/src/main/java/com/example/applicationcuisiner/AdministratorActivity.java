@@ -139,11 +139,11 @@ public class AdministratorActivity extends AppCompatActivity {
 
 
     private boolean deletePlainte(String id) {
-
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
         dR.removeValue();
         Toast.makeText(getApplicationContext(),"Plainte Deleted", Toast.LENGTH_LONG).show();
         return true;
+
 
     }
 
@@ -185,11 +185,6 @@ public class AdministratorActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Lorsque l'administrateur clique sur le bouton il va etre redirectionner vers MainActivity
-     * qui est la page de login.
-     * @param view view du boutton
-     */
 
     public void onDisconnectAdministrator(View view){
         Intent intent = new Intent(AdministratorActivity.this, MainActivity.class);
