@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
     String currentUserID;
     String cname;
     String lastname;
+    EditText foodName, foodDescription, foodPrice, typeOfFood, typeOfRepas;
 
 
 
@@ -66,47 +68,76 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
             }
         });
 
-         EditText foodName = findViewById(R.id.et_foodName);
-         EditText foodDescription = findViewById(R.id.et_foodDescription);
-         EditText foodPrice = findViewById(R.id.et_foodPrice);
-         EditText typeOfFood = findViewById(R.id.et_typeOfCuisine);
-         EditText typeOfRepas = findViewById(R.id.et_typeOfRepas);
+        TextView repasAjouteTV = findViewById(R.id.tv_repasAdded);
+
+         foodName = findViewById(R.id.et_foodName);
+         foodDescription = findViewById(R.id.et_foodDescription);
+         foodPrice = findViewById(R.id.et_foodPrice);
+         typeOfFood = findViewById(R.id.et_typeOfCuisine);
+         typeOfRepas = findViewById(R.id.et_typeOfRepas);
          addBtn = findViewById(R.id.btn_addFoodToDatabase);
          addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String name = foodName.getText().toString();
-                String description = foodDescription.getText().toString();
-                String price = foodPrice.getText().toString();
-                String typeFood = typeOfFood.getText().toString();
-                String typeRepas = typeOfRepas.getText().toString();
-                Map<String, Object> menu = new HashMap<>();
-                menu.put("name", name);
-                menu.put("description", description);
-                menu.put("price", price);
-                menu.put("typeDeCuisine", typeFood);
-                menu.put("typeDeRepas", typeRepas);
-                menu.put("cook", cname + " " + lastname);
+                if (valide()) {
 
-                db.collection("menu").document(name)
-                        .set(menu)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                    DocumentReference docRef = db.collection("menu").document(foodName.getText().toString()+ cname + " " + lastname);
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    System.out.println("un repas avec le mm nom existe deja ");
+                                    repasAjouteTV.setText("un repas avec le meme nom existe deja");
+
+                                } else {
+                                    Log.d(TAG, "No such document");
+                                    repasAjouteTV.setText("Repas added!");
+                                    String name = foodName.getText().toString();
+                                    String description = foodDescription.getText().toString();
+                                    String price = foodPrice.getText().toString();
+                                    String typeFood = typeOfFood.getText().toString();
+                                    String typeRepas = typeOfRepas.getText().toString();
+                                    Map<String, Object> menu = new HashMap<>();
+                                    menu.put("name", name);
+                                    menu.put("description", description);
+                                    menu.put("price", price);
+                                    menu.put("typeDeCuisine", typeFood);
+                                    menu.put("typeDeRepas", typeRepas);
+                                    menu.put("cook", cname + " " + lastname);
+
+                                    db.collection("menu").document(name + cname + " " + lastname)
+                                            .set(menu)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error adding document", e);
+                                                }
+                                            });
+                                }
+                            } else {
+                                Log.d(TAG, "get failed with ", task.getException());
+                                repasAjouteTV.setText("");
+
                             }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
-                            }
-                        });
+                        }
+                    });
 
-
+                } else {
+                    repasAjouteTV.setText("");
+                }
             }
         });
+
 
     }
 
@@ -118,5 +149,55 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
     public void onGoBack01(View view){
         Intent intent = new Intent(this, CuisinierActivity.class);
         startActivity(intent);
+    }
+
+
+    private boolean valide() {
+        Boolean result = true;
+
+
+        String name = foodName.getText().toString();
+        TextView noNameTV = findViewById(R.id.tv_noFoodName);
+        if(name.isEmpty()){
+            result = false;
+            noNameTV.setText("Champ Obligatoire");
+        } else {
+           noNameTV.setText("");
+        }
+        String description = foodDescription.getText().toString();
+        TextView noDesTV = findViewById(R.id.tv_noFoodDescription);
+        if(description.isEmpty()){
+            result = false;
+            noDesTV.setText("Champ Obligatoire");
+        }else {
+            noDesTV.setText("");
+        }
+        String price = foodPrice.getText().toString();
+        TextView noPriceTV = findViewById(R.id.tv_noFoodPrice);
+        if(price.isEmpty()){
+            result = false;
+            noPriceTV.setText("Champ Obligatoire");
+        } else {
+            noPriceTV.setText("");
+        }
+        String typeFood = typeOfFood.getText().toString();
+        TextView noTypeFTV = findViewById(R.id.tv_noFoodCuisine);
+        if(typeFood.isEmpty()){
+            result = false;
+            noTypeFTV.setText("Champ Obligatoire");
+        } else {
+            noTypeFTV.setText("");
+        }
+        String typeRepas = typeOfRepas.getText().toString();
+        TextView noTypeRTV = findViewById(R.id.tv_noFoodRepas);
+        if(typeRepas.isEmpty()){
+            result = false;
+            noTypeRTV.setText("Champ Obligatoire");
+        } else {
+            noTypeRTV.setText("");
+        }
+
+
+        return result;
     }
 }

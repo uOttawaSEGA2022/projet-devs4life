@@ -42,6 +42,7 @@ public class ClientRegistrationActivity extends AppCompatActivity {
 
 
     private EditText clientFirstName, clientLastName, clientEmail, clientPassword, clientAddress, clientCreditNumber, clientCreditExp, clientCreditCVV;
+    private TextView prenomErreur, nomErreur, courrielErreur,mdpErreur, adresseErreur, numErreur, expErreur, cvvErreur;
     private Button registerClient;
     private FirebaseAuth authentication;
     private FirebaseFirestore store;
@@ -59,6 +60,15 @@ public class ClientRegistrationActivity extends AppCompatActivity {
 
         authentication=FirebaseAuth.getInstance();
         store=FirebaseFirestore.getInstance();
+
+        prenomErreur = (TextView)  findViewById(R.id.tv_prenomErreur);
+        nomErreur = (TextView)  findViewById(R.id.tv_nomErreur);
+        courrielErreur = (TextView)  findViewById(R.id.tv_courrielErreur);
+        mdpErreur  = (TextView)  findViewById(R.id.tv_mdpErreur);
+        adresseErreur =  (TextView)  findViewById(R.id.tv_adresseErreur);
+        numErreur  = (TextView)  findViewById(R.id.tv_numErreur);
+        expErreur  = (TextView)  findViewById(R.id.tv_expErreur);
+        cvvErreur =  (TextView)  findViewById(R.id.tv_cvvErreur);
 
         clientFirstName = (EditText) findViewById(R.id.editText_PrenomClient);
         clientLastName = (EditText) findViewById(R.id.editText_NomClient);
@@ -144,41 +154,65 @@ public class ClientRegistrationActivity extends AppCompatActivity {
         String prenom = clientFirstName.getText().toString();
         if(prenom.isEmpty()){
             result = false;
-            clientFirstName.setHint("Ce champ est obligatoire : Prenom");
+            prenomErreur.setText("Ce champ est obligatoire");
+        } else {
+            prenomErreur.setText("");
         }
         String nom = clientLastName.getText().toString();
         if(nom.isEmpty()){
             result = false;
-            clientLastName.setHint("Ce champ est obligatoire : nom");
+            nomErreur.setText("Ce champ est obligatoire");
+        }
+        else {
+            nomErreur.setText("");
         }
         String email = clientEmail.getText().toString();
         if(email.isEmpty()){
             result = false;
-            clientEmail.setHint("Ce champ est obligatoire : email");
+            courrielErreur.setText("Ce champ est obligatoire");
+        } else {
+            courrielErreur.setText("");
         }
         String password = clientPassword.getText().toString();
         if(password.isEmpty()){
             result = false;
-            clientPassword.setHint("Ce champ est obligatoire : mot de passe");
+            mdpErreur.setText("Ce champ est obligatoire");
+        } else if(password.length()<6) {
+            mdpErreur.setText("Mot de passe doit avoir aux moins 6 caracteres");
+        }
+
+        else {
+            mdpErreur.setText("");
         }
         String adresse = clientAddress.getText().toString();
         if(adresse.isEmpty()){
             result = false;
-            clientAddress.setHint("Ce champ est obligatoire : adresse");
+            adresseErreur.setText("Ce champ est obligatoire");
+        } else {
+            adresseErreur.setText("");
         }
         String numCarte = clientCreditNumber.getText().toString();
         if(numCarte.isEmpty()){
             result=false;
-            clientCreditNumber.setHint("Ce champ est obligatoire : numero de carte de credit");
+            numErreur.setText("Ce champ est obligatoire");
+        }else {
+            numErreur.setText("");
         }
+
         String expCarte = clientCreditExp.getText().toString();
         if(expCarte.isEmpty()){
             result= false;
-            clientCreditExp.setHint("Ce champ est obligatoire : date d'expiration de carte de credit");
-        } String cvvCarte = clientCreditCVV.getText().toString();
+            expErreur.setText("Ce champ est obligatoire");
+        } else {
+            expErreur.setText("");
+        }
+
+        String cvvCarte = clientCreditCVV.getText().toString();
         if(cvvCarte.isEmpty()){
             result = false;
-            clientCreditCVV.setHint("Ce champ est obligatoire : cvv de carte de credit");
+            cvvErreur.setText("Ce champ est obligatoire");
+        } else {
+            cvvErreur.setText("");
         }
 
         return result;

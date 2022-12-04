@@ -65,18 +65,19 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
         TextView cook = listitemView.findViewById(R.id.tv_cookName);
         TextView typeDeRepas = listitemView.findViewById(R.id.tv_repasType);
         TextView typeDeCuisine = listitemView.findViewById(R.id.tv_cuisineType);
+        TextView tvError = listitemView.findViewById(R.id.tv_errorDeleteFromMenu);
 
 
 
         // after initializing our items we are
         // setting data to our view.
         // below line is use to set data to our text view.
-         name.setText(repas.getName());
-         description.setText(repas.getDescription());
-         price.setText(repas.getPrice());
-         cook.setText(repas.getCook());
-         typeDeRepas.setText(repas.getTypeDeRepas());
-         typeDeCuisine.setText(repas.getTypeDeCuisine());
+         name.setText("Nom: " + repas.getName());
+         description.setText("Description: " + repas.getDescription());
+         price.setText("Prix: " +repas.getPrice());
+         cook.setText("Cuisinier: " +repas.getCook());
+         typeDeRepas.setText("Repas: " +repas.getTypeDeRepas());
+         typeDeCuisine.setText("Cuisine: " +repas.getTypeDeCuisine());
 
 
         // below line is use to add item click listener
@@ -86,7 +87,7 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
             public void onClick(View v) {
                 // on the item click on our list view.
                 // we are displaying a toast message.
-                Toast.makeText(getContext(), "Item clicked is : " + repas.getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Item clicked is : " + repas.getName(), Toast.LENGTH_SHORT).show();
                 // Initializing the popup menu and giving the reference as current context
                 PopupMenu popupMenu = new PopupMenu(getContext(), listitemView);
 
@@ -102,9 +103,8 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
 
                             if (menuItem.getTitle().equals("Delete")) {
                                 System.out.println("j'ai cliquer sur del");
-
                                 System.out.println(repas.getName());
-                                DocumentReference docRef = db.collection("repasProp").document(repas.getName());
+                                DocumentReference docRef = db.collection("repasProp").document(repas.getName()+repas.getCook());
                                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -114,11 +114,17 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
                                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                                 System.out.println("ledocument est propose");
                                                 System.out.println("we cannot delete");
-                                                Toast.makeText(getContext(), "We cannot delete something that is in repas Proposes", Toast.LENGTH_SHORT).show();
+
+                                                //would like to change a TextView here
+                                                tvError.setText("Vous ne pouvez pas supprimer un repas contenu dans la \nliste des repas proposés.");
+                                                //Toast.makeText(getContext(), "We cannot delete something that is in repas Proposes", Toast.LENGTH_SHORT).show();
+
+
+
                                             } else {
                                                 Log.d(TAG, "No such document");
                                                 db = FirebaseFirestore.getInstance();
-                                                db.collection("menu").document(repas.getName())
+                                                db.collection("menu").document(repas.getName()+repas.getCook())
                                                         .delete()
                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override
@@ -168,7 +174,7 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
                                 repasProp.put("typeDeRepas", typeRepas);
                                 repasProp.put("cook", cook);
 
-                                db.collection("repasProp").document(name)
+                                db.collection("repasProp").document(name+cook)
                                         .set(repasProp)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -189,7 +195,7 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
 
                             }
 
-                        Toast.makeText(getContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
                         return true;
                     }
                 });

@@ -26,7 +26,6 @@ public class Cuisinier extends User{
 
     private String address;
     private String description;
-    private int index;
     private String status; //Active, Banned or PermanentlyBanned
     private long durationBanned;
 

@@ -12,10 +12,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tv_titleRepas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/k2d_medium"
+            android:gravity="center"
+            android:text="Vos Repas Proposés"
+            android:textColor="@color/textBlue"
+            android:textSize="34sp" />
+
         <ListView
             android:id="@+id/lv_seeMenu"
             android:layout_width="match_parent"
-            android:layout_height="665dp">
+            android:layout_height="594dp">
 
         </ListView>
 

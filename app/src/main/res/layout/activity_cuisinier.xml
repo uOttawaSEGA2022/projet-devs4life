@@ -33,7 +33,7 @@
             android:layout_height="68dp"
             android:background="@drawable/rounded_btn"
             android:fontFamily="@font/k2d_medium"
-            android:text="Add Repas"
+            android:text="Add Repas To Menu"
             android:textColor="@color/textBlue" />
 
         <Space
