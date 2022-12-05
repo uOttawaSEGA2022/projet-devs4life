@@ -114,6 +114,8 @@ public class AdministratorActivity extends AppCompatActivity {
 
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdatePlainte);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeletePlainte);
+        final Button buttonSuspendFor = (Button) dialogView.findViewById(R.id.buttonSuspendFor);
+
 
         dialogBuilder.setTitle(cooksname);
         final AlertDialog b = dialogBuilder.create();
@@ -132,6 +134,18 @@ public class AdministratorActivity extends AppCompatActivity {
                 deletePlainte(plainteId);
                 b.dismiss();
             }
+        });
+
+        buttonSuspendFor.setOnClickListener(new View.OnClickListener() {
+            @Override
+                public void onClick(View view) {
+
+
+                //SuspendFor(cooksname,time); //cooksname parameter
+                b.dismiss();
+
+            }
+
         });
     }
 
@@ -184,6 +198,15 @@ public class AdministratorActivity extends AppCompatActivity {
 
 
     }
+/*
+    private void SuspendFor(cooksname,time) {
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(cooksname);
+        dR.setValue(time);
+        Toast.makeText(getApplicationContext(), "Cook banned", Toast.LENGTH_SHORT).show();
+
+    }
+
+ */
 
 
     public void onDisconnectAdministrator(View view){

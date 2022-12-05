@@ -5,13 +5,30 @@
     android:orientation="vertical">
 
 
-
-
+    <EditText
+        android:id="@+id/editTextTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter period of time for suspension" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonSuspendFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Suspend " />
+
+        <Button
+            android:id="@+id/buttonDeletePlainte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete" />
 
     </LinearLayout>
 
@@ -20,22 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Suspend permanently" />
-
-
-
-    <Button
-        android:id="@+id/buttonSuspendPlainte"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Suspend for a period of time" />
-    <Button
-        android:id="@+id/buttonDeletePlainte"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Delete" />
+        android:text="Suspend Permanently" />
 
 
 </LinearLayout>
