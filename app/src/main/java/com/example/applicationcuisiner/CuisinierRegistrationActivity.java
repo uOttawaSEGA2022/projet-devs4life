@@ -174,6 +174,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
                     userInfo.put("Description",cuisinierDescription.getText().toString());
                     userInfo.put("Type", type);
                     userInfo.put("Status", status);
+                    userInfo.put("FullName",cuisinierFirstName.getText().toString()+" "+ cuisinierLastName.getText().toString());
                     cuisinier = new Cuisinier(currentUserID, cuisinierFirstName.getText().toString(), cuisinierLastName.getText().toString(),cuisinierEmail.getText().toString(), cuisinierPassword.getText().toString(), cuisinierAddress.getText().toString(), cuisinierDescription.getText().toString());
 
 
