@@ -13,9 +13,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Locale;
@@ -27,6 +31,7 @@ public class CuisinierTemporarilyBannedActivity extends AppCompatActivity {
     private String currentUserID;
     TextView countdownText;
     long duration; //timer duration
+    String time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,35 +44,85 @@ public class CuisinierTemporarilyBannedActivity extends AppCompatActivity {
 
         duration = TimeUnit.MINUTES.toMillis(1);
 
-        long timeBannedInMili = 2000000;
+         DocumentReference docRef = fireStore.collection("user").document(currentUserID);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        time = document.getString("Time");
+                        long timeBannedInMinutes = Long.parseLong(time);
+                        long timeBannedInMili = timeBannedInMinutes * 60000;
 
-        new CountDownTimer(timeBannedInMili, 1000) {
 
-                public void onTick(long millisUntilFinished) {
-                    countdownText.setText("Time left for the ban: " + String.format("%02d:%02d",
-                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
-                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
-                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                        new CountDownTimer(timeBannedInMili, 1000) {
+
+                            public void onTick(long millisUntilFinished) {
+                                countdownText.setText("Time left for the ban: " + String.format("%02d:%02d",
+                                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                            }
+
+                            public void onFinish() {
+                                countdownText.setText("done!");
+
+                                fireStore.collection("user").document(currentUserID).update("Status", "Active").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d(TAG, "DocumentSnapshot successfully updated!");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error updating document", e);
+                                            }
+                                        });
+
+                            }
+                        }.start();
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
                 }
+            }
+        });
 
-                public void onFinish() {
-                    countdownText.setText("done!");
-
-                    fireStore.collection("user").document(currentUserID).update("Status", "Active").addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "DocumentSnapshot successfully updated!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error updating document", e);
-                                }
-                            });
-
-                }
-            }.start();
+//        long timeBannedInMili = timeBannedInMinutes * 60000;
+//
+//
+//        new CountDownTimer(timeBannedInMili, 1000) {
+//
+//                public void onTick(long millisUntilFinished) {
+//                    countdownText.setText("Time left for the ban: " + String.format("%02d:%02d",
+//                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+//                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+//                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+//                }
+//
+//                public void onFinish() {
+//                    countdownText.setText("done!");
+//
+//                    fireStore.collection("user").document(currentUserID).update("Status", "Active").addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                @Override
+//                                public void onSuccess(Void aVoid) {
+//                                    Log.d(TAG, "DocumentSnapshot successfully updated!");
+//                                }
+//                            })
+//                            .addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    Log.w(TAG, "Error updating document", e);
+//                                }
+//                            });
+//
+//                }
+//            }.start();
 
     }
 

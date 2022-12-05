@@ -1,5 +1,7 @@
 package com.example.applicationcuisiner;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,11 +20,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +45,11 @@ public class AdministratorActivity extends AppCompatActivity {
     ListView listViewPlaintes;
     List<Plainte> plaintes;
     EditText editTextTemp;
-
+    FirebaseFirestore db;
+    String documentID;
     TextView noCooksname;
     TextView noPlainte;
+
 
 
 
@@ -47,7 +58,7 @@ public class AdministratorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrator);
         databsePlaintes = FirebaseDatabase.getInstance().getReference("plaintes");
-
+        db = FirebaseFirestore.getInstance();
         editTextName = (EditText) findViewById(R.id.editTextName);
 
         editTextTemp= (EditText) findViewById(R.id.editTextTemp);
@@ -112,18 +123,21 @@ public class AdministratorActivity extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.update, null);
         dialogBuilder.setView(dialogView);
 
-        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdatePlainte);
+        final Button buttonSuspend = (Button) dialogView.findViewById(R.id.buttonSuspendPerm);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeletePlainte);
         final Button buttonSuspendFor = (Button) dialogView.findViewById(R.id.buttonSuspendFor);
+        final EditText timeSuspendend = (EditText) dialogView.findViewById(R.id.editTextTime);
 
 
         dialogBuilder.setTitle(cooksname);
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+        buttonSuspend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                banPerm(plainteId, cooksname);
+                b.dismiss();
 
             }
         });
@@ -139,8 +153,7 @@ public class AdministratorActivity extends AppCompatActivity {
         buttonSuspendFor.setOnClickListener(new View.OnClickListener() {
             @Override
                 public void onClick(View view) {
-
-
+                banTemp(plainteId, cooksname,  timeSuspendend.getText().toString());
                 //SuspendFor(cooksname,time); //cooksname parameter
                 b.dismiss();
 
@@ -150,14 +163,74 @@ public class AdministratorActivity extends AppCompatActivity {
     }
 
 
+    private void banPerm(String id, String cook){
+// Create a reference to the cities collection
+        CollectionReference citiesRef = db.collection("user");
 
+// Create a query against the collection.
+        Query query = citiesRef.whereEqualTo("Name", cook);
+        //TODO: if we need the full name just create a new field full name in cuisinier which will contain the addition of the name and last name
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        System.out.println("the id of this cook:"+ cook +"is " +document.getId());
+                        documentID= document.getId();
+                        //TODO: change the value status
+                        db.collection("user").document(documentID)
+                                .update(
+                                        "Status", "PermanentlyBanned"
+                                );
+                        //document.getData();
+
+                    }
+                }
+            }
+        });
+
+        deletePlainte(id);//delete the plainte once the cook is banned
+    }
+
+    private void banTemp(String id, String cook, String timeBan){
+// Create a reference to the cities collection
+        CollectionReference citiesRef = db.collection("user");
+
+// Create a query against the collection.
+        Query query = citiesRef.whereEqualTo("Name", cook);
+        //TODO: if we need the full name just create a new field full name in cuisinier which will contain the addition of the name and last name
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        System.out.println("the id of this cook:"+ cook +"is " +document.getId());
+                        documentID= document.getId();
+                        //TODO: change the value status
+                        //TODO: change the value of time banned
+                        db.collection("user").document(documentID)
+                                .update(
+                                        "Status", "Banned",
+                                        "Time", timeBan
+                                );
+                        //document.getData();
+                        //TODO: change the method in cuisinier tempbanned to match the new time :)
+
+                        System.out.println("the date of this cook:"+ cook +"is " +document.getData());
+                        //document.getData();
+                    }
+                }
+            }
+        });
+
+        deletePlainte(id);//delete the plainte once the cook is banned
+    }
 
     private boolean deletePlainte(String id) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("plaintes").child(id);
         dR.removeValue();
         Toast.makeText(getApplicationContext(),"Plainte Deleted", Toast.LENGTH_LONG).show();
         return true;
-
 
     }
 
@@ -176,7 +249,7 @@ public class AdministratorActivity extends AppCompatActivity {
 
             editTextTemp.setText("");
             Toast.makeText(this,"Plainte added",Toast.LENGTH_LONG).show();
-            ;
+
 
         }
         if (TextUtils.isEmpty(name)){
