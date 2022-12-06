@@ -47,7 +47,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
         // layout for our item of list view.
         listitemView = convertView;
         if (listitemView == null) {
-            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.menulist, parent, false);
+            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.menulistforclient, parent, false);
         }
 
         // after inflating an item of listview item
@@ -56,12 +56,13 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
         Repas repas = getItem(position);
 
         // initializing our UI components of list view item.
-        TextView name = listitemView.findViewById(R.id.tv_menuName);
-        TextView description = listitemView.findViewById(R.id.tv_menuDescription);
-        TextView price = listitemView.findViewById(R.id.tv_price);
-        TextView cook = listitemView.findViewById(R.id.tv_cookName);
-        TextView typeDeRepas = listitemView.findViewById(R.id.tv_repasType);
-        TextView typeDeCuisine = listitemView.findViewById(R.id.tv_cuisineType);
+        TextView name = listitemView.findViewById(R.id.tv_menuNameC);
+        TextView description = listitemView.findViewById(R.id.tv_menuDescriptionC);
+        TextView price = listitemView.findViewById(R.id.tv_priceC);
+        TextView cook = listitemView.findViewById(R.id.tv_cookNameC);
+        TextView typeDeRepas = listitemView.findViewById(R.id.tv_repasTypeC);
+        TextView typeDeCuisine = listitemView.findViewById(R.id.tv_cuisineTypeC);
+        TextView score = listitemView.findViewById(R.id.tv_ratingC);
 
 
 
@@ -74,6 +75,8 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
         cook.setText("Cuisinier: " +repas.getCook());
         typeDeRepas.setText("Repas: " +repas.getTypeDeRepas());
         typeDeCuisine.setText("Cuisine: " +repas.getTypeDeCuisine());
+        score.setText("note d'evaluation du cuisinier " + repas.getRating());
+
 
 
         // below line is use to add item click listener

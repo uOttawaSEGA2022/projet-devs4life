@@ -93,7 +93,7 @@ public class Cuisinier_SeeMenuActivity extends AppCompatActivity {
                                 Repas repas= d.toObject(Repas.class);
                                 // after getting data from Firebase we are
                                 // storing that data in our array list
-                                if(repas.getCook().equals(fullcookName)){ //TODO pour l'activite client enlever le if statement
+                                if(repas.getCook().equals(fullcookName)){
                                 menuArrayList.add(repas);
                                 }
                             }

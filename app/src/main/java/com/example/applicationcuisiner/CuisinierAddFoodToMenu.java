@@ -101,6 +101,7 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
                                     String price = foodPrice.getText().toString();
                                     String typeFood = typeOfFood.getText().toString();
                                     String typeRepas = typeOfRepas.getText().toString();
+
                                     Map<String, Object> menu = new HashMap<>();
                                     menu.put("name", name);
                                     menu.put("description", description);
@@ -108,6 +109,7 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
                                     menu.put("typeDeCuisine", typeFood);
                                     menu.put("typeDeRepas", typeRepas);
                                     menu.put("cook", cname + " " + lastname);
+                                    menu.put("rating", 0);
 
                                     db.collection("menu").document(name + cname + " " + lastname)
                                             .set(menu)

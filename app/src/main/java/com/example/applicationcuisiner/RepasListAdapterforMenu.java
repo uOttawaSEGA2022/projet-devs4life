@@ -166,6 +166,7 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
                                 String typeFood = repas.getTypeDeCuisine();
                                 String typeRepas = repas.getTypeDeRepas();
                                 String cook = repas.getCook();
+                                double rating = repas.getRating();
                                 Map<String, Object> repasProp = new HashMap<>();
                                 repasProp.put("name", name);
                                 repasProp.put("description", description);
@@ -173,6 +174,7 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
                                 repasProp.put("typeDeCuisine", typeFood);
                                 repasProp.put("typeDeRepas", typeRepas);
                                 repasProp.put("cook", cook);
+                                repasProp.put("rating", rating);
 
                                 db.collection("repasProp").document(name+cook)
                                         .set(repasProp)
@@ -188,11 +190,6 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
                                                 Log.w(TAG, "Error adding document", e);
                                             }
                                         });
-
-
-
-
-
                             }
 
                        // Toast.makeText(getContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();

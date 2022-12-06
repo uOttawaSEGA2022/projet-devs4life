@@ -11,4 +11,5 @@
     <color name="boxGrey">#E4E4E4</color>
     <color name="borderGrey">#C9C9C9</color>
     <color name="errorRed">#B33E2E</color>
+    <color name="yellow">#ab6015</color>
 </resources>
