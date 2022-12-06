@@ -45,6 +45,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/rounded_btn"
                 android:fontFamily="@font/k2d_medium"
+                android:onClick="onClickBtnRepas"
                 android:text="Par Repas"
                 android:textColor="@color/textBlue" />
 
