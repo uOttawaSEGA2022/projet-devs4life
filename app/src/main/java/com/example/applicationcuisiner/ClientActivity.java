@@ -3,20 +3,30 @@ package com.example.applicationcuisiner;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -30,12 +40,16 @@ import java.util.List;
 
 public class ClientActivity extends AppCompatActivity {
 
+    FirebaseAuth firebaseAuth;
     FirebaseFirestore db;
     ListView repasLV;
     ArrayList<Repas> repasPropArrayList;
     String documentID;
     EditText criteres;
     String recherche;
+    Button order;
+    Button complain;
+    String userID;
 
 
 
@@ -47,20 +61,21 @@ public class ClientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_client);
 
         db = FirebaseFirestore.getInstance();
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        userID = user.getUid();
         repasLV = findViewById(R.id.lv_seeMenuClient);
         repasPropArrayList = new ArrayList<>();
         criteres = findViewById(R.id.et_CritereDeRecherche);
 
     }
 
+
     public void onClickBtnCuisine(View view) {
         repasPropArrayList.clear();
         loadDatainListviewForCuisine();
 
-
     }
-
 
     public void onClickBtnRepas(View view) {
         repasPropArrayList.clear();
@@ -106,7 +121,7 @@ public class ClientActivity extends AppCompatActivity {
                                                            if (status.equals("Active")) {
                                                                System.out.println("were in the if statement");
                                                               repasPropArrayList.add(repas);
-                                                               RepasListAdapterforClient adapter = new RepasListAdapterforClient(ClientActivity.this, repasPropArrayList);
+                                                               RepasListAdapterforClient adapter = new RepasListAdapterforClient(ClientActivity.this, repasPropArrayList, userID);
                                                                repasLV.setAdapter(adapter);
 
                                                            }
@@ -168,7 +183,7 @@ public class ClientActivity extends AppCompatActivity {
                                                                 String status = document.getString("Status");
                                                                 if (status.equals("Active")) {
                                                                     repasPropArrayList.add(repas);
-                                                                    RepasListAdapterforClient adapter = new RepasListAdapterforClient(ClientActivity.this, repasPropArrayList);
+                                                                    RepasListAdapterforClient adapter = new RepasListAdapterforClient(ClientActivity.this, repasPropArrayList, userID);
                                                                     repasLV.setAdapter(adapter);
 
                                                                 }

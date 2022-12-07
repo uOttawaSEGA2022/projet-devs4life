@@ -2,24 +2,32 @@
 package com.example.applicationcuisiner;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.MenuItem;
 
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -27,16 +35,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
-
+    private FirebaseAuth firebaseAuth;
     private View listitemView;
     private ArrayList RepasArrayList;
     private FirebaseFirestore db;
+    private String clientName;
+    private String userID;
 
 
     // constructor for our list view adapter.
-    public RepasListAdapterforClient(@NonNull Context context, ArrayList<Repas> RepasArrayList) {
+    public RepasListAdapterforClient(@NonNull Context context, ArrayList<Repas> RepasArrayList, String userID) {
         super(context, 0, RepasArrayList);
         this.RepasArrayList = RepasArrayList;
+        this.userID = userID;
 
     }
 
@@ -100,31 +111,73 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
 
                         // menu item select listener
 
-                        if (menuItem.getTitle().equals("Delete")) {
-                            System.out.println("j'ai cliquer sur del");
-                            FirebaseFirestore db;
+                        if (menuItem.getTitle().equals("Order")) {
                             db = FirebaseFirestore.getInstance();
-                            System.out.println(repas.getName());
-                            db.collection("repasProp").document(repas.getName()+repas.getCook())
-                                    .delete()
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            // notifyDataSetChanged();
-                                            RepasArrayList.remove(position);
-                                            listitemView.refreshDrawableState();
-                                            notifyDataSetChanged();
+                            firebaseAuth = FirebaseAuth.getInstance();
 
-                                            Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                            String name = repas.getName();
+                            String description = repas.getDescription();
+                            String price = repas.getPrice();
+                            String typeFood = repas.getTypeDeCuisine();
+                            String typeRepas = repas.getTypeDeRepas();
+                            String cook = repas.getCook();
+                            double rating = repas.getRating();
+//                            Map<String, Object> repasOrdered = new HashMap<>();
+//                            repasOrdered.put("name", name);
+//                            repasOrdered.put("description", description);
+//                            repasOrdered.put("price", price);
+//                            repasOrdered.put("typeDeCuisine", typeFood);
+//                            repasOrdered.put("typeDeRepas", typeRepas);
+//                            repasOrdered.put("cook", cook);
+//                            repasOrdered.put("rating", rating);
 
+                            DocumentReference docRef = db.collection("user").document(userID);
+                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+                                            String name = document.getString("Name");
+                                            String lName = document.getString("LastName");
+                                            System.out.println("is it working");
+                                            clientName = name+" "+lName;
+                                            Map<String, Object> repasOrdered = new HashMap<>();
+                                            repasOrdered.put("name", name);
+                                            repasOrdered.put("description", description);
+                                            repasOrdered.put("price", price);
+                                            repasOrdered.put("typeDeCuisine", typeFood);
+                                            repasOrdered.put("typeDeRepas", typeRepas);
+                                            repasOrdered.put("cook", cook);
+                                            repasOrdered.put("rating", rating);
+                                            repasOrdered.put("client", clientName);
+
+                                            db.collection("repasOrdered").document()
+                                                    .set(repasOrdered)
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Log.w(TAG, "Error adding document", e);
+                                                        }
+                                                    });
+
+                                            System.out.println(clientName);
+                                            Log.d(ContentValues.TAG, "DocumentSnapshot data: " + document.getData());
+                                        } else {
+                                            Log.d(ContentValues.TAG, "No such document");
                                         }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w(TAG, "Error deleting document", e);
-                                        }
-                                    });
+                                    } else {
+                                        Log.d(ContentValues.TAG, "get failed with ", task.getException());
+                                    }
+                                }
+                            });
+
 
 
                         }
@@ -139,6 +192,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
         });
         return listitemView;
     }
+
 
 
 
