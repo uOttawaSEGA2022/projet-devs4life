@@ -115,7 +115,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
                             db = FirebaseFirestore.getInstance();
                             firebaseAuth = FirebaseAuth.getInstance();
 
-                            String name = repas.getName();
+                            String nameRepas = repas.getName();
                             String description = repas.getDescription();
                             String price = repas.getPrice();
                             String typeFood = repas.getTypeDeCuisine();
@@ -143,7 +143,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
                                             System.out.println("is it working");
                                             clientName = name+" "+lName;
                                             Map<String, Object> repasOrdered = new HashMap<>();
-                                            repasOrdered.put("name", name);
+                                            repasOrdered.put("name", nameRepas);
                                             repasOrdered.put("description", description);
                                             repasOrdered.put("price", price);
                                             repasOrdered.put("typeDeCuisine", typeFood);
@@ -151,6 +151,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
                                             repasOrdered.put("cook", cook);
                                             repasOrdered.put("rating", rating);
                                             repasOrdered.put("client", clientName);
+                                            repasOrdered.put("status", "Attente");
 
                                             db.collection("repasOrdered").document()
                                                     .set(repasOrdered)

@@ -25,6 +25,12 @@ public class CuisinierActivity extends AppCompatActivity {
 
     }
 
+
+    public void onGoToSeeOrders(View view){
+        Intent intent = new Intent(this, Cuisinier_SeeOrdersActivity.class);
+        startActivity(intent);
+    }
+
     public void onGoToMenu(View view){
         Intent intent = new Intent(this, Cuisinier_SeeMenuActivity.class);
         startActivity(intent);

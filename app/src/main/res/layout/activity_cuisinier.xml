@@ -25,7 +25,21 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="280dp" />
+            android:layout_height="181dp" />
+
+        <Button
+            android:id="@+id/btn_seeOrders"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/k2d_medium"
+            android:text="Consulter les repas"
+            android:textColor="@color/textBlue"
+            android:onClick="onGoToSeeOrders"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
 
         <Button
             android:id="@+id/btn_addRepas"
