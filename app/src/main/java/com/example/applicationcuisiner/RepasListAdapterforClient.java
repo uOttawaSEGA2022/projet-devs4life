@@ -4,6 +4,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 
@@ -182,12 +183,18 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
 
 
                         }
+                        else{
+                            Intent intent = new Intent(v.getContext(), AdministratorActivity.class);
+                            v.getContext().startActivity(intent);
+
+                        }
 
                         // Toast.makeText(getContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
                         return true;
                     }
                 });
                 // Showing the popup menu
+
                 popupMenu.show();
             }
         });
