@@ -33,7 +33,7 @@
             android:layout_height="68dp"
             android:background="@drawable/rounded_btn"
             android:fontFamily="@font/k2d_medium"
-            android:text="Consulter les repas"
+            android:text="Consulter les commandes"
             android:textColor="@color/textBlue"
             android:onClick="onGoToSeeOrders"/>
         <Space

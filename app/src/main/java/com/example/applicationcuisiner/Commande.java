@@ -9,13 +9,14 @@ public class Commande {
     private String typeDeCuisine;
     private String typeDeRepas;
     private String cook;
+    private String id;
     private double rating;
 
     public Commande(){
 
     }
 
-    public Commande(String name, String description, String price, String cook, String typeDeCuisine, String typeDeRepas, double rating, String client, String status) {
+    public Commande(String name, String description, String price, String cook, String typeDeCuisine, String typeDeRepas, double rating, String client, String status, String id) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -25,6 +26,7 @@ public class Commande {
         this.rating = rating;
         this.client = client;
         this.status = status;
+        this.id = id;
     }
 
     public void setName(String name){ this.name = name;}
@@ -85,6 +87,10 @@ public class Commande {
         return client;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -93,5 +99,7 @@ public class Commande {
         this.client = client;
     }
 
-
+    public void setId(String id) {
+        this.id = id;
+    }
 }

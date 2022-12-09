@@ -42,6 +42,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
     private FirebaseFirestore db;
     private String clientName;
     private String userID;
+    private String id;
 
 
     // constructor for our list view adapter.
@@ -136,6 +137,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
                                             String lName = document.getString("LastName");
                                             System.out.println("is it working");
                                             clientName = name+" "+lName;
+                                            id = nameRepas+clientName+cook;
                                             Map<String, Object> repasOrdered = new HashMap<>();
                                             repasOrdered.put("name", nameRepas);
                                             repasOrdered.put("description", description);
@@ -146,8 +148,9 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
                                             repasOrdered.put("rating", rating);
                                             repasOrdered.put("client", clientName);
                                             repasOrdered.put("status", "Attente");
+                                            repasOrdered.put("id", id);
 
-                                            db.collection("repasOrdered").document()
+                                            db.collection("repasOrdered").document(id)
                                                     .set(repasOrdered)
                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override

@@ -1,6 +1,9 @@
 package com.example.applicationcuisiner;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.MenuItem;
@@ -14,7 +17,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+import com.google.firebase.firestore.DocumentReference;
+
 import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.ArrayList;
 
@@ -60,7 +69,7 @@ public class RepasListAdapterforOrder  extends ArrayAdapter<Commande> {
         // below line is use to set data to our text view.
         orderName.setText("Nom: " + order.getName());
         client.setText("Client: "+ order.getClient());
-        orderStatus.setText("Status:" + order.getStatus());
+        orderStatus.setText("Status: " + order.getStatus());
 
 
         // below line is use to add item click listener
@@ -81,17 +90,73 @@ public class RepasListAdapterforOrder  extends ArrayAdapter<Commande> {
                     public boolean onMenuItemClick(MenuItem menuItem) {
 
 
+                        db = FirebaseFirestore.getInstance();
+
                         if (menuItem.getTitle().equals("Accept")) {
                             System.out.println("j'ai cliquer sur accept");
-                            //TODO: change the status of the order
+                            System.out.println(order.getId());
+                            DocumentReference docRef = db.collection("repasOrdered").document(order.getId());
+
+                            if(order.getStatus().equals("Attente"))
+                            {
+                                docRef.update("status", "Accepted")
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                                            Commande newOrder = new Commande(order.getName(), order.getDescription(), order.getPrice(), order.getCook(), order.getTypeDeCuisine(), order.getTypeDeRepas(), order.getRating(), order.getClient(), "Accepted", order.getId());
+                                            OrderArrayList.remove(position);
+                                            OrderArrayList.add(position, newOrder);
+
+                                            listitemView.refreshDrawableState();
+                                            notifyDataSetChanged();
+
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error updating document", e);
+                                        }
+                                    });
+                        } else {
+                                //TODO: Message d'erreur
+                                System.out.println("order has already been refused can't change it");
+                            }
 
 
-
-                        } else if(menuItem.equals("Refuse")){
+                        } else if(menuItem.getTitle().equals("Refuse")) {
                             System.out.println("j'ai cliquer sur refuse");
-                            //TODO: change the status of the order
+                            System.out.println(order.getId());
+                            DocumentReference docRef = db.collection("repasOrdered").document(order.getId());
+                            if (order.getStatus().equals("Attente")) {
+                                docRef.update("status", "Refused")
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d(TAG, "DocumentSnapshot successfully updated!");
+                                                Commande newOrder = new Commande(order.getName(), order.getDescription(), order.getPrice(), order.getCook(), order.getTypeDeCuisine(), order.getTypeDeRepas(), order.getRating(), order.getClient(), "Refused", order.getId());
+                                                OrderArrayList.remove(position);
+                                                OrderArrayList.add(position, newOrder);
 
-                            //maybe the client will delete the document
+                                                listitemView.refreshDrawableState();
+                                                notifyDataSetChanged();
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error updating document", e);
+                                            }
+                                        });
+
+                                //maybe the client will delete the document
+                            }
+                            else {
+                                //TODO: Message d'erreur
+                                System.out.println("order has already been accepted can't change it");
+                            }
                         }
 
                         return true;
