@@ -270,7 +270,7 @@ public class ClientComplain extends AppCompatActivity {
 
 
     public void onDisconnectAdministrator(View view){
-        Intent intent = new Intent(ClientComplain.this, MainActivity.class);
+        Intent intent = new Intent(ClientComplain.this, ClientActivity.class);
         startActivity(intent);
         finish();
     }
