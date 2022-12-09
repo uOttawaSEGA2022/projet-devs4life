@@ -61,10 +61,27 @@
                 android:textColor="@color/textBlue" />
         </LinearLayout>
 
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="19dp"
+            android:layout_weight="0" />
+
+        <Button
+            android:id="@+id/btn_toutvoir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/k2d_medium"
+            android:onClick="onClickBtnTout"
+            android:text="voir toutes les options"
+            android:textColor="@color/textBlue" />
+
         <ListView
             android:id="@+id/lv_seeMenuClient"
             android:layout_width="match_parent"
-            android:layout_height="500dp">
+            android:layout_height="430dp">
 
         </ListView>
 

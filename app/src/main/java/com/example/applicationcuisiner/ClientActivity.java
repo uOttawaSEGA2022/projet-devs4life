@@ -1,24 +1,14 @@
 package com.example.applicationcuisiner;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -80,6 +70,12 @@ public class ClientActivity extends AppCompatActivity {
     public void onClickBtnRepas(View view) {
         repasPropArrayList.clear();
         loadDatainListviewForRepas();
+
+    }
+
+    public void onClickBtnTout(View view) {
+        repasPropArrayList.clear();
+        loadDatainListviewForEverything();
 
     }
 
@@ -147,6 +143,7 @@ public class ClientActivity extends AppCompatActivity {
                         Toast.makeText(ClientActivity.this, "Fail to load data..", Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 
 
@@ -195,7 +192,6 @@ public class ClientActivity extends AppCompatActivity {
                                             }
                                         }
                                     });
-
                                 }
                             }
 
@@ -209,6 +205,70 @@ public class ClientActivity extends AppCompatActivity {
                         Toast.makeText(ClientActivity.this, "Fail to load data..", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public void loadDatainListviewForEverything() { //called in the on Click
+        db.collection("repasProp").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        if (!queryDocumentSnapshots.isEmpty()) {
+
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot d : list) {
+                                Repas repas = d.toObject(Repas.class);
+                                    //tri par status du cuisinier
+                                    CollectionReference cookRef = db.collection("user");
+                                    Query query = cookRef.whereEqualTo("FullName", repas.getCook());
+                                    query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    System.out.println("the id of this cook:" + repas.getCook() + "is " + document.getId());
+                                                    documentID = document.getId();
+                                                    DocumentReference docRef = db.collection("user").document(documentID);
+                                                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                            if (task.isSuccessful()) {
+
+                                                                DocumentSnapshot document = task.getResult();
+                                                                String status = document.getString("Status");
+
+                                                                System.out.println("status of this cook " + repas.getCook() + "for this dish " + repas.getName() + " is " + status.equals("Active"));
+
+                                                                if (status.equals("Active")) {
+                                                                    System.out.println("were in the if statement");
+                                                                    repasPropArrayList.add(repas);
+                                                                    RepasListAdapterforClient adapter = new RepasListAdapterforClient(ClientActivity.this, repasPropArrayList, userID);
+                                                                    repasLV.setAdapter(adapter);
+
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+
+                                                }
+                                            }
+                                        }
+                                    });
+
+
+                            }
+
+                        } else {
+                            Toast.makeText(ClientActivity.this, "No data found in Database", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ClientActivity.this, "Fail to load data..", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
     public void onClientDisconnect(View view){

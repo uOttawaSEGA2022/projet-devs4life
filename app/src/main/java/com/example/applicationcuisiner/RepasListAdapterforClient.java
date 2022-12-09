@@ -123,14 +123,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
                             String typeRepas = repas.getTypeDeRepas();
                             String cook = repas.getCook();
                             double rating = repas.getRating();
-//                            Map<String, Object> repasOrdered = new HashMap<>();
-//                            repasOrdered.put("name", name);
-//                            repasOrdered.put("description", description);
-//                            repasOrdered.put("price", price);
-//                            repasOrdered.put("typeDeCuisine", typeFood);
-//                            repasOrdered.put("typeDeRepas", typeRepas);
-//                            repasOrdered.put("cook", cook);
-//                            repasOrdered.put("rating", rating);
+
 
                             DocumentReference docRef = db.collection("user").document(userID);
                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
