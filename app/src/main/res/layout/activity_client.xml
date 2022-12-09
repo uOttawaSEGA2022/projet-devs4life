@@ -81,9 +81,24 @@
         <ListView
             android:id="@+id/lv_seeMenuClient"
             android:layout_width="match_parent"
-            android:layout_height="350dp">
+            android:layout_height="225dp">
 
         </ListView>
+
+        <Button
+            android:id="@+id/notifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="See Notifications"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/k2d_medium"
+            android:textColor="@color/textBlue"
+            />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="19dp"
+            android:layout_weight="0" />
 
         <Button
             android:id="@+id/button2"
@@ -100,6 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="19dp"
             android:layout_weight="0" />
+
         <Button
             android:id="@+id/buttonDisconnectClient"
             android:layout_width="match_parent"

@@ -11,4 +11,6 @@
     <string name="welcome_to">Welcome to</string>
     <string name="une_image_d_avocat">une image d\'avocat</string>
     <string name="une_image_de_citron">une image de citron</string>
+    <string name="channel_name">chan</string>
+    <string name="channel_description">muy lindp</string>
 </resources>

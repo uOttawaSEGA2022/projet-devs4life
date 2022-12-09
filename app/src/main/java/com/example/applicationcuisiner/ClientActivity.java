@@ -2,8 +2,16 @@ package com.example.applicationcuisiner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +38,8 @@ import java.util.List;
 
 public class ClientActivity extends AppCompatActivity {
 
+    private static String channel1;
+    private static final String CHANNEL_ID = channel1;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore db;
     ListView repasLV;
@@ -40,7 +50,7 @@ public class ClientActivity extends AppCompatActivity {
     Button order;
     Button complain;
     String userID;
-
+    Button btn_notify;
 
 
 
@@ -57,7 +67,61 @@ public class ClientActivity extends AppCompatActivity {
         repasLV = findViewById(R.id.lv_seeMenuClient);
         repasPropArrayList = new ArrayList<>();
         criteres = findViewById(R.id.et_CritereDeRecherche);
+        btn_notify=findViewById(R.id.notifications);
 
+        btn_notify.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                addNotification();
+            }
+
+        });
+
+
+    }
+
+    // Creates and displays a notification
+    private void addNotification() {
+
+        // Create an explicit intent for an Activity in your app
+        Intent intent = new Intent(this, ClientActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        //Channel
+        int NOTIFICATION_ID = 234;
+
+        NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        String CHANNEL_ID = null;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            CHANNEL_ID = "my_channel_01";
+            CharSequence name = "my_channel";
+            String Description = "This is my channel";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            mChannel.setDescription(Description);
+            mChannel.enableLights(true);
+            mChannel.setLightColor(Color.RED);
+            mChannel.enableVibration(true);
+            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            mChannel.setShowBadge(false);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+        // Builds your notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.avocado_cropped)
+                .setContentTitle("My notification")
+                .setContentText("Hello World!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+
+
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(0, builder.build());
     }
 
 
@@ -282,4 +346,7 @@ public class ClientActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
+
 }
