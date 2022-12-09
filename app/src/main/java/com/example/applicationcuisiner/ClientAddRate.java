@@ -142,6 +142,10 @@ public class ClientAddRate extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onRate(View view){
+
+    }
+
 
     private boolean valide() {
         Boolean result = true;
