@@ -166,7 +166,7 @@ public class RepasListAdapterforMenu extends ArrayAdapter<Repas> {
                                 String typeFood = repas.getTypeDeCuisine();
                                 String typeRepas = repas.getTypeDeRepas();
                                 String cook = repas.getCook();
-                                double rating = repas.getRating();
+                                String rating = repas.getRating();
                                 Map<String, Object> repasProp = new HashMap<>();
                                 repasProp.put("name", name);
                                 repasProp.put("description", description);

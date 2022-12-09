@@ -7,13 +7,13 @@ public class Repas {
     private String typeDeCuisine;
     private String typeDeRepas;
     private String cook;
-    private double rating;
+    private String rating;
 
     public Repas(){
 
     }
 
-    public Repas(String name, String description, String price, String cook, String typeDeCuisine, String typeDeRepas, double rating) {
+    public Repas(String name, String description, String price, String cook, String typeDeCuisine, String typeDeRepas, String rating) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -45,7 +45,7 @@ public class Repas {
         this.cook = cook;
     }
 
-    public void setRating(double rating){this.rating = rating;}
+    public void setRating(String rating){this.rating = rating;}
 
     public String getName() {
         return name;
@@ -71,6 +71,6 @@ public class Repas {
         return cook;
     }
 
-    public double getRating(){return rating;}
+    public String getRating(){return rating;}
 }
 

@@ -10,166 +10,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <TextView
-            android:id="@+id/tv_addToMenu"
-            android:layout_width="match_parent"
-            android:layout_height="126dp"
-            android:fontFamily="@font/k2d_medium"
-            android:gravity="center"
-            android:text="Rate the cook"
-            android:textColor="@color/textBlue"
-            android:textSize="34sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/et_foodRate"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="13dp"
-                android:layout_weight="1"
-
-                android:ems="10"
-                android:fontFamily="@font/k2d_medium"
-                android:hint="Rate"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:textColor="@color/textBlue"
-                android:textColorHint="@color/textBlue" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_noFoodRate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/k2d_medium"
-                android:textColor="@color/errorRed" />
-
-            <TextView
-                android:id="@+id/tv_noFoodPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/k2d_medium"
-                android:textColor="@color/errorRed" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_noFoodCuisine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text=""
-                android:fontFamily="@font/k2d_medium"
-                android:textColor="@color/errorRed" />
-
-            <TextView
-                android:id="@+id/tv_noFoodRepas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text=""
-                android:fontFamily="@font/k2d_medium"
-                android:textColor="@color/errorRed" />
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/tv_noFoodDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/k2d_medium"
-            android:text=""
-            android:textColor="@color/errorRed" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="83dp"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/btn_addFoodToDatabase"
-                android:layout_width="match_parent"
-                android:layout_height="67dp"
-                android:background="@drawable/rounded_btn"
-                android:fontFamily="@font/k2d_medium"
-                android:onClick="OnRate"
-                android:text="Rate cook"
-                android:textColor="@color/textBlue" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <LinearLayout
+            android:id="@+id/tv_RateCook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="TextView" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-            <Button
-                android:id="@+id/btn_goBack01"
-                android:layout_width="413dp"
-                android:layout_height="66dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_btn"
-                android:fontFamily="@font/k2d_medium"
-                android:onClick="onGoBack"
-                android:text="Go Back"
-                android:textColor="@color/textBlue" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_repasAdded"
+        <Button
+            android:id="@+id/btn_rateCook"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/k2d_medium"
-            android:gravity="center"
-            android:textColor="@color/textBlue"
-            android:textSize="24sp" />
+            android:layout_height="wrap_content"
+            android:text="Rate" />
 
+        <Button
+            android:id="@+id/btn_rateGoBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Leave" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

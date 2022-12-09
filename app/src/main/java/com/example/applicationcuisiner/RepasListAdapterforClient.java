@@ -123,7 +123,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
                             String typeFood = repas.getTypeDeCuisine();
                             String typeRepas = repas.getTypeDeRepas();
                             String cook = repas.getCook();
-                            double rating = repas.getRating();
+                            String rating = repas.getRating();
 
 
                             DocumentReference docRef = db.collection("user").document(userID);

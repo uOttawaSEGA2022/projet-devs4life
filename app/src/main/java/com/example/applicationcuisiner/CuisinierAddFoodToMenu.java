@@ -102,29 +102,48 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
                                     String typeFood = typeOfFood.getText().toString();
                                     String typeRepas = typeOfRepas.getText().toString();
 
-                                    Map<String, Object> menu = new HashMap<>();
-                                    menu.put("name", name);
-                                    menu.put("description", description);
-                                    menu.put("price", price);
-                                    menu.put("typeDeCuisine", typeFood);
-                                    menu.put("typeDeRepas", typeRepas);
-                                    menu.put("cook", cname + " " + lastname);
-                                    menu.put("rating", 0);
 
-                                    db.collection("menu").document(name + cname + " " + lastname)
-                                            .set(menu)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                    DocumentReference docRef = db.collection("user").document(currentUserID);
+
+                                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                DocumentSnapshot document = task.getResult();
+                                                if (document.exists()) {
+                                                    Map<String, Object> menu = new HashMap<>();
+                                                    menu.put("name", name);
+                                                    menu.put("description", description);
+                                                    menu.put("price", price);
+                                                    menu.put("typeDeCuisine", typeFood);
+                                                    menu.put("typeDeRepas", typeRepas);
+                                                    menu.put("cook", cname + " " + lastname);
+                                                    menu.put("rating", document.get("Rating"));
+                                                    db.collection("menu").document(name + cname + " " + lastname)
+                                                            .set(menu)
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void unused) {
+                                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Log.w(TAG, "Error adding document", e);
+                                                                }
+                                                            });
+                                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                                } else {
+                                                    Log.d(TAG, "No such document");
                                                 }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Log.w(TAG, "Error adding document", e);
-                                                }
-                                            });
+                                            } else {
+                                                Log.d(TAG, "get failed with ", task.getException());
+                                            }
+                                        }
+                                    });
+
+
                                 }
                             } else {
                                 Log.d(TAG, "get failed with ", task.getException());
@@ -202,4 +221,5 @@ public class CuisinierAddFoodToMenu extends AppCompatActivity {
 
         return result;
     }
+
 }
