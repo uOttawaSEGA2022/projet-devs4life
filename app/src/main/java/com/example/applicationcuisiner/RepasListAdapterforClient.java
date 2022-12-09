@@ -184,7 +184,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
 
                         }
                         else{
-                            Intent intent = new Intent(v.getContext(), AdministratorActivity.class);
+                            Intent intent = new Intent(v.getContext(), ClientComplain.class);
                             v.getContext().startActivity(intent);
 
                         }

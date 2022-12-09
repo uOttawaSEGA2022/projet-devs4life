@@ -52,6 +52,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ClientComplain"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CuisinierPermanentlyBannedActivity"
             android:exported="false">
             <meta-data
