@@ -93,7 +93,7 @@ public class RepasListAdapterforClientOrder  extends ArrayAdapter<Commande> {
                         db = FirebaseFirestore.getInstance();
 
                         if (menuItem.getTitle().equals("Rate")) {
-                            Intent intent = new Intent(v.getContext(), ClientComplain.class);
+                            Intent intent = new Intent(v.getContext(), ClientAddRate.class);
                             v.getContext().startActivity(intent);
 
                         }
