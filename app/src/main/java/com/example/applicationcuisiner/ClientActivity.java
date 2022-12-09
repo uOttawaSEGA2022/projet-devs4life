@@ -271,6 +271,12 @@ public class ClientActivity extends AppCompatActivity {
 
     }
 
+    public void onClientSeeOrders(View view){
+        Intent intent = new Intent(ClientActivity.this, Client_SeeOrdersActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     public void onClientDisconnect(View view){
         Intent intent = new Intent(ClientActivity.this, MainActivity.class);
         startActivity(intent);

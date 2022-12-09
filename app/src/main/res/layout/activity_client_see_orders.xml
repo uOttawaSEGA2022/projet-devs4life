@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cuisinier_SeeMenuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_titleOrderC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/k2d_medium"
+            android:gravity="center"
+            android:text="Vos Commandes"
+            android:textColor="@color/textBlue"
+            android:textSize="34sp" />
+
+        <ListView
+            android:id="@+id/lv_seeOrderC"
+            android:layout_width="match_parent"
+            android:layout_height="589dp">
+
+        </ListView>
+
+        <Button
+            android:id="@+id/btn_goBack0rderC"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/k2d_medium"
+            android:text="Go Back"
+            android:onClick="onGoBackToClientMainPageFromOrder"
+            android:textColor="@color/textBlue"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
