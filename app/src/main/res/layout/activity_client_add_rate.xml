@@ -17,7 +17,7 @@
             android:layout_height="126dp"
             android:fontFamily="@font/k2d_medium"
             android:gravity="center"
-            android:text="Ajoutez un repas a votre menu"
+            android:text="Rate the cook"
             android:textColor="@color/textBlue"
             android:textSize="34sp" />
 
