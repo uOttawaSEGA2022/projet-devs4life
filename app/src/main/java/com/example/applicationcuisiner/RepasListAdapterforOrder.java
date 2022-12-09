@@ -3,6 +3,8 @@ package com.example.applicationcuisiner;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -96,7 +99,13 @@ public class RepasListAdapterforOrder  extends ArrayAdapter<Commande> {
                             System.out.println("j'ai cliquer sur accept");
                             System.out.println(order.getId());
                             DocumentReference docRef = db.collection("repasOrdered").document(order.getId());
-
+                            Toast.makeText(v.getContext(), "The client has been notified", Toast.LENGTH_SHORT).show();
+                            /*Intent intent = new Intent(Intent.ACTION_SENDTO); //SEND EMAIL NOTIFICATION MANUALLY
+                            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                            intent.putExtra(Intent.EXTRA_EMAIL, "pcnamex2@gmail.com");
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "Order Status");
+                                v.getContext().startActivity(intent);
+*/
                             if(order.getStatus().equals("Attente"))
                             {
                                 docRef.update("status", "Accepted")
@@ -126,6 +135,7 @@ public class RepasListAdapterforOrder  extends ArrayAdapter<Commande> {
 
 
                         } else if(menuItem.getTitle().equals("Refuse")) {
+                            Toast.makeText(v.getContext(), "The client has been notified", Toast.LENGTH_SHORT).show();
                             System.out.println("j'ai cliquer sur refuse");
                             System.out.println(order.getId());
                             DocumentReference docRef = db.collection("repasOrdered").document(order.getId());
@@ -168,6 +178,7 @@ public class RepasListAdapterforOrder  extends ArrayAdapter<Commande> {
         });
         return listitemView;
     }
+
 
 
 

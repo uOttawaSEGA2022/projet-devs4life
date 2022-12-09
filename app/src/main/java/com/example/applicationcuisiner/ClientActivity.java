@@ -38,8 +38,6 @@ import java.util.List;
 
 public class ClientActivity extends AppCompatActivity {
 
-    private static String channel1;
-    private static final String CHANNEL_ID = channel1;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore db;
     ListView repasLV;
@@ -110,15 +108,13 @@ public class ClientActivity extends AppCompatActivity {
         }
         // Builds your notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.avocado_cropped)
+                .setSmallIcon(R.drawable.citron_cropped)
                 .setContentTitle("My notification")
-                .setContentText("Hello World!")
+                .setContentText("Your order has been accepted!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // Set the intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
-
-
 
         // notificationId is a unique int for each notification that you must define
         notificationManager.notify(0, builder.build());
