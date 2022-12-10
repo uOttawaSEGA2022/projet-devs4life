@@ -1,5 +1,7 @@
 package com.example.applicationcuisiner;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -13,6 +15,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,7 +56,10 @@ public class ClientActivity extends AppCompatActivity {
     TextView clienterror;
     String userID;
     Button btn_notify;
-
+    String currentUserID;
+    String clientName;
+    String clientLastName;
+    String fullclientName;
 
 
 
@@ -72,19 +78,70 @@ public class ClientActivity extends AppCompatActivity {
         btn_notify=findViewById(R.id.notifications);
         clienterror = findViewById(R.id.tv_clientErreur);
 
-        btn_notify.setOnClickListener(new View.OnClickListener(){
+        currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        System.out.println("id is" + currentUserID);
+        DocumentReference docRef = db.collection("user").document(currentUserID);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onClick(View v) {
-                addNotification();
-            }
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        System.out.println("were inside the document");
+                        clientName = document.getString("Name");
+                        clientLastName = document.getString("LastName");
+                        fullclientName = clientName + " " + clientLastName;
+                        System.out.println("name is " + fullclientName);
 
+                        db.collection("repasOrdered")
+                                .whereEqualTo("client", fullclientName)
+                                .whereEqualTo("status", "Accepted")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                addNotification("accepted");
+                                                break;
+                                            }
+                                        } else {
+                                            Log.d(TAG, "Error getting documents: ", task.getException());
+                                        }
+                                    }
+                                });
+
+
+                        db.collection("repasOrdered")
+                                .whereEqualTo("client", fullclientName)
+                                .whereEqualTo("status", "Refused")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                addNotification("refused");
+                                                break;
+                                            }
+                                        } else {
+                                            Log.d(TAG, "Error getting documents: ", task.getException());
+                                        }
+                                    }
+                                });
+
+                    }
+                }
+            }
         });
+
+
 
 
     }
 
     // Creates and displays a notification
-    private void addNotification() {
+    private void addNotification(String status) {
 
         // Create an explicit intent for an Activity in your app
         Intent intent = new Intent(this, ClientActivity.class);
@@ -115,7 +172,7 @@ public class ClientActivity extends AppCompatActivity {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.citron_cropped)
                 .setContentTitle("My notification")
-                .setContentText("Your order has been accepted!")
+                .setContentText("Your order has been "+ status)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // Set the intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
