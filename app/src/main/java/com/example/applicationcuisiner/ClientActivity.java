@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +34,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +50,7 @@ public class ClientActivity extends AppCompatActivity {
     String recherche;
     Button order;
     Button complain;
+    TextView clienterror;
     String userID;
     Button btn_notify;
 
@@ -64,8 +68,9 @@ public class ClientActivity extends AppCompatActivity {
         userID = user.getUid();
         repasLV = findViewById(R.id.lv_seeMenuClient);
         repasPropArrayList = new ArrayList<>();
-        criteres = findViewById(R.id.et_CritereDeRecherche);
+        criteres = (EditText) findViewById(R.id.et_CritereDeRecherche);
         btn_notify=findViewById(R.id.notifications);
+        clienterror = findViewById(R.id.tv_clientErreur);
 
         btn_notify.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -122,14 +127,28 @@ public class ClientActivity extends AppCompatActivity {
 
 
     public void onClickBtnCuisine(View view) {
-        repasPropArrayList.clear();
-        loadDatainListviewForCuisine();
+        String texte = criteres.getText().toString();
+        if(texte.isEmpty()){
+            repasPropArrayList.clear();
+            System.out.println("field is empty");
+            clienterror.setText("il faut entrer un critere");
+        } else {
+            repasPropArrayList.clear();
+            loadDatainListviewForCuisine();
+        }
 
     }
 
     public void onClickBtnRepas(View view) {
-        repasPropArrayList.clear();
-        loadDatainListviewForRepas();
+        String texte = criteres.getText().toString();
+        if(texte.isEmpty()){
+            repasPropArrayList.clear();
+            System.out.println("field is empty");
+            clienterror.setText("il faut entrer un critere");
+        } else {
+            repasPropArrayList.clear();
+            loadDatainListviewForRepas();
+        }
 
     }
 
