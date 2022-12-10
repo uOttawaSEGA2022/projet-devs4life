@@ -96,16 +96,7 @@
 
         </ListView>
 
-        <Button
-            android:id="@+id/notifications"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="See Notifications"
-            android:background="@drawable/rounded_btn"
-            android:fontFamily="@font/k2d_medium"
-            android:textColor="@color/textBlue"
-            />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="19dp"

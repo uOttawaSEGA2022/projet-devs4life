@@ -51,11 +51,10 @@ public class ClientActivity extends AppCompatActivity {
     String documentID;
     EditText criteres;
     String recherche;
-    Button order;
-    Button complain;
+
     TextView clienterror;
     String userID;
-    Button btn_notify;
+
     String currentUserID;
     String clientName;
     String clientLastName;
@@ -75,7 +74,6 @@ public class ClientActivity extends AppCompatActivity {
         repasLV = findViewById(R.id.lv_seeMenuClient);
         repasPropArrayList = new ArrayList<>();
         criteres = (EditText) findViewById(R.id.et_CritereDeRecherche);
-        btn_notify=findViewById(R.id.notifications);
         clienterror = findViewById(R.id.tv_clientErreur);
 
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
