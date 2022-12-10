@@ -28,9 +28,9 @@ public class Cuisinier extends User{
     private String description;
     private String status; //Active, Banned or PermanentlyBanned
     private long durationBanned;
-    private double rating;
+    private String rating;
 
-    public Cuisinier(String userID,String firstname, String lastname, String email, String password, String address, String description, double rating){
+    public Cuisinier(String userID,String firstname, String lastname, String email, String password, String address, String description, String rating){
         type = "Cuisinier";
         status = "Active";
         this.userID = userID;
@@ -61,7 +61,7 @@ public class Cuisinier extends User{
         return status;
     }
 
-    public double getRating(){return rating;}
+    public String getRating(){return rating;}
 
 
     public void setAddress(String address) {
@@ -80,7 +80,7 @@ public class Cuisinier extends User{
         this.status = status;
     }
 
-    public void setRating(double rating){this.rating = rating;}
+    public void setRating(String rating){this.rating = rating;}
 
 
 

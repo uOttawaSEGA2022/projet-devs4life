@@ -16,10 +16,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -29,6 +35,7 @@ public class RepasListAdapterforClientOrder  extends ArrayAdapter<Commande> {
     private View listitemView;
     private ArrayList OrderArrayList;
     private FirebaseFirestore db;
+    private String cookId;
 
     // constructor for our list view adapter.
     public RepasListAdapterforClientOrder(@NonNull Context context, ArrayList<Commande> OrderArrayList) {
@@ -54,12 +61,46 @@ public class RepasListAdapterforClientOrder  extends ArrayAdapter<Commande> {
         // our modal class.
         Commande order = getItem(position);
         //Repas repas = getItem(position);
-
-        // initializing our UI components of list view item.
+        db = FirebaseFirestore.getInstance();
         TextView orderName = listitemView.findViewById(R.id.tv_orderNameOC);
         TextView cook = listitemView.findViewById(R.id.tv_cookNameOC);
         TextView rating = listitemView.findViewById(R.id.tv_ratingOC);
         TextView orderStatus= listitemView.findViewById(R.id.tv_statusOC);
+
+        // initializing our UI components of list view item.
+        db.collection("user").whereEqualTo("FullName",   order.getCook()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                cookId = document.getId();
+                                System.out.println(cookId);
+                                DocumentReference docRef = db.collection("user").document(cookId);
+                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+                                                rating.setText("Rating: " +document.get("Rating"));
+
+                                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                            } else {
+                                                Log.d(TAG, "No such document");
+                                            }
+                                        } else {
+                                            Log.d(TAG, "get failed with ", task.getException());
+                                        }
+                                    }
+                                });
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
 
 
 
@@ -68,7 +109,6 @@ public class RepasListAdapterforClientOrder  extends ArrayAdapter<Commande> {
         // below line is use to set data to our text view.
         orderName.setText("Nom: " + order.getName());
         cook.setText("Cook: "+ order.getCook());
-        rating.setText("Rating: " + order.getRating());
         orderStatus.setText("Status: " + order.getStatus());
 
 
@@ -94,7 +134,23 @@ public class RepasListAdapterforClientOrder  extends ArrayAdapter<Commande> {
 
                         if (menuItem.getTitle().equals("Rate")) {
                             Intent intent = new Intent(v.getContext(), ClientAddRate.class);
-                            v.getContext().startActivity(intent);
+                           db.collection("user").whereEqualTo("FullName",   order.getCook()).get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    cookId = document.getId();
+                                                    System.out.println(cookId);
+                                                    intent.putExtra("cookId", cookId);
+                                                    v.getContext().startActivity(intent);
+
+                                                }
+                                            } else {
+                                                Log.d(TAG, "Error getting documents: ", task.getException());
+                                            }
+                                        }
+                                    });
 
                         }
 

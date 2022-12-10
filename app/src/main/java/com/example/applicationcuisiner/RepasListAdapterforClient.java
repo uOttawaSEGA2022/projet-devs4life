@@ -30,6 +30,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +45,7 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
     private String clientName;
     private String userID;
     private String id;
+    private String cookId;
 
 
     // constructor for our list view adapter.
@@ -78,10 +81,44 @@ public class RepasListAdapterforClient extends ArrayAdapter<Repas> {
         TextView score = listitemView.findViewById(R.id.tv_ratingC);
 
 
-
+        db = FirebaseFirestore.getInstance();
         // after initializing our items we are
         // setting data to our view.
         // below line is use to set data to our text view.
+
+        db.collection("user").whereEqualTo("FullName",   repas.getCook()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                cookId = document.getId();
+                                System.out.println(cookId);
+                                DocumentReference docRef = db.collection("user").document(cookId);
+                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+                                                score.setText("Rating: " +document.get("Rating"));
+
+                                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                            } else {
+                                                Log.d(TAG, "No such document");
+                                            }
+                                        } else {
+                                            Log.d(TAG, "get failed with ", task.getException());
+                                        }
+                                    }
+                                });
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
         name.setText("Nom: " + repas.getName());
         description.setText("Description: " + repas.getDescription());
         price.setText("Prix: " +repas.getPrice());

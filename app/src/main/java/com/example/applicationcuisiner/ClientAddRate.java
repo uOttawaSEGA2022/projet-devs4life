@@ -81,7 +81,7 @@ public class ClientAddRate extends AppCompatActivity {
 
     public void onRateButton(View view){
        String rate = Float.toString(ratingBar.getRating());
-
+        System.out.println(cookId);
         db.collection("user").document(cookId)
                 .update("Rating", rate)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
