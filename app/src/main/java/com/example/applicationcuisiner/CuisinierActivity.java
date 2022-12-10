@@ -46,4 +46,9 @@ public class CuisinierActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    public void onGoToProfile(View view){
+        Intent intent = new Intent(this, CuisinierSeeProfileActivity.class);
+        startActivity(intent);
+    }
 }

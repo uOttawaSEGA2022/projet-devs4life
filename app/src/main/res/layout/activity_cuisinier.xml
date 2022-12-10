@@ -23,9 +23,25 @@
             android:textColor="@color/textBlue"
             android:textSize="20sp" />
 
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="181dp" />
+            android:layout_height="90dp" />
+
+        <Button
+            android:id="@+id/btn_seeProfile"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@drawable/rounded_btn"
+            android:fontFamily="@font/k2d_medium"
+            android:text="Consulter votre profil"
+            android:textColor="@color/textBlue"
+            android:onClick="onGoToProfile"
+           />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
         <Button
             android:id="@+id/btn_seeOrders"

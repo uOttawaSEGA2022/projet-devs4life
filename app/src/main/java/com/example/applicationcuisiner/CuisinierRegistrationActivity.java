@@ -57,7 +57,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
     private String currentUserID;
     private String status;
     private Cuisinier cuisinier;
-    private double rating;
+    private String rating;
 
     TextView noEmail;
     TextView noPassword;
@@ -92,7 +92,7 @@ public class CuisinierRegistrationActivity extends AppCompatActivity {
         cuisinierAddress = (EditText) findViewById(R.id.editText_AdresseRamassageCuisinier);
         cuisinierDescription = (EditText) findViewById(R.id.editText_DescriptionCuisinier);
         status = "Active"; //de base tout les cuisiniers sont actifs.
-        rating = 0; //de base tt les cuisiniers ont un rating de 0
+        rating = "0"; //de base tt les cuisiniers ont un rating de 0
 
         image = findViewById(R.id.image);
         image.setOnClickListener(new View.OnClickListener() {

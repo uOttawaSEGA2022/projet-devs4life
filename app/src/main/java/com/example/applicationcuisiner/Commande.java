@@ -10,13 +10,13 @@ public class Commande {
     private String typeDeRepas;
     private String cook;
     private String id;
-    private double rating;
+    private String rating;
 
     public Commande(){
 
     }
 
-    public Commande(String name, String description, String price, String cook, String typeDeCuisine, String typeDeRepas, double rating, String client, String status, String id) {
+    public Commande(String name, String description, String price, String cook, String typeDeCuisine, String typeDeRepas, String rating, String client, String status, String id) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -51,7 +51,7 @@ public class Commande {
         this.cook = cook;
     }
 
-    public void setRating(double rating){this.rating = rating;}
+    public void setRating(String rating){this.rating = rating;}
 
     public String getName() {
         return name;
@@ -77,7 +77,7 @@ public class Commande {
         return cook;
     }
 
-    public double getRating(){return rating;}
+    public String getRating(){return rating;}
 
     public String getStatus() {
         return status;
